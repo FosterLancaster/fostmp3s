@@ -309,7 +309,7 @@ table {
   font-family: 'futura';
   font-size: 18px;
   color: #ffffff;
-  -webkit-text-stroke: .05em #000000;
+  -webkit-text-stroke: .045em #000000;
   position: relative;
   width: calc(100% - 1px);
   margin: 1px 0px 1px 0px;
@@ -586,6 +586,7 @@ input[type="range"]::-webkit-slider-thumb {
   white-space: nowrap;
   overflow: hidden;
   color: #ffffff;
+  border-bottom: solid 1px #ffffff;
 }
 .MoreBody {
   flex: 1;
@@ -761,27 +762,28 @@ li {
 .h3 { left: 20%; bottom: 5%;  animation-delay: .75s; }
 .h4 { left: 60%; bottom: 5%;  animation-delay: 1s; }
 
-.playcount {
-  width: auto;
-  text-align: center;
-  font-size: 10px;
-  font-weight: bold;
-  line-height: 10px;
-  z-index: 3;
+.playcountframe {
+  font-size: 14px;
   position: absolute;
-  right: 0px;
   top: 0;
+  right: 0;
   bottom: 0;
-  padding: 0px 5px 0px 50px;
-  background-size: auto 50px;
-  background-position: left center;
-  background-image: linear-gradient(to right, transparent, rgba(70, 70, 70, .9) 50px, rgba(70, 70, 70, .9));
-  border-bottom-right-radius: 20px; /* Needed for backdrop filter */
-  color: #f0e2ff;
-  -webkit-text-stroke: .02em #000000;
+  min-width: 60px; /* or whatever minimum you want */
+  padding: 0 2px;
+  background-color: rgba(255, 255, 255, .3);
+  backdrop-filter: blur(5px);
   display: flex;
-  align-items: center;   /* vertical centering */
+  align-items: center;
   justify-content: center;
+  text-align: center;
+  line-height: 1.1;
+}
+.plays {
+  position: static;
+  white-space: nowrap;
+}
+.playcount {
+  position: static; /* remove the absolute positioning */
 }
 /*------100vh Controls Sum Landscape = 217px (with frame) + 195px (without frame)-------*/
 
@@ -927,16 +929,16 @@ li {
             <div class="shuffleBtn"  onclick="shuffle()" alt="Shuffle" title="Shuffle"></div>
           <div align='center'>
             <audio id="introAudio" preload="auto" src="fmp3smusic/Sale.mp3"></audio>
-            <button preload="auto" class ="song-button GoodForYou" data-song="fmp3smusic/GoodForYou.mp3"><img src="fmp3simages/GoodForYou.jpg" class="AlbumThumbnail">"Good For You"<span class="playcount">...</span></button>
-            <button preload="auto" class ="song-button MoreThanJustAFan" data-song="fmp3smusic/MoreThanJustAFan.mp3"><img src="fmp3simages/MoreThanJustAFan.jpg" class="AlbumThumbnail">"More Than Just A Fan"<span class="playcount">...</span></button>
-            <button preload="auto" class ="song-button TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL1.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Black Jeans"<span class="playcount">...</span></button>
-            <button preload="auto" class ="song-button TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL2.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Ah, Ah, Ah"<span class="playcount">...</span></button>
-            <button preload="auto" class ="song-button TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL3.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Looks"<span class="playcount">...</span></button>
-            <button preload="auto" class ="song-button TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL4.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Became So Real"<span class="playcount">...</span></button>
-            <button preload="auto" class ="song-button TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL5.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Dry"<span class="playcount">...</span></button>
-            <button preload="auto" class ="song-button TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL6.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Black Panther"<span class="playcount">...</span></button>
-            <button preload="auto" class ="song-button TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL7.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Everything I Claim To Be"<span class="playcount">...</span></button>
-            <button preload="auto" class ="song-button TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL8.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Reality"<span class="playcount">...</span></button>
+            <button preload="auto" class ="song-button GoodForYou" data-song="fmp3smusic/GoodForYou.mp3"><img src="fmp3simages/GoodForYou.jpg" class="AlbumThumbnail">"Good For You"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
+            <button preload="auto" class ="song-button MoreThanJustAFan" data-song="fmp3smusic/MoreThanJustAFan.mp3"><img src="fmp3simages/MoreThanJustAFan.jpg" class="AlbumThumbnail">"More Than Just A Fan"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
+            <button preload="auto" class ="song-button TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL1.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Black Jeans"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
+            <button preload="auto" class ="song-button TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL2.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Ah, Ah, Ah"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
+            <button preload="auto" class ="song-button TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL3.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Looks"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
+            <button preload="auto" class ="song-button TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL4.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Became So Real"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
+            <button preload="auto" class ="song-button TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL5.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Dry"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
+            <button preload="auto" class ="song-button TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL6.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Black Panther"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
+            <button preload="auto" class ="song-button TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL7.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Everything I Claim To Be"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
+            <button preload="auto" class ="song-button TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL8.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Reality"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
           </div>
         </div>
       
@@ -1273,8 +1275,8 @@ async function commitDailyGrowth(songRef, songId) {
           if (!el) return;
 
           //------------------Listens
-          const shortText = `${formatPlays(displayPlays)} Listens`;
-          const fullText  = `${displayPlays.toLocaleString()} Listens`;
+          const shortText = `${formatPlays(displayPlays)}`;
+          const fullText  = `${displayPlays.toLocaleString()}`;
 
           if (el.matches(':hover')) {
             el.textContent = fullText;
@@ -1305,14 +1307,15 @@ async function commitDailyGrowth(songRef, songId) {
 
     const displayPlays = highestDisplayed[songId] || 0;
 
-    const shortText = `${formatPlays(displayPlays)} Listens`;
-    const fullText  = `${displayPlays.toLocaleString()} Listens`;
+    const shortText = `${formatPlays(displayPlays)}`;
 
-    if (el.matches(':hover')) {
-      el.textContent = fullText;
-    } else {
-      el.textContent = shortText;
-    }
+    const fullText  = `${displayPlays.toLocaleString()}`;
+
+if (el.matches(':hover')) {
+  el.innerHTML = fullText;
+} else {
+  el.innerHTML = shortText;
+}
   }
 
 async function commitSongPlay(songPath, button) {
