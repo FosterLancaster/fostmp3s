@@ -763,6 +763,7 @@ li {
 .h4 { left: 60%; bottom: 5%;  animation-delay: 1s; }
 
 .playcountframe {
+  -webkit-text-stroke: .04em #000000;
   font-size: 14px;
   position: absolute;
   top: 0;
@@ -1277,13 +1278,24 @@ async function commitDailyGrowth(songRef, songId) {
           //------------------Listens
           const shortText = `${formatPlays(displayPlays)}`;
           const fullText  = `${displayPlays.toLocaleString()}`;
+          const frame = button.querySelector('.playcountframe');
 
-          if (el.matches(':hover')) {
+frame.addEventListener('mouseenter', () => {
+  el.innerHTML = fullText;
+});
+
+frame.addEventListener('mouseleave', () => {
+  el.innerHTML = shortText;
+});
+
+          if (frame.matches(':hover')) {
             el.textContent = fullText;
           } else {
             el.textContent = shortText;
           }
         }
+
+
 
         updateDisplay();
 
@@ -1299,24 +1311,20 @@ async function commitDailyGrowth(songRef, songId) {
 
   }
 
-  function updatePlaycountText(button, songId) {
-    if (!button || !songId) return;
+function updatePlaycountText(button, songId) {
+  if (!button || !songId) return;
 
-    const el = button.querySelector('.playcount');
-    if (!el) return;
+  const el = button.querySelector('.playcount');
 
-    const displayPlays = highestDisplayed[songId] || 0;
+  if (!el || !frame) return;
 
-    const shortText = `${formatPlays(displayPlays)}`;
+  const displayPlays = highestDisplayed[songId] || 0;
+  const shortText = `${formatPlays(displayPlays)}`;
+  const fullText  = `${displayPlays.toLocaleString()}`;
 
-    const fullText  = `${displayPlays.toLocaleString()}`;
-
-if (el.matches(':hover')) {
-  el.innerHTML = fullText;
-} else {
-  el.innerHTML = shortText;
 }
-  }
+
+
 
 async function commitSongPlay(songPath, button) {
   if (!songPath) return;
