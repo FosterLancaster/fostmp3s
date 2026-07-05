@@ -586,7 +586,7 @@ input[type="range"]::-webkit-slider-thumb {
   white-space: nowrap;
   overflow: hidden;
   color: #ffffff;
-  border-bottom: solid 1px #ffffff;
+  border-bottom: solid .5px #ffffff;
 }
 .MoreBody {
   flex: 1;
@@ -764,13 +764,14 @@ li {
 
 .playcountframe {
   font-size: 14px;
+  -webkit-text-stroke: .025em #000000;
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   min-width: 60px; /* or whatever minimum you want */
   padding: 0 2px;
-  background-color: rgba(150, 150, 150, .4);
+  background-color: rgba(50, 50, 50, .4);
   backdrop-filter: blur(5px);
   display: flex;
   align-items: center;
