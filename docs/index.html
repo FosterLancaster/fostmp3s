@@ -248,12 +248,16 @@ table {
   z-index: 3;
   transition-duration: .3s;
 }
-.songSelection:hover {
-  opacity: 1;
-}
 /*------100vh Controls Sum Landscape = 207px (with frame) + 185px (without frame)-------*/
 /*----Bars----*/
-.songSelection:hover .Seven{
+.songSelection:hover,
+.songSelection:active,
+.songSelection:focus-within {
+  opacity: 1;
+}
+.songSelection:hover .Seven,
+.songSelection:active .Seven,
+.songSelection:focus-within .Seven {
   background-image: none;
 }
 .Seven:hover {
