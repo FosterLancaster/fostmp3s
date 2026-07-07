@@ -698,47 +698,53 @@ li {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 1.5em;
-  height: 1.5em;
+  width: 2em;
+  height: 2em;
   z-index: 1;
 }
 .postbutton {
   margin: 2px;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;      /* vertical center */
+  justify-content: center;  /* centers contents if there's extra space */
   position: relative;
   width: auto;
-  height: 1.5em;
-  max-height: 45px; 
+  height: 2em;
+  max-height: 45px;
   border-radius: 5px;
   transition-duration: .5s;
 }
+
 .postbutton:hover {
   background-color: rgb(0, 0, 0, .5);
 }
 .postreact {
-  width: 1.5em;
-  height: 1.5em;
-  max-width: 45px; 
-  max-height: 45px; 
-  background-image: url('fmp3simages/Email.png'); 
-  background-size: 1.5em 1.5em;
-  background-position: center center;
+  width: 2em;
+  height: 2em;
+  max-width: 45px;
+  max-height: 45px;
+  background-image: url('images/Email.png');
+  background-size: 2em 2em;
+  background-position: center;
   background-repeat: no-repeat;
+  flex-shrink: 0;
 }
 .postname {
-  font-size: .5em;
-  margin: 5px;
-  line-height: 2em;
+  display: flex;
+  align-items: center;   /* vertically center text */
+  height: 100%;
+  font-size: .75em;
+  padding: 0 .5em;
 }
 .hearteffect2 {
   position: relative;
   inset: 0;
   pointer-events: none;
   overflow: hidden;
-  width: 1.5em;
-  height: 1.5em;
+  width: 2em;
+  height: 2em;
   z-index: 1;
-  background-image: url('fmp3simages/PWBUY.png');
+  background-image: url('images/PWBUY.png');
   background-size: cover;
   background-position: center center;
   transition-duration: .5s;
@@ -750,7 +756,7 @@ li {
   position: absolute;
   width: 45%;
   height: 45%;
-  background: url('fmp3simages/Heart.png') center/contain no-repeat;
+  background: url('images/Heart.png') center/contain no-repeat;
   opacity: 0;
   animation: floatHeart 1s infinite linear;
   background-color: transparent;
@@ -1948,32 +1954,33 @@ fetch("https://fostchat-rss.fostmp3s.workers.dev/")
             : ""
         }
                 
-    </a>
-    <div class="love">
-    <table>
-    <td class="postbutton" title="Send Message">
-    <a href="mailto:foster@fostmp3s.com" target="_blank">
-    <div class="postreact"></div>
-    </a>
-    </td>
-    <td class="postbutton" title="Buy Password">
-    <a href="https://fostmp3s.com/pw" target="_blank">
-    <div class="hearteffect2">
-      <span class="heart h1"></span>
-      <span class="heart h2"></span>
-      <span class="heart h3"></span>
-      <span class="heart h4"></span>
-    </div>
-    </a>
-    </td>
-    <td class="postbutton" title="Visit Site">
-    <a href="https://fostmp3s.com" target="_blank">
-    <div class="postname">Written by Foster Lancaster<img style="width: 12px; height: 12px; margin: 0px 0px -3px 4px;" src="fmp3simages/Verified.png"></div>
-    </a>
-    </td>
-    </table>
-    </div>
-    `;
+</a>
+<div class="love">
+<table>
+<td class="postbutton" title="Send Message">
+<a href="mailto:foster@fostmp3s.com" target="_blank">
+<div class="postreact"></div>
+</a>
+</td>
+<td class="postbutton" title="Buy Password">
+<a href="https://fostmp3s.com/pw" target="_blank">
+<div class="hearteffect2">
+  <span class="heart h1"></span>
+  <span class="heart h2"></span>
+  <span class="heart h3"></span>
+  <span class="heart h4"></span>
+</div>
+</a>
+</td>
+<td class="postbutton" title="Visit Site">
+<a href="https://fostmp3s.com" target="_blank">
+<div class="postname">Human Post<img style="width: 1em; height: 1em; margin-left: .5em;" src="images/Verified.png"></div>
+</a>
+</td>
+</table>
+</div>
+`;
+
                 
     if (feedList) {
       feedList.appendChild(li);
