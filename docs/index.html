@@ -72,8 +72,6 @@ table {
   position: relative;
   z-index: 2;
   opacity: 1;
-  border-top-left-radius: 20px;
-  border-bottom-right-radius: 20px;
   background-color: rgba(255, 255, 255, .1);
   background-image: linear-gradient(to top, rgba(0, 0, 0, .4), transparent, rgba(0, 0, 0, .4));
   background-size: 100% 400px;
@@ -263,8 +261,6 @@ table {
   margin-right: auto;
   height: calc(100vh - 207px);
   border: solid 11px rgba(150, 150, 150, .3);
-  border-top-left-radius: 20px;
-  border-bottom-right-radius: 20px;
   position: relative; /* important */
   opacity: 1;
   background-image: url('fmp3simages/SongSelect.png');
@@ -308,11 +304,11 @@ table {
   background-position: center center;
   background-size: contain;
 }
-.song-button {
+.songbutton {
+  -webkit-text-stroke: .04em #000000;
   font-family: 'futura';
   font-size: 18px;
   color: #ffffff;
-  -webkit-text-stroke: .045em #000000;
   position: relative;
   width: calc(100% - 1px);
   margin: 1px 0px 1px 0px;
@@ -334,12 +330,12 @@ table {
   text-overflow: ellipsis;
   display: block;
 }
-.song-button:focus {
+.songbutton:focus {
   background-color: rgb(0, 0, 0, .8);
   height: 80px;
   padding-left: 86px;
 }
-.song-button:hover {
+.songbutton:hover {
   height: 80px;
   padding-left: 86px;
 }
@@ -764,15 +760,15 @@ li {
 .h4 { left: 60%; bottom: 5%;  animation-delay: 1s; }
 
 .playcountframe {
+  -webkit-text-stroke: .025em #ffffff;
+  color: #000000;
   font-size: 14px;
-  -webkit-text-stroke: .025em #000000;
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   padding: 0 5px;
-  background-color: rgba(50, 50, 50, .4);
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -920,16 +916,16 @@ li {
             <div class="shuffleBtn"  onclick="shuffle()" alt="Shuffle" title="Shuffle"></div>
           <div align='center'>
             <audio id="introAudio" preload="auto" src="fmp3smusic/Sale.mp3"></audio>
-            <button preload="auto" class ="song-button GoodForYou" data-song="fmp3smusic/GoodForYou.mp3"><img src="fmp3simages/GoodForYou.jpg" class="AlbumThumbnail">"Good For You"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
-            <button preload="auto" class ="song-button MoreThanJustAFan" data-song="fmp3smusic/MoreThanJustAFan.mp3"><img src="fmp3simages/MoreThanJustAFan.jpg" class="AlbumThumbnail">"More Than Just A Fan"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
-            <button preload="auto" class ="song-button TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL1.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Black Jeans"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
-            <button preload="auto" class ="song-button TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL2.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Ah, Ah, Ah"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
-            <button preload="auto" class ="song-button TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL3.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Looks"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
-            <button preload="auto" class ="song-button TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL4.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Became So Real"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
-            <button preload="auto" class ="song-button TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL5.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Dry"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
-            <button preload="auto" class ="song-button TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL6.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Black Panther"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
-            <button preload="auto" class ="song-button TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL7.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Everything I Claim To Be"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
-            <button preload="auto" class ="song-button TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL8.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Reality"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
+            <button preload="auto" class ="songbutton GoodForYou" data-song="fmp3smusic/GoodForYou.mp3"><img src="fmp3simages/GoodForYou.jpg" class="AlbumThumbnail">"Good For You"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
+            <button preload="auto" class ="songbutton MoreThanJustAFan" data-song="fmp3smusic/MoreThanJustAFan.mp3"><img src="fmp3simages/MoreThanJustAFan.jpg" class="AlbumThumbnail">"More Than Just A Fan"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
+            <button preload="auto" class ="songbutton TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL1.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Black Jeans"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
+            <button preload="auto" class ="songbutton TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL2.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Ah, Ah, Ah"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
+            <button preload="auto" class ="songbutton TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL3.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Looks"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
+            <button preload="auto" class ="songbutton TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL4.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Became So Real"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
+            <button preload="auto" class ="songbutton TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL5.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Dry"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
+            <button preload="auto" class ="songbutton TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL6.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Black Panther"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
+            <button preload="auto" class ="songbutton TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL7.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Everything I Claim To Be"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
+            <button preload="auto" class ="songbutton TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL8.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Reality"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
           </div>
         </div>
       
@@ -1223,114 +1219,93 @@ async function commitDailyGrowth(songRef, songId) {
   });
 }
 
-  function setupFirebasePlayCounts(songButtons) {
+ function setupFirebasePlayCounts(songButtons) {
+  songButtons.forEach(button => {
+    const songId = getSongId(button.dataset.song);
+    const songRef = ref(database, `songs/${songId}`);
 
-    songButtons.forEach(button => {
+    onValue(songRef, snapshot => {
+      const data = snapshot.val() || {};
 
-      const songId = getSongId(button.dataset.song);
-      const songRef = ref(database, `songs/${songId}`);
+      if (!dailyChecked[songId]) {
+        dailyChecked[songId] = true;
+        commitDailyGrowth(songRef, songId);
+      }
 
-      //Update number
-      onValue(songRef, snapshot => {
+      const el = button.querySelector('.playcount');
+      if (!el) return;
 
-        const data = snapshot.val() || {};
+      const basePlays = data.plays || 0;
+      const lastUpdated = data.lastUpdated || Date.now();
+      const today = getToday();
 
-        if (!dailyChecked[songId]) {
-          dailyChecked[songId] = true;
-          commitDailyGrowth(songRef, songId);
-        }
+      if (!data.boostDate || data.boostDate !== today) {
+        update(songRef, {
+          dailyBoost: getDailyBoost(songId),
+          boostDate: today
+        });
+      }
 
-        const el = button.querySelector('.playcount');
-        if (!el) return;
+      function updateDisplay() {
+        const elapsed = Date.now() - lastUpdated;
 
-        const basePlays = data.plays || 0;
-        const lastUpdated = data.lastUpdated || Date.now();
-        const today = getToday();
+        const estimatedGrowth = Math.floor(
+          Math.max(0, elapsed) * RATE_PER_MS
+        );
 
-        if (!data.boostDate || data.boostDate !== today) {
-          update(songRef, {
-            dailyBoost: getDailyBoost(songId),
-            boostDate: today
-          });
-        }
+        const dailyBoost = getDailyBoost(songId);
 
-        function updateDisplay() {
+        let displayPlays =
+          basePlays + estimatedGrowth + dailyBoost;
 
-          const elapsed = Date.now() - lastUpdated;
-
-          const estimatedGrowth = Math.floor(
-            Math.max(0, elapsed) * RATE_PER_MS
+        // Never allow the displayed number to decrease
+        if (highestDisplayed[songId] !== undefined) {
+          displayPlays = Math.max(
+            displayPlays,
+            highestDisplayed[songId]
           );
-
-          const dailyBoost = getDailyBoost(songId);
-
-          let displayPlays =
-            basePlays + estimatedGrowth + dailyBoost;
-
-          // never allow it to go backwards
-          if (highestDisplayed[songId] !== undefined) {
-            displayPlays = Math.max(displayPlays, highestDisplayed[songId]);
-          }
-
-          highestDisplayed[songId] = displayPlays;
-
-          if (!highestDisplayed[songId] || displayPlays > highestDisplayed[songId]) {
-            highestDisplayed[songId] = displayPlays;
-          }
-
-          const el = button.querySelector('.playcount');
-
-          if (!el) return;
-
-          //------------------Listens
-          const shortText = `${formatPlays(displayPlays)}`;
-          const fullText  = `${displayPlays.toLocaleString()}`;
-          const frame = button.querySelector('.playcountframe');
-
-frame.addEventListener('mouseenter', () => {
-  el.innerHTML = fullText;
-});
-
-frame.addEventListener('mouseleave', () => {
-  el.innerHTML = shortText;
-});
-
-          if (frame.matches(':hover')) {
-            el.textContent = fullText;
-          } else {
-            el.textContent = shortText;
-          }
         }
 
+        highestDisplayed[songId] = displayPlays;
 
+        const shortText = formatPlays(displayPlays);
+        const fullText = displayPlays.toLocaleString();
 
-        updateDisplay();
-
-        if (el._interval) {
-          clearInterval(el._interval);
+        // Show full number while hovering anywhere over the song button
+        if (button.matches(':hover')) {
+          el.textContent = fullText;
+        } else {
+          el.textContent = shortText;
         }
+      }
 
-        el._interval = setInterval(updateDisplay, 1000);
+      // Display immediately
+      updateDisplay();
 
-      });
+      // Prevent duplicate intervals
+      if (el._interval) {
+        clearInterval(el._interval);
+      }
 
+      el._interval = setInterval(updateDisplay, 1000);
     });
-
-  }
+  });
+}
 
 function updatePlaycountText(button, songId) {
   if (!button || !songId) return;
 
   const el = button.querySelector('.playcount');
-
-  if (!el || !frame) return;
+  if (!el) return;
 
   const displayPlays = highestDisplayed[songId] || 0;
-  const shortText = `${formatPlays(displayPlays)}`;
-  const fullText  = `${displayPlays.toLocaleString()}`;
 
+  if (button.matches(':hover')) {
+    el.textContent = displayPlays.toLocaleString();
+  } else {
+    el.textContent = formatPlays(displayPlays);
+  }
 }
-
 
 
 async function commitSongPlay(songPath, button) {
@@ -1407,7 +1382,7 @@ const defaultImage        = document.querySelector('.default-image');
 const LancasterMusicPlayer= document.querySelector('.LancasterMusicPlayer');
                 
 // Set Order of Songs
-let songButtons = Array.from(document.querySelectorAll('.song-button'));
+let songButtons = Array.from(document.querySelectorAll('.songbutton'));
 const audioPreload = {};
 
 // Set Firebase play counts for every song button
