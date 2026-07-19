@@ -28,6 +28,11 @@ body {
 .fostmp3s {
   display: block;
 }
+.MainLogo {
+  height: 30px; 
+  width: auto;
+  margin: 5px;
+}
 audio {
   display: none;
 }
@@ -246,7 +251,7 @@ table {
   z-index: 3;
   transition-duration: .3s;
 }
-/*------100vh Controls Sum Landscape = 207px (with frame) + 185px (without frame)-------*/
+/*------100vh Controls Sum Landscape = 252px (with frame) + 228px (without frame)-------*/
 /*----Bars----*/
 .songSelection.revealed,
 .songSelection:hover {
@@ -256,10 +261,10 @@ table {
   background-image: none;
 }
 .Seven {
-  width: calc(100% - 22px);
+  width: calc(100% - 42px);
   margin-left: auto;
   margin-right: auto;
-  height: calc(100vh - 207px);
+  height: calc(100vh - 252px);
   border: solid 11px rgba(150, 150, 150, .3);
   position: relative; /* important */
   opacity: 1;
@@ -276,8 +281,8 @@ table {
   height: 38px;
   width: 100%;
   border-radius: 0px;
-  z-index: 999;
-  background-color: transparent;
+  z-index: 1;
+  background-color: #ffffff;
   text-align: center;
   background-image: url('fmp3simages/Shuffle.png');
   background-size: 38px 38px;
@@ -288,8 +293,8 @@ table {
   background-color: #ffffff;
 }
 .OffMusicHeader {
-  height: calc(100vh - 185px);
-  min-height: calc(100vh - 185px);
+  height: calc(100vh - 230px);
+  min-height: calc(100vh - 230px);
   width: 100%;
   display: flex; 
   align-items: center; 
@@ -311,7 +316,7 @@ table {
   color: #ffffff;
   position: relative;
   width: calc(100% - 1px);
-  margin: 1px 0px 1px 0px;
+  margin: 1px 0;
   overflow: hidden;
   height: 38px;
   line-height: 18px;
@@ -321,6 +326,8 @@ table {
   background-size: cover;
   text-align: left;
   padding-left: 44px;
+  padding-right: 70px;   /* Reserve 70px on the right */
+  box-sizing: border-box;
   border-top-left-radius: 20px;
   border-bottom-right-radius: 20px;
   opacity: 1;
@@ -559,7 +566,7 @@ input[type="range"]::-webkit-slider-thumb {
   width: 100%;
   height: 100%;
   background: transparent;
-  background-image: linear-gradient(to top, rgba(255, 255, 255, .8), rgba(0, 0, 0, .8));
+  background-image: linear-gradient(to top, rgba(255, 255, 255, .8), rgba(127.5, 127.5, 127.5, .8));
   border-top-left-radius: 20px;
   border-bottom-right-radius: 20px;
   display: flex;
@@ -765,14 +772,14 @@ li {
   top: 0;
   right: 0;
   bottom: 0;
-  padding: 0 5px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   line-height: 1.1;
   transition-duration: .5s;
-  min-width: 55px;
+  width: 70px;
+  background-color: transparent;
 }
 .plays {
   position: static;
@@ -781,11 +788,11 @@ li {
 .playcount {
   position: static; /* remove the absolute positioning */
 }
-/*------100vh Controls Sum Landscape = 217px (with frame) + 195px (without frame)-------*/
+/*------100vh Controls Sum Landscape = 262px (with frame) + 238px (without frame)-------*/
 
 @media screen and (max-width: 500px) {
 .Seven {
-  height: calc(100vh - 217px);
+  height: calc(100vh - 262px);
   }
 .MusicHeader {
   max-width: 100%;
@@ -826,8 +833,8 @@ li {
   }
 /*----Music----*/
 .OffMusicHeader {
-  height: calc(100vh - 195px);
-  min-height: calc(100vh - 195px);
+  height: calc(100vh - 240px);
+  min-height: calc(100vh - 240px);
 }
 }
 
@@ -905,13 +912,13 @@ li {
 <!------Music Player------>
 <div class="LancasterFrame" id="LancasterFrame">
 <div class="LancasterMusicPlayer">
+  <img class="MainLogo" src="fmp3simages/FostMp3sLogo.png">
   
   <!----PayOn---->
         <div id="PayOn">
           <div class="Seven">
-          <div class="songSelection" id="songSelection"  alt="Song Selector" title="Song Selector">
-            <div class="shuffleBtn"  onclick="shuffle()" alt="Shuffle" title="Shuffle"></div>
           <div align='center'>
+            <div class="songSelection" id="songSelection"  alt="Song Selector" title="Song Selector">
             <audio id="introAudio" preload="auto" src="fmp3smusic/Sale.mp3"></audio>
             <button preload="auto" class ="songbutton GoodForYou" data-song="fmp3smusic/GoodForYou.mp3"><img src="fmp3simages/GoodForYou.jpg" class="AlbumThumbnail">"Good For You"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
             <button preload="auto" class ="songbutton MoreThanJustAFan" data-song="fmp3smusic/MoreThanJustAFan.mp3"><img src="fmp3simages/MoreThanJustAFan.jpg" class="AlbumThumbnail">"More Than Just A Fan"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
@@ -923,10 +930,9 @@ li {
             <button preload="auto" class ="songbutton TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL6.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Black Panther"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
             <button preload="auto" class ="songbutton TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL7.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Everything I Claim To Be"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
             <button preload="auto" class ="songbutton TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL8.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Reality"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
-          </div>
+          <div class="shuffleBtn"  onclick="shuffle()" alt="Shuffle" title="Shuffle"></div>
         </div>
-      
-      </div>
+        </div>
       </div>
 
             <!----PayOff---->
