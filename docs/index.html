@@ -1364,9 +1364,14 @@ const Password      = document.getElementById('passwordInput');
 'fmp3simages/PLAY3.png',
 'fmp3simages/PLAY4.png'
                 ];
-                const selectedPlayImage =
-playImages[Math.floor(Math.random() * playImages.length)];
-                
+const selectedPlayImage =
+  playImages[Math.floor(Math.random() * playImages.length)];
+
+// Show the play button immediately on page load
+if (playLogo) {
+  playLogo.src = selectedPlayImage;
+}
+
 audio.addEventListener("play", () => {
   if (playLogo) {
     playLogo.src = "fmp3simages/PAUSE.png";
@@ -1553,8 +1558,11 @@ if (!audio) return;
 if (!decrementListenCount()) return;
                 
 // 🔹 CHANGE UI IMMEDIATELY (while loading)
-if (playLogo && listensLeft > 0);
-defaultImage && defaultImage.classList.add('playing');
+if (playLogo && listensLeft > 0) {
+  playLogo.src = "fmp3simages/PAUSE.png";
+}
+
+defaultImage?.classList.add('playing');
                 
 // Stop intro audio if it was playing
 if (introAudio) {
@@ -1586,7 +1594,7 @@ if (p && typeof p.then === "function") {
     commitSongPlay(songPath, btn);
   }).catch(() => {
     // 🔹 Revert if play fails
-    if (playLogo) playLogo.src = 'fmp3simages/PLAY.png';
+    if (playLogo) playLogo.src = selectedPlayImage;
     defaultImage && defaultImage.classList.remove('playing');
   });
 } else {
@@ -2013,3 +2021,4 @@ export default {
   ----->
 </body>
 </html>
+
