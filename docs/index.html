@@ -1367,11 +1367,26 @@ const Password      = document.getElementById('passwordInput');
                 const selectedPlayImage =
 playImages[Math.floor(Math.random() * playImages.length)];
                 
-                // Set initial image
-                if (playLogo) {
-playLogo.src = selectedPlayImage;
-                }
-                
+audio.addEventListener("play", () => {
+  if (playLogo) {
+    playLogo.src = "fmp3simages/PAUSE.png";
+  }
+  defaultImage?.classList.add("playing");
+});
+
+audio.addEventListener("pause", () => {
+  if (playLogo) {
+    playLogo.src = selectedPlayImage;
+  }
+  defaultImage?.classList.remove("playing");
+});
+
+audio.addEventListener("ended", () => {
+  if (playLogo) {
+    playLogo.src = selectedPlayImage;
+  }
+  defaultImage?.classList.remove("playing");
+});            
                 
 document.getElementById("embedBtn");
 document.getElementById("embedOverlay");
@@ -1538,7 +1553,7 @@ if (!audio) return;
 if (!decrementListenCount()) return;
                 
 // 🔹 CHANGE UI IMMEDIATELY (while loading)
-if (playLogo && listensLeft > 0) playLogo.src = 'fmp3simages/PAUSE.png';
+if (playLogo && listensLeft > 0);
 defaultImage && defaultImage.classList.add('playing');
                 
 // Stop intro audio if it was playing
@@ -1599,20 +1614,17 @@ if (!audio) return;
                 
 if (audio.paused && listensLeft > 0) {
   // 🔹 Update UI FIRST
-  if (playLogo) playLogo.src = 'fmp3simages/PAUSE.png';
   defaultImage && defaultImage.classList.add('playing');
                 
   const p = audio.play();
   if (p && typeof p.then === "function") {
     p.catch(() => {
       // 🔹 Revert UI if play fails
-      if (playLogo) playLogo.src = selectedPlayImage;
       defaultImage && defaultImage.classList.remove('playing');
     });
   }
 } else {
   // 🔹 Update UI FIRST
-  if (playLogo) playLogo.src = selectedPlayImage;
   defaultImage && defaultImage.classList.remove('playing');
                 
   audio.pause();
