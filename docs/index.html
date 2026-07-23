@@ -72,8 +72,8 @@ table {
 }
  .LancasterFrame {
   font-size: 18px;
-  width: calc(100vw - 2px);
-  height: calc(100vh - 2px);
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
   position: relative;
   z-index: 2;
@@ -83,7 +83,6 @@ table {
   background-size: 100% 400px;
   background-position: center center;
   animation: rise 4s linear infinite;
-  border: solid 1px #ffffff;
 }
 .LancasterFrame:hover .ControlBar {
   height: 40px;
@@ -328,7 +327,7 @@ table {
   background-size: cover;
   text-align: left;
   padding-left: 44px;
-  padding-right: 90px;   /* Reserve 70px on the right */
+  padding-right: 90px;
   box-sizing: border-box;
   border-top-left-radius: 20px;
   border-bottom-right-radius: 20px;
@@ -337,7 +336,8 @@ table {
   cursor: pointer;
   white-space: nowrap;
   text-overflow: ellipsis;
-  display: block;
+  display: flex;
+  align-items: center; /* Centers text vertically */
 }
 .songbutton:focus {
   background-color: rgb(0, 0, 0, .8);
@@ -347,6 +347,37 @@ table {
 .songbutton:hover {
   height: 80px;
   padding-left: 86px;
+}
+.SongTitle {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.playcountframe {
+  font-size: 14px;
+  position: absolute;
+  top: 0;
+  right: 0px;
+  padding: 0px 5px 0px 5px;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  text-align: center;
+  line-height: 1.1;
+  transition-duration: .5s;
+  width: auto;
+  background-color: transparent;
+  flex-shrink: 0;
+}
+.plays {
+  position: static;
+  white-space: nowrap;
+}
+.playcount {
+  position: static; /* remove the absolute positioning */
 }
 .AlbumThumbnail {
   height: 100%; /* Fill the height of the button */
@@ -767,28 +798,6 @@ li {
 .h2 { left: 40%; bottom: 5%;  animation-delay: .50s; }
 .h3 { left: 20%; bottom: 5%;  animation-delay: .75s; }
 .h4 { left: 60%; bottom: 5%;  animation-delay: 1s; }
-
-.playcountframe {
-  font-size: 14px;
-  position: absolute;
-  top: 0;
-  right: 5px;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: right;
-  text-align: center;
-  line-height: 1.1;
-  transition-duration: .5s;
-  width: 75px;
-}
-.plays {
-  position: static;
-  white-space: nowrap;
-}
-.playcount {
-  position: static; /* remove the absolute positioning */
-}
 /*------100vh Controls Sum Landscape = 256px (with frame) + 234px (without frame)-------*/
 
 @media screen and (max-width: 500px) {
@@ -921,16 +930,16 @@ li {
           <div align='center'>
             <div class="songSelection" id="songSelection"  alt="Song Selector" title="Song Selector">
             <audio id="introAudio" preload="auto" src="fmp3smusic/Sale.mp3"></audio>
-            <button preload="auto" class ="songbutton GoodForYou" data-song="fmp3smusic/GoodForYou.mp3"><img src="fmp3simages/GoodForYou.jpg" class="AlbumThumbnail">"Good For You"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
-            <button preload="auto" class ="songbutton MoreThanJustAFan" data-song="fmp3smusic/MoreThanJustAFan.mp3"><img src="fmp3simages/MoreThanJustAFan.jpg" class="AlbumThumbnail">"More Than Just A Fan"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
-            <button preload="auto" class ="songbutton TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL1.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Black Jeans"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
-            <button preload="auto" class ="songbutton TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL2.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Ah, Ah, Ah"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
-            <button preload="auto" class ="songbutton TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL3.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Looks"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
-            <button preload="auto" class ="songbutton TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL4.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Became So Real"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
-            <button preload="auto" class ="songbutton TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL5.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Dry"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
-            <button preload="auto" class ="songbutton TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL6.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Black Panther"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
-            <button preload="auto" class ="songbutton TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL7.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Everything I Claim To Be"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
-            <button preload="auto" class ="songbutton TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL8.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail">"Reality"<div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
+            <button preload="auto" class ="songbutton GoodForYou" data-song="fmp3smusic/GoodForYou.mp3"><img src="fmp3simages/GoodForYou.jpg" class="AlbumThumbnail"><span class="SongTitle">"Good For You"</span><div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
+            <button preload="auto" class ="songbutton MoreThanJustAFan" data-song="fmp3smusic/MoreThanJustAFan.mp3"><img src="fmp3simages/MoreThanJustAFan.jpg" class="AlbumThumbnail"><span class="SongTitle">"More Than Just A Fan"</span><div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
+            <button preload="auto" class ="songbutton TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL1.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail"><span class="SongTitle">"Black Jeans"</span><div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
+            <button preload="auto" class ="songbutton TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL2.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail"><span class="SongTitle">"Ah, Ah, Ah"</span><div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
+            <button preload="auto" class ="songbutton TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL3.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail"><span class="SongTitle">"Looks"</span><div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
+            <button preload="auto" class ="songbutton TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL4.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail"><span class="SongTitle">"Became So Real"</span><div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
+            <button preload="auto" class ="songbutton TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL5.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail"><span class="SongTitle">"Dry"</span><div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
+            <button preload="auto" class ="songbutton TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL6.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail"><span class="SongTitle">"Black Panther"</span><div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
+            <button preload="auto" class ="songbutton TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL7.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail"><span class="SongTitle">"Everything I Claim To Be"</span><div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
+            <button preload="auto" class ="songbutton TheGoodLink" data-song="fmp3smusic/TheGoodLink/TGL8.mp3"><img src="fmp3simages/TheGoodLink.png" class="AlbumThumbnail"><span class="SongTitle">"Reality"</span><div class="playcountframe"><div class="plays"><span class="playcount">?</span><br>Listens</div></div></button>
             <div class="shuffleBtn"  onclick="shuffle()" alt="Shuffle" title="Shuffle"></div>
             </div>
           </div>
@@ -2021,4 +2030,5 @@ export default {
   ----->
 </body>
 </html>
+
 
