@@ -61,7 +61,7 @@ table {
 .volumeContainer:hover, 
 .nextprev-btn:hover, 
 .embedBtn:hover, 
-.chatBtn:hover {
+.SupBtn:hover {
   background-color: rgba(255, 255, 255, .8);
 }
 .EngageBar td:hover {
@@ -414,7 +414,7 @@ table {
   height: 40px;
   width: auto;
 }
-.chatBtn {
+.SupBtn {
   cursor: pointer;
   border: inline-block;
   cursor: pointer;
@@ -581,7 +581,7 @@ input[type="range"]::-webkit-slider-thumb {
   margin-top: -6px;
 }
 #embedOverlay,
-#chatOverlay {
+#SupOverlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -595,7 +595,7 @@ input[type="range"]::-webkit-slider-thumb {
   color: #000000;
 }
 .embedContent,
-.chatContent {
+.SupContent {
   width: 100%;
   height: 100%;
   background: transparent;
@@ -649,7 +649,7 @@ input[type="range"]::-webkit-slider-thumb {
   overflow-x: hidden;
 }
 #closeEmbed,
-#closeChat {
+#closeSup {
   font-size: 18px;
   color: #000000;
   position: absolute;
@@ -668,7 +668,7 @@ input[type="range"]::-webkit-slider-thumb {
   z-index: 11;
   outline: none;
 }
-.chatEmbed {
+.SupEmbed {
   text-align: center;
   line-height: 2em;
   height: calc(100% - 40px);
@@ -676,7 +676,7 @@ input[type="range"]::-webkit-slider-thumb {
   overflow-y: scroll;
   text-overflow: ellipsis;
 }
-.chatPosts {
+.SupPosts {
   padding: 0px;
   margin-top: 15px; 
   width: 100%;
@@ -1010,21 +1010,21 @@ li {
   </td>
   
   <td>
-    <a href="#" id="chatBtn">
-    <div class="chatBtn">
+    <a href="#" id="SupBtn">
+    <div class="SupBtn">
     <div class="hearteffect">
       <span class="heart h1"></span>
       <span class="heart h2"></span>
       <span class="heart h3"></span>
       <span class="heart h4"></span>
     </div>
-    <img src="fmp3simages/Chat.png" class="chatBtn" alt="Chat" title="Chat">
+    <img src="fmp3simages/Sup.png" class="SupBtn" alt="Sup" title="Sup">
     </div>
     </a>
     
-    <div id="chatOverlay">
-      <div class="chatContent">
-      <button id="closeChat">X</button>
+    <div id="SupOverlay">
+      <div class="SupContent">
+      <button id="closeSup">X</button>
       <div class="MoreInner">
         <div class="MoreHeader">
           <div style="position: relative; z-index: 1;">
@@ -1034,11 +1034,11 @@ li {
               <span class="heart h3"></span>
               <span class="heart h4"></span>
             </div>
-            <img src="fmp3simages/Chat.png" style="width: 45px; height: 45px; position: relative; z-index: 0;" alt="Chat" title="Chat">
+            <img src="fmp3simages/Sup.png" style="width: 45px; height: 45px; position: relative; z-index: 0;" alt="Sup" title="Sup">
             </div>
         </div>
         <div class="MoreBody">
-  <ul class="chatPosts" id="feed">
+  <ul class="SupPosts" id="feed">
   </ul>
   </div>
   
@@ -1873,20 +1873,20 @@ if (songButtons.length > 0) {
  document.getElementById("embedOverlay").style.display = "none";
  };
                 
-                //Show Chat
-                document.getElementById("chatBtn").onclick = function(e) {
+                //Show Sup
+                document.getElementById("SupBtn").onclick = function(e) {
 e.preventDefault();
-const overlay = document.getElementById("chatOverlay");
+const overlay = document.getElementById("SupOverlay");
 overlay.style.display = "flex";
                 };
               
-                document.getElementById("closeChat").onclick = function() {
-                document.getElementById("chatOverlay").style.display = "none";
+                document.getElementById("closeSup").onclick = function() {
+                document.getElementById("SupOverlay").style.display = "none";
                 };
                 
             
-                // Foster Chat From RSS
-fetch("https://fostchat-rss.fostmp3s.workers.dev/")
+                // Foster Sup From RSS
+fetch("https://fostsup.fostmp3s.workers.dev/")
 .then(response => response.text())
 .then(str => {
                 
@@ -1998,7 +1998,7 @@ fetch("https://fostchat-rss.fostmp3s.workers.dev/")
 export default {
   async fetch(request) {
 
-    const rssUrl = "https://fostchatupdates.wordpress.com/feed/";
+    const rssUrl = "https://fostsup.fostmp3s.workers.dev/";
     const response = await fetch(rssUrl);
     let text = await response.text();
 
@@ -2030,5 +2030,6 @@ export default {
   ----->
 </body>
 </html>
+
 
 
