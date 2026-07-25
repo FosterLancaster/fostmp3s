@@ -810,6 +810,15 @@ li {
 .h2 { left: 40%; bottom: 5%;  animation-delay: .50s; }
 .h3 { left: 20%; bottom: 5%;  animation-delay: .75s; }
 .h4 { left: 60%; bottom: 5%;  animation-delay: 1s; }
+
+.textHighlight {
+  display: inline;
+  background: rgba(183, 255, 60, .75);
+  color: #000000;
+  padding: 0 .15em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
 /*------100vh Controls Sum Landscape = 256px (with frame) + 234px (without frame)-------*/
 
 @media screen and (max-width: 500px) {
@@ -1963,13 +1972,17 @@ fetch("https://fostsup.fostmp3s.workers.dev/")
             : ""
         }
                 
-        <div class="feedTitle">${title}</div>
-                
-        ${
-          cleanDescription
-            ? `<div class="feedDescription">${cleanDescription}</div>`
-            : ""
-        }
+<div class="feedTitle">
+  <span class="textHighlight">${title}</span>
+</div>
+
+${
+  cleanDescription
+    ? `<div class="feedDescription">
+         <span class="textHighlight">${cleanDescription}</span>
+       </div>`
+    : ""
+}
                 
 </a>
 <div class="love">
