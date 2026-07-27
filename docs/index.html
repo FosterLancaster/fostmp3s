@@ -78,11 +78,9 @@ table {
   position: relative;
   z-index: 2;
   opacity: 1;
-  background-color: rgba(0, 0, 0, .4);
-  background-image: linear-gradient(to top, rgba(255, 255, 255, .2), transparent, rgba(255, 255, 255, .2));
-  background-size: 100% 400px;
+  background-image: radial-gradient(transparent 50%, rgba(0, 0, 0, .7));
+  background-size: cover;
   background-position: center center;
-  animation: rise 4s linear infinite;
 }
 .LancasterFrame:hover .ControlBar {
   height: 40px;
@@ -895,11 +893,6 @@ li {
   0% { transform: translateY(0px);}
   50% { transform: translateY(-10px); }
   100% { transform: translateY(0); }
-}
-
-@keyframes rise {
-  0% { background-position: center 0px; }
-  100% { background-position: center -400px; }
 }
 
 @keyframes floatup {
@@ -1965,13 +1958,14 @@ ${
 </a>
 <div class="love">
 <table>
-<td class="postbutton" title="Send Message">
+<td>
 <a href="mailto:foster@fostmp3s.com" target="_blank">
-<div class="postreact"></div>
+<div class="postbutton postreact" title="Send Message"></div>
 </a>
 </td>
-<td class="postbutton postbuy" title="Buy Password">
+<td>
 <a href="https://fostmp3s.com/pw" target="_blank">
+<div class="postbutton postbuy" title="Buy Password"></div>
 </a>
 </td>
 </table>
