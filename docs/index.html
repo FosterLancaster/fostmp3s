@@ -72,7 +72,7 @@ table {
 }
  .LancasterFrame {
   font-size: 18px;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   overflow: hidden;
   position: relative;
@@ -241,7 +241,6 @@ table {
   z-index: 3;
 }
 .songSelection {
-  filter: blur(5px);
   height: 100%;
   overflow-y: scroll;
   position: relative;
@@ -318,15 +317,14 @@ table {
   width: calc(100% - 1px);
   margin: 1px 0;
   overflow: hidden;
-  height: 38px;
+  height: 40px;
+  padding-left: 38px;
   line-height: 18px;
   border: solid .5px #ffffff;
   background-color: transparent;
   background-image: linear-gradient(to top, rgba(0, 0, 0, .6), transparent, rgba(255, 255, 255, .6));
   background-size: cover;
   text-align: left;
-  padding-left: 44px;
-  padding-right: 90px;
   box-sizing: border-box;
   border-top-left-radius: 20px;
   border-bottom-right-radius: 20px;
@@ -336,23 +334,32 @@ table {
   white-space: nowrap;
   text-overflow: ellipsis;
   display: flex;
-  align-items: center; /* Centers text vertically */
+  align-items: stretch; /* Centers text vertically */
 }
 .songbutton:focus {
   background-color: rgb(0, 0, 0, .8);
-  height: 80px;
-  padding-left: 86px;
+  height: 90px;
+  padding-left: 88px;
 }
 .songbutton:hover {
-  height: 80px;
-  padding-left: 86px;
+  height: 90px;
+  padding-left: 88px;
 }
 .SongTitle {
-  flex: 1;
-  min-width: 0;
-  overflow: hidden;
+  text-indent: 5px;
+  top: 0px;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  max-width: 100%;
+  height: 100%;                 /* ← this is fine */
   white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, .8), transparent);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 .playcountframe {
   font-size: 14px;
@@ -370,6 +377,9 @@ table {
   width: auto;
   background-color: transparent;
   flex-shrink: 0;
+  background-image: linear-gradient(to left, rgba(0, 0, 0, .8), transparent);
+  background-size: 100% 100%;
+  background-position: center center;
 }
 .plays {
   position: static;
@@ -803,11 +813,13 @@ li {
   -webkit-box-decoration-break: clone;
 }
 /*------100vh Controls Sum Landscape = 256px (with frame) + 234px (without frame)-------*/
-
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 400px) {
 .Seven {
   height: calc(100vh - 256px);
   }
+.playcountframe {
+  display: none;
+}
 .MusicHeader {
   max-width: 100%;
   margin: 0px;
@@ -1098,6 +1110,7 @@ li {
 
 
 <!--- Song Selection Reveal -->
+
 <script>
 const songSelection = document.querySelector('.songSelection');
 const Seven = document.querySelector('.Seven');
