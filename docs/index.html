@@ -313,7 +313,7 @@ table {
 .songbutton {
   -webkit-text-stroke: .05em #000000;
   font-family: 'futura';
-  font-size: 16px;
+  font-size: 13px;
   color: #ffffff;
   position: relative;
   width: calc(100% - 1px);
@@ -359,12 +359,12 @@ table {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  background-image: linear-gradient(to right, rgba(0, 0, 0, .8), transparent);
+  background-image: linear-gradient(to right, #000000, transparent);
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
 .playcountframe {
-  font-size: 14px;
+  font-size: 13px;
   position: absolute;
   top: 0;
   right: 0px;
@@ -379,7 +379,7 @@ table {
   width: auto;
   background-color: transparent;
   flex-shrink: 0;
-  background-image: linear-gradient(to left, rgba(0, 0, 0, .8), transparent);
+  background-image: linear-gradient(to left, #000000, transparent);
   background-size: 100% 100%;
   background-position: center center;
 }
@@ -816,7 +816,7 @@ li {
   -webkit-box-decoration-break: clone;
 }
 /*------100vh Controls Sum Landscape = 256px (with frame) + 234px (without frame)-------*/
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 350px) {
 .songbutton {
   -webkit-text-stroke: .05em #000000;
   font-family: 'futura';
@@ -868,17 +868,20 @@ li {
   max-height: 251px;
   overflow: hidden;
 }
+/*----Music----*/
+.OffMusicHeader {
+  height: calc(100vh - 234px);
+  min-height: calc(100vh - 234px);
+}
+}
+
+@media screen and (max-width: 400px) {
 .volumeContainer {
     display: none;
   }
 .embedBtn {
     display: none;
   }
-/*----Music----*/
-.OffMusicHeader {
-  height: calc(100vh - 234px);
-  min-height: calc(100vh - 234px);
-}
 }
 
 /* ------------ Miniature Adjustments ----------*/
