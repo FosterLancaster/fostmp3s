@@ -704,7 +704,8 @@ input[type="range"]::-webkit-slider-thumb {
 }
 li {
   list-style: none;
-  background-color: #ffffff;
+  background-color: #000000;
+  color: #000000;
   border-radius: 8px;
   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.4);
   margin: 0px auto 15px auto;
@@ -714,6 +715,17 @@ li {
   text-align: center;
   position: relative;
   pointer-events: none; /* disable clicks on the li */
+}
+li a {
+  color: #ffffff;
+  pointer-events: auto;
+}
+.textHighlight {
+  display: inline;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 0 .15em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 .love {
   height: 45px;
@@ -766,6 +778,7 @@ li {
   transition-duration: .5s;
   pointer-events: auto;
   cursor: pointer;
+  filter: invert(1);
 }
 .postbutton:hover {
   background-color: rgb(0, 0, 0, .5);
@@ -806,15 +819,6 @@ li {
 .up2 { left: 45%; bottom: 5%;  animation-delay: .50s; }
 .up3 { left: 25%; bottom: 5%;  animation-delay: .75s; }
 .up4 { left: 60%; bottom: 5%;  animation-delay: 1s; }
-
-.textHighlight {
-  display: inline;
-  background: rgba(216, 60, 255, 0.4);
-  color: #000000;
-  padding: 0 .15em;
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
-}
 /*------100vh Controls Sum Landscape = 256px (with frame) + 234px (without frame)-------*/
   /*----Mini Player----*/
 @media screen and (max-width: 350px) {
@@ -1939,26 +1943,60 @@ fetch("https://fostsup.fostmp3s.workers.dev/")
     const rawDescription =
       item.querySelector("description")?.textContent || "";
                 
-    // Convert HTML to text
-    const tempDiv = document.createElement("div");
-    tempDiv.innerHTML = rawDescription;
-                
-    let cleanDescription =
-      tempDiv.textContent || tempDiv.innerText || "";
-                
-    cleanDescription = cleanDescription
-      .replace(/\s+/g, " ")
-      .replace(/^undefined$/i, "")
-      .trim();
-                
-    // FINAL protection against undefined/null
-    if (
-      !cleanDescription ||
-      cleanDescription === "undefined" ||
-      cleanDescription === "null"
-    ) {
-      cleanDescription = "";
-    }
+// Convert the RSS description into plain text
+const tempDiv = document.createElement("div");
+tempDiv.innerHTML = rawDescription;
+
+let cleanDescription =
+  tempDiv.textContent || tempDiv.innerText || "";
+
+cleanDescription = cleanDescription
+  .replace(/\s+/g, " ")
+  .replace(/^undefined$/i, "")
+  .trim();
+
+if (
+  !cleanDescription ||
+  cleanDescription === "undefined" ||
+  cleanDescription === "null"
+) {
+  cleanDescription = "";
+}
+
+// Escape HTML before adding clickable URLs
+function escapeHTML(text) {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+// Convert only URLs written in the post text into links
+function makeLinksClickable(text) {
+  const escapedText = escapeHTML(text);
+
+  const urlPattern =
+    /(?:https?:\/\/|www\.)[^\s<]+/gi;
+
+  return escapedText.replace(urlPattern, url => {
+    // Keep punctuation outside the link
+    const punctuationMatch = url.match(/[.,!?;:)\]]+$/);
+    const punctuation = punctuationMatch ? punctuationMatch[0] : "";
+    const cleanURL = punctuation
+      ? url.slice(0, -punctuation.length)
+      : url;
+
+    const href = cleanURL.startsWith("www.")
+      ? `https://${cleanURL}`
+      : cleanURL;
+
+    return `<a href="${href}" target="_blank" rel="noopener noreferrer">${cleanURL}</a>${punctuation}`;
+  });
+}
+
+const linkedDescription = makeLinksClickable(cleanDescription);
                 
     // Try multiple image sources
     const image =
@@ -1971,27 +2009,25 @@ fetch("https://fostsup.fostmp3s.workers.dev/")
     const li = document.createElement("li");
                 
     li.innerHTML = `
-      <a href="${link}" target="_blank">
                 
-        ${
-          image
-            ? `<img src="${image}" style="max-width:100%; display:block;">`
-            : ""
-        }
+${
+    image
+    ? `<img src="${image}" style="max-width:100%; display:block;">`
+         : ""
+ }
+${
+  linkedDescription
+    ? `<div class="feedDescription">
+         <span class="textHighlight">${linkedDescription}</span>
+       </div>`
+    : ""
+}
                 
 <div class="feedTitle">
   <span class="textHighlight">${title}</span>
 </div>
 
-${
-  cleanDescription
-    ? `<div class="feedDescription">
-         <span class="textHighlight">${cleanDescription}</span>
-       </div>`
-    : ""
-}
                 
-</a>
 <div class="love">
 <table>
 <td>
