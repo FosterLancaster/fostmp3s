@@ -180,7 +180,7 @@ table {
   width: calc(100% - 12px);
   overflow: hidden;
   border-radius: 90px;
-  background-position: bottom center;
+  background-position: right top;
   background-size: auto 30px;
   background-attachment: scroll;
   background-repeat: no-repeat;
@@ -541,7 +541,7 @@ table {
   width: 0;
 }
 input::placeholder {
-  color: #ffffff;
+  color: rgba(255, 255, 255, .5);
 }
 input:focus {
   animation: none;
@@ -719,6 +719,10 @@ li {
   text-align: center;
   position: relative;
   pointer-events: none; /* disable clicks on the li */
+  background-image: url('fmp3simages/FostMp3sLogo.png');
+  background-size: 80px auto;
+  background-position: bottom right;
+  background-repeat: no-repeat;
 }
 li a {
   color: #ffffff;
@@ -1118,7 +1122,7 @@ li a {
 <div align="center">
   <div class="PasswordUnlockBar">
     <div id="passwordUnlock" class="PasswordBar">
-      <input id="passwordInput" class="Password" type="password" placeholder="* * * * * * * *" alt="Password" title="Password"/>
+      <input id="passwordInput" class="Password" type="password" placeholder="p a s s w o r d" alt="Password" title="Password"/>
       <div class="PasswordSubmit" id="passwordSubmit" onclick="submitPassword()" alt="Submit" title="Submit"><img style="height: 100%; width: auto;" src="fmp3simages/Unlock.png"></div>
     </div>
     </div>
