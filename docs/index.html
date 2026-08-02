@@ -15,6 +15,9 @@ a {
   text-decoration: none;
   color: #000000;
 }
+a:hover {
+  color: #ffff00;
+}
 button {
   outline: none;
 }
@@ -362,13 +365,14 @@ table {
   background-image: linear-gradient(to right, #000000, transparent);
   background-repeat: no-repeat;
   background-size: 100% 100%;
+  padding-right: 30px;
 }
 .playcountframe {
+  color: #ffff00;
   font-size: 12.5px;
   position: absolute;
   top: 0;
   right: 0px;
-  padding: 0px 5px 0px 5px;
   bottom: 0;
   display: flex;
   align-items: center;
@@ -382,6 +386,7 @@ table {
   background-image: linear-gradient(to left, #000000, transparent);
   background-size: 100% 100%;
   background-position: center center;
+  padding: 0px 5px 0px 35px;
 }
 .plays {
   position: static;
@@ -825,7 +830,7 @@ li a {
 .songbutton {
   -webkit-text-stroke: .05em #000000;
   font-family: 'futura';
-  font-size: 5vw;
+  font-size: 4vw;
   }
 .playcountframe {
   display: none;
