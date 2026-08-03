@@ -35,6 +35,9 @@ body {
   width: auto;
   margin: 5px;
   float: right;
+  position: relative;
+  cursor: pointer;
+  z-index: 2;
 }
 audio {
   display: none;
@@ -261,7 +264,7 @@ table {
   background-image: none;
 }
 .Seven {
-  width: calc(100% - 42px);
+  width: calc(100% - 22px);
   margin-left: auto;
   margin-right: auto;
   height: calc(100vh - 246px);
@@ -367,7 +370,7 @@ table {
   padding-right: 30px;
 }
 .playcountframe {
-  color: #ffff00;
+  color: #e49a55;
   font-size: 12.5px;
   position: absolute;
   top: 0;
@@ -967,8 +970,9 @@ li a {
 <!------Music Player------>
 <div class="LancasterFrame" id="LancasterFrame">
 <div class="LancasterMusicPlayer">
+  <a href="https://fostmp3s.com/mp3s" target="_blank">
   <img class="MainLogo" src="fmp3simages/FostMp3sLogo.png">
-  
+  </a>
   <!----PayOn---->
         <div id="PayOn">
           <div class="Seven">
