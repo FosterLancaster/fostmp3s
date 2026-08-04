@@ -30,14 +30,41 @@ body {
 .fostmp3s {
   display: block;
 }
-.MainLogo {
-  height: 30px; 
-  width: auto;
-  margin: 5px;
+.fmp3sheader {
   float: right;
+  margin: 0px 10px 0px 10px;
+  min-height: 40px;
+  height: 40px;
+  max-height: 40px;
+  overflow: hidden;
+  position: relative;
+}
+.MainLogo {
+  height: 30px;
+  margin: 5px;
+  width: auto;
   position: relative;
   cursor: pointer;
   z-index: 2;
+}
+.totallistens {
+  min-height: 40px;
+  height: 40px;
+  max-height: 40px;
+  overflow: hidden;
+  position: relative;
+  color: #ffffff;
+  width: auto;
+  font-size: 12px;
+  width: fit-content;
+}
+.totallistensnumber {
+  background-color: #ffffff;
+  border: solid 2px #484848;
+  color: #000000;
+  border-radius: 5px;
+  width: fit-content;
+  padding: 2px;
 }
 audio {
   display: none;
@@ -366,10 +393,10 @@ table {
   background-image: linear-gradient(to right, #000000, transparent);
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  padding-right: 30px;
+  padding-right: 50px;
 }
 .playcountframe {
-  color: #e49a55;
+  color: #d2965d;
   font-size: 12.5px;
   position: absolute;
   top: 0;
@@ -387,7 +414,7 @@ table {
   background-image: linear-gradient(to left, #000000, transparent);
   background-size: 100% 100%;
   background-position: center center;
-  padding: 0px 5px 0px 35px;
+  padding: 0px 5px 0px 55px;
 }
 .plays {
   position: static;
@@ -828,6 +855,7 @@ li a {
 .up2 { left: 45%; bottom: 5%;  animation-delay: .50s; }
 .up3 { left: 25%; bottom: 5%;  animation-delay: .75s; }
 .up4 { left: 60%; bottom: 5%;  animation-delay: 1s; }
+
 /*------100vh Controls Sum Landscape = 256px (with frame) + 234px (without frame)-------*/
   /*----Mini Player----*/
 @media screen and (max-width: 350px) {
@@ -968,9 +996,23 @@ li a {
 <!------Music Player------>
 <div class="LancasterFrame" id="LancasterFrame">
 <div class="LancasterMusicPlayer">
+  <div class="fmp3sheader">
+  <table>
+  <td>
   <a href="https://fostmp3s.com/mp3s" target="_blank">
   <img class="MainLogo" src="fmp3simages/FostMp3sLogo.png">
   </a>
+  </td>
+  <td>
+  <div align='center'>
+  <div class="totallistens" id="totalPlays">
+  <div class="totallistensnumber" id="totalPlayCount">?</div> 
+  Total Listens
+  </div>
+  </div>
+  </td>
+  </table>
+  </div>
   <!----PayOn---->
         <div id="PayOn">
           <div class="Seven">
@@ -1192,6 +1234,7 @@ songSelection.addEventListener('touchstart', revealSongSelection, { once: true }
   let lastPlayedSongId = null;
   const highestDisplayed = {};
   const dailyChecked = {};
+  let highestTotalDisplayed = 0;
 
   //Play Rate
   const PLAYS_PER_6H = 5000;
@@ -1218,6 +1261,23 @@ songSelection.addEventListener('touchstart', revealSongSelection, { once: true }
     }
     return num.toLocaleString();
   }
+
+  function updateTotalPlays() {
+  const totalEl = document.getElementById("totalPlayCount");
+  if (!totalEl) return;
+
+  let total = Object.values(highestDisplayed).reduce(
+    (sum, plays) => sum + (Number(plays) || 0),
+    0
+  );
+
+  // Prevent the displayed total from decreasing
+  total = Math.max(total, highestTotalDisplayed);
+  highestTotalDisplayed = total;
+
+  totalEl.textContent = formatPlays(total);
+  totalEl.title = total.toLocaleString();
+}
 
   function getDailyBoost(songId) {
 
@@ -1302,38 +1362,42 @@ async function commitDailyGrowth(songRef, songId) {
         });
       }
 
-      function updateDisplay() {
-        const elapsed = Date.now() - lastUpdated;
+function updateDisplay() {
+  const elapsed = Date.now() - lastUpdated;
 
-        const estimatedGrowth = Math.floor(
-          Math.max(0, elapsed) * RATE_PER_MS
-        );
+  const estimatedGrowth = Math.floor(
+    Math.max(0, elapsed) * RATE_PER_MS
+  );
 
-        const dailyBoost = getDailyBoost(songId);
+  const dailyBoost = getDailyBoost(songId);
 
-        let displayPlays =
-          basePlays + estimatedGrowth + dailyBoost;
+  let displayPlays =
+    Number(basePlays) +
+    estimatedGrowth +
+    dailyBoost;
 
-        // Never allow the displayed number to decrease
-        if (highestDisplayed[songId] !== undefined) {
-          displayPlays = Math.max(
-            displayPlays,
-            highestDisplayed[songId]
-          );
-        }
+  // Never allow the displayed number to decrease
+  if (highestDisplayed[songId] !== undefined) {
+    displayPlays = Math.max(
+      displayPlays,
+      highestDisplayed[songId]
+    );
+  }
 
-        highestDisplayed[songId] = displayPlays;
+  highestDisplayed[songId] = displayPlays;
 
-        const shortText = formatPlays(displayPlays);
-        const fullText = displayPlays.toLocaleString();
+  const shortText = formatPlays(displayPlays);
+  const fullText = displayPlays.toLocaleString();
 
-        // Show full number while hovering anywhere over the song button
-        if (button.matches(':hover')) {
-          el.textContent = fullText;
-        } else {
-          el.textContent = shortText;
-        }
-      }
+  // Show the full number while hovering over the song button
+  if (button.matches(":hover")) {
+    el.textContent = fullText;
+  } else {
+    el.textContent = shortText;
+  }
+
+  updateTotalPlays();
+}
 
       // Display immediately
       updateDisplay();
@@ -1370,8 +1434,11 @@ async function commitSongPlay(songPath, button) {
   const songId = getSongId(songPath);
   lastPlayedSongId = songId;
 
-  highestDisplayed[songId] = (highestDisplayed[songId] || 0) + 1;
+  highestDisplayed[songId] =
+    (highestDisplayed[songId] || 0) + 1;
+
   updatePlaycountText(button, songId);
+  updateTotalPlays();
 
   try {
     await update(ref(database, `songs/${songId}`), {
@@ -1382,8 +1449,6 @@ async function commitSongPlay(songPath, button) {
     console.error("Firebase play increment failed:", err);
   }
 }
-
-
 
 
 // Foster Lancaster Music Player
