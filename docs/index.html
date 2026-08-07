@@ -279,14 +279,14 @@ table {
   z-index: 3;
 }
 .songSelection {
-  height: 100%;
-  overflow-y: scroll;
-  position: relative;
+  position: absolute;
+  inset: 0;               /* top:0; right:0; bottom:0; left:0; */
+  overflow-y: auto;
   opacity: .05;
-  display: block;
   z-index: 3;
-  transition-duration: .8s;
+  transition: opacity .8s;
   background-color: rgba(255, 255, 255, .1);
+  box-sizing: border-box;
 }
 /*------100vh Controls Sum Landscape = 246px (with frame) + 224px (without frame)-------*/
 /*----Bars----*/
@@ -1053,7 +1053,7 @@ li a:hover {
           <div align="center">
             <a href="https://fostmp3s.com/pw" target="_blank">
             <div class="OffMusicHeader">     
-              Infinite Listens For Only $3.00          
+              Get Infinite Listens Now!          
             </div>
           </a>
             </div>
