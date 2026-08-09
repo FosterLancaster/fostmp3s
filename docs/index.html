@@ -675,7 +675,7 @@ input[type="range"]::-webkit-slider-thumb {
   box-sizing: border-box;
   overflow: hidden;
   min-width: 0;
-  background-color: rgba(255, 255, 255, .1);
+  background-color: rgba(0, 0, 0, .3);
   border-bottom: solid 1px #ffffff;
 }
 .MoreHeader {
@@ -695,7 +695,6 @@ input[type="range"]::-webkit-slider-thumb {
   width: calc(100% - 1px);
   border: solid .5px transparent;
   border-radius: 5px;
-  background-color: rgba(0, 0, 0, .1);
 }
 .MoreInner textarea {
   font-size: .8em;
@@ -880,7 +879,14 @@ li a:hover {
 .up2 { left: 45%; bottom: 5%;  animation-delay: .250s; }
 .up3 { left: 25%; bottom: 5%;  animation-delay: .375s; }
 .up4 { left: 60%; bottom: 5%;  animation-delay: .5; }
-
+.Latest {
+  transform: rotate(90deg); 
+  position: absolute; 
+  color: #ffffff; 
+  -webkit-text-stroke: .05em #000000; 
+  right: calc(50% - 320px); 
+  top: 170px;
+}
 /*------100vh Controls Sum Landscape = 256px (with frame) + 234px (without frame)-------*/
   /*----Mini Player----*/
 @media screen and (max-width: 350px) {
@@ -1140,7 +1146,7 @@ li a:hover {
             </div>
         </div>
 <div class="MoreBody">
-<div style="transform: rotate(90deg); position: absolute; color: #ffffff; right: -50px; top: 180px;">&larr; Latest "Sup" Posted</div>
+<div class="Latest">&larr; Latest "Sup" Posted</div>
   <ul class="SupPosts" id="feed">
   </ul>
   </div>
