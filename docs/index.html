@@ -669,14 +669,15 @@ input[type="range"]::-webkit-slider-thumb {
   flex-direction: column;
   height: 100%;
   width: 100%;
-  max-width: 600px;
+  max-width: 450px;
   margin-left: auto;
   margin-right: auto;
   box-sizing: border-box;
   overflow: hidden;
   min-width: 0;
-  background-color: rgba(0, 0, 0, .3);
+  background-color: rgba(0, 0, 0, .5);
   border-bottom: solid 1px #ffffff;
+  border-radius: 20px;
 }
 .MoreHeader {
   font-size: 1.15em;
@@ -692,8 +693,10 @@ input[type="range"]::-webkit-slider-thumb {
 .MoreBody {
   flex: 1;
   overflow-y: auto;
-  width: calc(100% - 1px);
-  border: solid .5px transparent;
+  height: 100%;
+  max-height: 100%;
+  margin-left: auto;
+  margin-right: auto;
   border-radius: 5px;
 }
 .MoreInner textarea {
@@ -741,12 +744,12 @@ input[type="range"]::-webkit-slider-thumb {
   padding: 0px;
   margin-top: 15px; 
   width: 100%;
-  max-width: 100%;
+  max-width: 400px;
+  margin: 25px;
   flex: 1;
   font-size: 1em;
   line-height: 1.7em;
   overflow-y: auto;
-  overflow-x: hidden;
   min-width: 0;
   word-break: break-word;
   overflow-wrap: anywhere;
@@ -882,9 +885,8 @@ li a:hover {
 .Latest {
   transform: rotate(90deg); 
   position: absolute; 
-  color: #ffffff; 
-  -webkit-text-stroke: .05em #000000; 
-  right: calc(50% - 320px); 
+  color: #d6d6d6; 
+  right: calc(50% - 297.5px); 
   top: 170px;
 }
 /*------100vh Controls Sum Landscape = 256px (with frame) + 234px (without frame)-------*/
