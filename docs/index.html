@@ -695,6 +695,7 @@ input[type="range"]::-webkit-slider-thumb {
   overflow-y: auto;
   height: 100%;
   max-height: 100%;
+  max-width: 100%;
   margin-left: auto;
   margin-right: auto;
   border-radius: 5px;
@@ -900,10 +901,9 @@ li a:hover {
 .playcountframe {
   display: none;
 }
-.li {
-  max-width: 80%;
-  margin: 0px;
-  padding: 0px;
+.li, .MoreInner {
+ max-width: calc(100% - 10px);
+ padding: 0px;
 }
 .Latest {
   display: none;
