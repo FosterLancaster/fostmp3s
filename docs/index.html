@@ -283,19 +283,11 @@ table {
   inset: 0;        
   opacity: .05;
   z-index: 3;
-  transition: opacity .8s;
   background-color: rgba(255, 255, 255, .1);
   box-sizing: border-box;
   overflow-y: hidden;
   pointer-events: none;
-}
-.songSelection.active {
-  opacity: 1;
-  overflow-y: auto;
-  pointer-events: auto;
-}
-.Seven.active {
-  background-image: none;
+  transition: opacity 1s;
 }
 /*------100vh Controls Sum Landscape = 246px (with frame) + 224px (without frame)-------*/
 /*----Bars----*/
@@ -306,6 +298,7 @@ table {
   position: relative; /* important */
   opacity: 1;
   overflow-x: hidden;
+  transition: background-image 1s ease;
 }
 .shuffleBtn {
   position: relative;
@@ -1181,7 +1174,7 @@ li a:hover {
   </a>
 </td>
       <td>
-        <div class="MusicButton" id="playBtn" alt="Play/Pause Music" title="Play/Pause Music">
+        <div class="MusicButton" onclick="Starter()" id="playBtn" alt="Play/Pause Music" title="Play/Pause Music">
     <div class="upeffect">
       <span class="up up1"></span>
       <span class="up up2"></span>
@@ -1227,10 +1220,17 @@ li a:hover {
 <!--- Song Selection Reveal -->
 
 <script>
-document.getElementById("playBtn").addEventListener("click", function () {
-  document.querySelector(".songSelection").classList.add("active");
-  document.querySelector(".Seven").classList.add("active");
-});
+function Starter() {
+  const songSelection = document.querySelector(".songSelection");
+  const seven = document.querySelector(".Seven");
+
+  songSelection.style.transition = "opacity 0.8s ease";
+  songSelection.style.opacity = "1";
+  songSelection.style.overflowY = "auto";
+  songSelection.style.pointerEvents = "auto";
+
+  seven.style.backgroundImage = "none";
+}
 </script>
 
 <!--- FostMp3s Counter -->
