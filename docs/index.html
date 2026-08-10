@@ -280,13 +280,14 @@ table {
 }
 .songSelection {
   position: absolute;
-  inset: 0;               /* top:0; right:0; bottom:0; left:0; */
-  overflow-y: auto;
+  inset: 0;        
   opacity: .05;
   z-index: 3;
   transition: opacity .8s;
   background-color: rgba(255, 255, 255, .1);
   box-sizing: border-box;
+  overflow-y: hidden;
+  pointer-events: none;
 }
 /*------100vh Controls Sum Landscape = 246px (with frame) + 224px (without frame)-------*/
 /*----Bars----*/
@@ -297,7 +298,6 @@ table {
   position: relative; /* important */
   opacity: 1;
   overflow-x: hidden;
-  overflow-y: scroll;
 }
 .shuffleBtn {
   position: relative;
@@ -1220,8 +1220,15 @@ li a:hover {
 
 <script>
 document.getElementById("playBtn").addEventListener("click", () => {
-  document.querySelector(".songSelection").style.opacity = "1";
+
+  Object.assign(document.querySelector(".songSelection").style, {
+    opacity: "1",
+    overflow: "scroll",
+    pointerEvents: "auto"
+  });
+
   document.querySelector(".Seven").style.backgroundImage = "none";
+
 });
 </script>
 
