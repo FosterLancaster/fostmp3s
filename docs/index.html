@@ -290,23 +290,12 @@ table {
 }
 /*------100vh Controls Sum Landscape = 246px (with frame) + 224px (without frame)-------*/
 /*----Bars----*/
-.songSelection.revealed,
-.songSelection:hover {
-  opacity: 1;
-}
-.Seven.revealed {
-  background-image: none;
-}
 .Seven {
   width: calc(100% - 22px);
   height: calc(100vh - 246px);
   border: solid 11px transparent;
   position: relative; /* important */
   opacity: 1;
-  background-image: url('fmp3simages/SongSelect.png');
-  background-size: auto 80px;
-  background-position: center bottom;
-  background-repeat: no-repeat;
   overflow-x: hidden;
   overflow-y: scroll;
 }
@@ -905,6 +894,9 @@ li a:hover {
 .playcountframe {
   display: none;
 }
+.shuffleBtn {
+  display: none;
+}
 }
 
 @media screen and (max-width: 400px) {
@@ -1227,18 +1219,11 @@ li a:hover {
 <!--- Song Selection Reveal -->
 
 <script>
-const songSelection = document.querySelector('.songSelection');
-const Seven = document.querySelector('.Seven');
-
-function revealSongSelection() {
-  songSelection.classList.add('revealed');
-  Seven.classList.add('revealed');
-}
-
-songSelection.addEventListener('mouseenter', revealSongSelection, { once: true });
-songSelection.addEventListener('touchstart', revealSongSelection, { once: true });
+document.getElementById("playBtn").addEventListener("click", () => {
+  document.querySelector(".songSelection").style.opacity = "1";
+  document.querySelector(".Seven").style.backgroundImage = "none";
+});
 </script>
-
 
 <!--- FostMp3s Counter -->
   <script type="module">
