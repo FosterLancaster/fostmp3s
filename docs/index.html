@@ -289,6 +289,14 @@ table {
   overflow-y: hidden;
   pointer-events: none;
 }
+.songSelection.starterf {
+  opacity: 1;
+  overflow-y: auto;
+  pointer-events: auto;
+}
+.Seven.active.starterf {
+  background-image: none;
+}
 /*------100vh Controls Sum Landscape = 246px (with frame) + 224px (without frame)-------*/
 /*----Bars----*/
 .Seven {
@@ -1219,16 +1227,9 @@ li a:hover {
 <!--- Song Selection Reveal -->
 
 <script>
-document.getElementById("playBtn").addEventListener("click", () => {
-
-  Object.assign(document.querySelector(".songSelection").style, {
-    opacity: "1",
-    overflow: "scroll",
-    pointerEvents: "auto"
-  });
-
-  document.querySelector(".Seven").style.backgroundImage = "none";
-
+document.getElementById("playBtn").addEventListener("click", function () {
+  document.querySelector(".songSelection").classList.add("starterf");
+  document.querySelector(".Seven").classList.add("starterf");
 });
 </script>
 
