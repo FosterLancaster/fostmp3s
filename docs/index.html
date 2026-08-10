@@ -1174,7 +1174,7 @@ li a:hover {
   </a>
 </td>
       <td>
-        <div class="MusicButton" onclick="Starter()" id="playBtn" alt="Play/Pause Music" title="Play/Pause Music">
+        <div class="MusicButton" id="playBtn" alt="Play/Pause Music" title="Play/Pause Music">
     <div class="upeffect">
       <span class="up up1"></span>
       <span class="up up2"></span>
@@ -1807,35 +1807,44 @@ songButtons.forEach((btn) => {
     }
   });
 });
-                
-if (playBtn) {
+
+
+
+
+   if (playBtn) {
+
   playBtn.addEventListener('click', () => {
-    // Play First Song  (FIX: it used to select(0) and return without playing)
+    Starter();
+
     if (window.currentsongindex === -1) {
       selectSong(0);
       playSong(0);
       return;
     }
-                
-    // Playing The Song
+
     togglePlayPause();
   });
-                
-                //Play on first touch (touch screens)
+
   playBtn.addEventListener('touchstart', (e) => {
-if (!audio) return;
-                
-e.preventDefault(); // stop ghost click / double trigger
-                
-if (window.currentsongindex === -1) {
-  selectSong(0);
-  playSong(0);
-} else {
-  togglePlayPause(); // 🔑 this now pauses too
+    if (!audio) return;
+
+    e.preventDefault();
+
+    Starter();
+
+    if (window.currentsongindex === -1) {
+      selectSong(0);
+      playSong(0);
+    } else {
+      togglePlayPause();
+    }
+  }, { passive: false });
+
 }
-                }, { passive: false });
-                
-}
+
+
+
+
 // Progress Bar
 if (progressBar) {
   progressBar.addEventListener('click', (e) => {
