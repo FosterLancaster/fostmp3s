@@ -671,7 +671,7 @@ input[type="range"]::-webkit-slider-thumb {
   border-radius: 20px;
 }
 .MoreHeader {
-  font-size: 1.15em;
+  height: 48px;
   flex: 0 0 auto;
   text-align: center;
   max-width: 100%;
@@ -881,8 +881,9 @@ li a:hover {
   transform: rotate(90deg); 
   position: absolute; 
   color: #d6d6d6; 
-  right: -70px; 
-  top: 150px;
+  right: 0px; 
+  top: calc(50% + 77.5px);
+  transform-origin: top right;
 }
 /*------100vh Controls Sum Landscape = 256px (with frame) + 234px (without frame)-------*/
   /*----Mini Player----*/
@@ -1146,7 +1147,7 @@ li a:hover {
             </div>
         </div>
 <div class="MoreBody">
-<div class="Latest">&larr; Latest "Sup" Posted</div>
+<div class="Latest">&larr; Latest &emsp; &emsp; First &rarr;</div>
   <ul class="SupPosts" id="feed">
   </ul>
   </div>
@@ -1841,7 +1842,6 @@ songButtons.forEach((btn) => {
   }, { passive: false });
 
 }
-
 
 
 
