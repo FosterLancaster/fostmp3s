@@ -654,7 +654,7 @@ input[type="range"]::-webkit-slider-thumb {
   flex-direction: column;
   position: relative;
 }
-.MoreInner {
+.SupInner {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -666,11 +666,11 @@ input[type="range"]::-webkit-slider-thumb {
   box-sizing: border-box;
   overflow: hidden;
   min-width: 0;
-  background-color: rgba(0, 0, 0, .5);
+  background-color: rgba(0, 0, 0, .7);
   border-bottom: solid 1px #ffffff;
   border-radius: 20px;
 }
-.MoreHeader {
+.SupHeader {
   height: 48px;
   flex: 0 0 auto;
   text-align: center;
@@ -681,7 +681,7 @@ input[type="range"]::-webkit-slider-thumb {
   color: #ffffff;
   border-bottom: solid .5px #ffffff;
 }
-.MoreBody {
+.SupBody {
   flex: 1;
   overflow-y: auto;
   height: 100%;
@@ -691,7 +691,7 @@ input[type="range"]::-webkit-slider-thumb {
   margin-right: auto;
   border-radius: 5px;
 }
-.MoreInner textarea {
+.SupInner textarea {
   font-size: .8em;
   line-height: 1.6em;
   flex: 1;
@@ -882,9 +882,20 @@ li a:hover {
   position: absolute; 
   color: #d6d6d6; 
   right: 0px; 
-  top: calc(50% + 77.5px);
-  line-height: 38px;
+  top: calc(50% + 80px);
+  line-height: 47.5px;
   transform-origin: top right;
+}
+.LatestButton {
+  display: inline-block; 
+  text-align: center; 
+  width: 100px; 
+  max-width: 30vh;
+  overflow: hidden;
+  height: 20px;
+  line-height: 20px;
+  border-radius: 20px;
+  cursor: pointer; 
 }
 /*------100vh Controls Sum Landscape = 256px (with frame) + 234px (without frame)-------*/
   /*----Mini Player----*/
@@ -1099,8 +1110,8 @@ li a:hover {
         <div class="embedContent">
         <button id="closeEmbed">X</button>
         <div class="MoreInner">
-          <div class="MoreHeader"><img src="fmp3simages/Embed.png" style="width: 45px; height: 45px;"></div>
-          <div class="MoreBody">
+          <div class="SupHeader"><img src="fmp3simages/Embed.png" style="width: 45px; height: 45px;"></div>
+          <div class="SupBody">
           <textarea readonly>
             <iframe src="https://fosterlancaster.github.io/fostmp3s" style="width: 100%; height: 100%; border-top-left-radius: 20px; border-bottom-right-radius: 20px; min-height: 300px; min-width: 250px; border: none; display: block;" class="fostmp3s"></iframe>
           </textarea>
@@ -1141,17 +1152,29 @@ li a:hover {
     <div id="SupOverlay">
       <div class="SupContent">
       <button id="closeSup">X</button>
-      <div class="MoreInner">
-        <div class="MoreHeader">
+      <div class="SupInner">
+        <div class="SupHeader">
           <div style="position: relative; z-index: 1;">
             <img src="fmp3simages/Sup.png" style="width: 45px; height: 45px; position: relative; z-index: 0;" alt="Sup" title="Sup">
             </div>
         </div>
-<div class="MoreBody">
-<div class="Latest">&larr; Latest &emsp; &emsp; First &rarr;</div>
+<div class="SupBody">
+  <div class="Latest">
+    <a onclick="this.closest('.SupBody').scrollTo({ top: 0, behavior: 'smooth' })">
+      <div class="LatestButton" style="color: #de1ce5; border: solid 1px #de1ce5;"/>&larr; Latest &emsp;</div>
+    </a>
+    <a onclick="this.closest('.SupBody').scrollTo({
+         top: this.closest('.SupBody').scrollHeight,
+         behavior: 'smooth'
+       })">
+      <div class="LatestButton" style="color: #ff3434; border: solid 1px #ff3434;"/>&emsp; First &rarr;</div>
+    </a>
+</div>
+
   <ul class="SupPosts" id="feed">
   </ul>
-  </div>
+
+</div>
   
   </div>
   </div>
@@ -2208,6 +2231,7 @@ export default {
   ----->
 </body>
 </html>
+
 
 
 
