@@ -629,7 +629,7 @@ input[type="range"]::-webkit-slider-thumb {
   position: relative;
   margin-top: -6px;
 }
-#embedOverlay,
+#EmbedOverlay,
 #SupOverlay {
   position: fixed;
   top: 0;
@@ -643,7 +643,7 @@ input[type="range"]::-webkit-slider-thumb {
   z-index: 10;
   color: #000000;
 }
-.embedContent,
+.EmbedContent,
 .SupContent {
   width: 100%;
   height: 100%;
@@ -925,7 +925,7 @@ li a:hover {
 .shuffleBtn {
   display: none;
 }
-.Seven, .EmbedInner, .EmbedBody, .EmbedOverlay {
+.Seven, .EmbedContent, .EmbedInner, .EmbedBody, .EmbedOverlay {
 opacity: 0;
 z-index: -1;
 pointer-events: none;
@@ -936,7 +936,7 @@ pointer-events: none;
 .volumeContainer {
     display: none;
   }
-.embedBtn {
+.EmbedBtn {
     display: none;
   }
   /*----Alternate Size----*/
@@ -987,7 +987,7 @@ pointer-events: none;
 
 /* ------------ Miniature Adjustments ----------*/
 @media screen and (max-height: 300px) {
-.embedBtn {
+.EmbedBtn {
   display: none;
 }
 .XBtn {
@@ -1121,12 +1121,12 @@ pointer-events: none;
   <table>
   
     <td>
-      <a href="#" id="embedBtn">
+      <a href="#" id="EmbedBtn">
         <img src="fmp3simages/Embed.png" class="embedBtn" alt="Embed" title="Embed">
       </a>
       
-      <div id="embedOverlay">
-        <div class="embedContent">
+      <div id="EmbedOverlay">
+        <div class="EmbedContent">
         <button id="closeEmbed">X</button>
         <div class="EmbedInner">
           <div class="SupHeader"><img src="fmp3simages/Embed.png" style="width: 45px; height: 45px;"></div>
