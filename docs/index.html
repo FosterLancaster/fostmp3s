@@ -654,7 +654,7 @@ input[type="range"]::-webkit-slider-thumb {
   flex-direction: column;
   position: relative;
 }
-.SupInner {
+.SupInner, .EmbedInner {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -669,6 +669,9 @@ input[type="range"]::-webkit-slider-thumb {
   background-color: rgba(0, 0, 0, .7);
   border-bottom: solid 1px #ffffff;
   border-radius: 20px;
+}
+.EmbedInner {
+  width: 600px;
 }
 .SupHeader {
   height: 48px;
@@ -691,12 +694,23 @@ input[type="range"]::-webkit-slider-thumb {
   margin-right: auto;
   border-radius: 5px;
 }
-.SupInner textarea {
+.EmbedBody {
+  flex: 1;
+  overflow-y: auto;
+  height: 100%;
+  max-height: 100%;
+  width: 400px;
+  max-width: calc(100% - 5px);
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 5px;
+}
+.EmbedInner textarea {
   font-size: .8em;
   line-height: 1.6em;
   flex: 1;
   padding: 10px;
-  width: 320px;
+  width: calc(100% - 40px);
   margin: 10px;
   max-width: calc(100% - 40px);
   height: calc(100% - 40px);
@@ -1110,9 +1124,9 @@ li a:hover {
       <div id="embedOverlay">
         <div class="embedContent">
         <button id="closeEmbed">X</button>
-        <div class="MoreInner">
+        <div class="EmbedInner">
           <div class="SupHeader"><img src="fmp3simages/Embed.png" style="width: 45px; height: 45px;"></div>
-          <div class="SupBody">
+          <div class="EmbedBody">
           <textarea readonly>
             <iframe src="https://fosterlancaster.github.io/fostmp3s" style="width: 100%; height: 100%; border-top-left-radius: 20px; border-bottom-right-radius: 20px; min-height: 300px; min-width: 250px; border: none; display: block;" class="fostmp3s"></iframe>
           </textarea>
