@@ -98,7 +98,7 @@ table {
 }
 .volumeContainer:hover, 
 .nextprev-btn:hover, 
-.embedBtn:hover, 
+.EmbedBtn:hover, 
 .SupBtn:hover {
   background-color: rgba(255, 255, 255, .8);
 }
@@ -445,7 +445,7 @@ table {
   background-color: transparent;
   border: none;
 }
-.embedBtn {
+.EmbedBtn {
   cursor: pointer;
   margin-bottom: -13px;
   border: inline-block;
@@ -1122,7 +1122,7 @@ pointer-events: none;
   
     <td>
       <a href="#" id="EmbedBtn">
-        <img src="fmp3simages/Embed.png" class="embedBtn" alt="Embed" title="Embed">
+        <img src="fmp3simages/Embed.png" class="EmbedBtn" alt="Embed" title="Embed">
       </a>
       
       <div id="EmbedOverlay">
@@ -1582,8 +1582,8 @@ audio.addEventListener("ended", () => {
   defaultImage?.classList.remove("playing");
 });            
                 
-document.getElementById("embedBtn");
-document.getElementById("embedOverlay");
+document.getElementById("EmbedBtn");
+document.getElementById("EmbedOverlay");
 document.getElementById("closeEmbed");
 document.getElementById("xBtn");
 document.getElementById("xOverlay");
@@ -2052,13 +2052,13 @@ if (songButtons.length > 0) {
                 });
                 
                 //Open and close overlays
-                document.getElementById("embedBtn").onclick = function(e) {
+                document.getElementById("EmbedBtn").onclick = function(e) {
  e.preventDefault();
- document.getElementById("embedOverlay").style.display = "flex";
+ document.getElementById("EmbedOverlay").style.display = "flex";
  };
               
  document.getElementById("closeEmbed").onclick = function() {
- document.getElementById("embedOverlay").style.display = "none";
+ document.getElementById("EmbedOverlay").style.display = "none";
  };
                 
                 //Show Sup
@@ -2250,6 +2250,7 @@ export default {
   ----->
 </body>
 </html>
+
 
 
 
