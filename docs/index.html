@@ -913,7 +913,7 @@ li a:hover {
 }
 /*------100vh Controls Sum Landscape = 256px (with frame) + 234px (without frame)-------*/
   /*----Mini Player----*/
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 500px) {
 .songbutton {
   -webkit-text-stroke: .05em #000000;
   font-family: 'futura';
@@ -925,12 +925,17 @@ li a:hover {
 .shuffleBtn {
   display: none;
 }
-.embedOverlay {
-  display: none;
-}
 .Seven {
-width: 0px;
-height: 0px;
+max-width: 0px;
+max-height: 0px;
+pointer-events: none;
+overflow: hidden;
+}
+.embedOverlay {
+max-width: 0px;
+max-height: 0px;
+pointer-events: none;
+overflow: hidden;
 }
 }
 
