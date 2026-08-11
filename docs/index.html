@@ -114,7 +114,6 @@ table {
   height: 100vh;
   overflow: hidden;
   position: relative;
-  z-index: 0;
   opacity: 1;
   background-image: radial-gradient(transparent 50%, rgba(0, 0, 0, .7));
   background-size: cover;
@@ -926,12 +925,12 @@ li a:hover {
   display: none;
 }
 .Seven {
-  opacity: 0px;
-  pointer-events: none;
+  display: none;
+  z-index: -1;
 }
 .EmbedContent {
   display: none;
-  z-index: -2;
+  z-index: -1;
 }
 }
 
