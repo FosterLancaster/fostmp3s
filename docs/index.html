@@ -262,11 +262,6 @@ table {
   outline: none;
   box-shadow: none;
 }
-.ControlBar td {
-  height: 40px;
-  vertical-align: middle;
-  padding: 0;
-}
 .ControlBar {
   max-height: 40px;
   line-height: 40px;
@@ -459,25 +454,11 @@ table {
 }
 .SupBtn {
   cursor: pointer;
+  margin-bottom: -13px;
   border: inline-block;
   cursor: pointer;
   height: 40px;
   width: auto;
-  position: relative;
-  z-index: 0;
-}
-#SupBtn {
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-#SupBtn .SupBtn {
-  height: 40px;
-  width: auto;
-  display: block;
-  margin: 0;
-  padding: 0;
 }
 .nextprev-btn {
   cursor: pointer;
@@ -706,7 +687,7 @@ input[type="range"]::-webkit-slider-thumb {
   height: 100%;
   max-height: 100%;
   max-width: 100%;
-  margin-left: auto;
+  margin-left: 0;
   margin-right: auto;
   border-radius: 5px;
 }
@@ -766,10 +747,10 @@ input[type="range"]::-webkit-slider-thumb {
   text-overflow: ellipsis;
 }
 .SupPosts {
-  padding: 0px;
-  width: calc(100% - 25px);
-  max-width: calc(100% - 25px);
-  margin: 15px 45px 15px 0px;
+  width: 100%;
+  max-width: 100%;
+  margin: 15px 0px 0px 5px;
+  padding: 0;              /* important */
   flex: 1;
   font-size: 1em;
   line-height: 1.7em;
@@ -779,19 +760,20 @@ input[type="range"]::-webkit-slider-thumb {
   word-break: break-word;
   overflow-wrap: anywhere;
   box-sizing: border-box;
+  text-align: left;
 }
 li {
   list-style: none;
   background-color: #000000;
   color: #000000;
   border-radius: 8px;
-  margin: 0px auto 15px auto;
+  margin: 0 0 15px 0;     /* left instead of centered */
   padding: 10px 10px 55px 10px;
   width: 350px;
-  max-width: calc(100% - 50px);
+  max-width: calc(100% - 40px);
   text-align: center;
   position: relative;
-  pointer-events: none; /* disable clicks on the li */
+  pointer-events: none;
   border: solid 1px #ffffff;
   background-image: url('fmp3simages/SupBrandingMini.png');
   background-size: 100px auto;
@@ -913,7 +895,7 @@ li a:hover {
   color: #d6d6d6; 
   right: 0px; 
   top: calc(50% + 100px);
-  line-height: 47.5px;
+  line-height: 42px;
   transform-origin: top right;
   z-index: 3;
 }
@@ -1178,9 +1160,7 @@ li a:hover {
   
   <td>
     <a href="#" id="SupBtn">
-    <div class="SupBtn">
     <img src="fmp3simages/Sup.png" class="SupBtn" alt="Sup" title="Sup">
-    </div>
     </a>
     
     <div id="SupOverlay">
