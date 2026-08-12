@@ -924,10 +924,6 @@ li a:hover {
 .shuffleBtn {
   display: none;
 }
-.Seven {
-  display: none;
-  pointer-events: none;
-}
 }
 
 @media screen and (max-width: 400px) {
@@ -2050,14 +2046,29 @@ if (songButtons.length > 0) {
                 });
                 
                 //Open and close overlays
-                document.getElementById("EmbedBtn").onclick = function(e) {
- e.preventDefault();
- document.getElementById("EmbedOverlay").style.display = "flex";
- };
-              
- document.getElementById("closeEmbed").onclick = function() {
- document.getElementById("EmbedOverlay").style.display = "none";
- };
+// Open and close Embed overlay
+document.getElementById("EmbedBtn").onclick = function(e) {
+  e.preventDefault();
+
+  // Only open in landscape
+  if (window.innerWidth > window.innerHeight) {
+    document.getElementById("EmbedOverlay").style.display = "flex";
+  }
+};
+
+document.getElementById("closeEmbed").onclick = function() {
+  document.getElementById("EmbedOverlay").style.display = "none";
+};
+
+// Close Embed if orientation changes to portrait
+function checkEmbedOrientation() {
+  if (window.innerHeight > window.innerWidth) {
+    document.getElementById("EmbedOverlay").style.display = "none";
+  }
+}
+
+window.addEventListener("resize", checkEmbedOrientation);
+window.addEventListener("orientationchange", checkEmbedOrientation);
                 
                 //Show Sup
                 document.getElementById("SupBtn").onclick = function(e) {
