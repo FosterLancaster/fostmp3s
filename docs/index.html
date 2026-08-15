@@ -881,14 +881,14 @@ li a:hover {
   height: 35%;
   background: url('fmp3simages/Star.png') center/contain no-repeat;
   opacity: 0;
-  animation: floatup .5s infinite linear;
+  animation: floatup 2s infinite linear;
   background-color: transparent;
 }
 /* 4 locations */
-.up1 { left: 5%;  bottom: 5%;  animation-delay: .125s; }
-.up2 { left: 45%; bottom: 5%;  animation-delay: .250s; }
-.up3 { left: 25%; bottom: 5%;  animation-delay: .375s; }
-.up4 { left: 60%; bottom: 5%;  animation-delay: .5; }
+.up1 { left: 5%;  bottom: 5%;  animation-delay: .5s; }
+.up2 { left: 45%; bottom: 5%;  animation-delay: 1s; }
+.up3 { left: 25%; bottom: 5%;  animation-delay: 1.5s; }
+.up4 { left: 60%; bottom: 5%;  animation-delay: 2s; }
 .Latest {
   transform: rotate(90deg); 
   position: absolute; 
@@ -968,6 +968,7 @@ li a:hover {
 .LancasterFrame:hover .PasswordBar {
   height: 50px;
 }
+}
 
 /* ------------ Miniature Adjustments ----------*/
 @media screen and (max-height: 300px) {
@@ -1023,20 +1024,18 @@ li a:hover {
     opacity: 0;
     transform: translateY(0) scale(.6);
   }
-
   15% {
     opacity: 1;
   }
-
   75% {
     opacity: 1;
   }
-
   100% {
     opacity: 0;
     transform: translateY(-200%) scale(1);
   }
 }
+
 </style>
 </head>
 <body>
