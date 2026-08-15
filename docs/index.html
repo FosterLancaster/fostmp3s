@@ -918,24 +918,12 @@ li a:hover {
   font-family: 'futura';
   font-size: 5vw;
   }
-.playcountframe {
-  display: none;
-}
-.shuffleBtn {
-  display: none;
-}
-.songSelection {
+.playcountframe, .shuffleBtn, .songSelection, .EmbedBtn, .volumeContainer {
   display: none;
 }
 }
 
 @media screen and (max-width: 400px) {
-.volumeContainer {
-    display: none;
-  }
-.EmbedBtn {
-    display: none;
-  }
   /*----Alternate Size----*/
   .Seven {
   height: calc(100vh - 256px);
@@ -2047,12 +2035,16 @@ if (songButtons.length > 0) {
                 });
                 
                 //Open and close overlays
+
+
+
+
 // Open and close Embed overlay
 document.getElementById("EmbedBtn").onclick = function(e) {
   e.preventDefault();
 
-  // Only open in landscape
-  if (window.innerWidth > window.innerHeight) {
+  // Only open if 300px or wider
+  if (window.innerWidth >= 300) {
     document.getElementById("EmbedOverlay").style.display = "flex";
   }
 };
@@ -2061,16 +2053,31 @@ document.getElementById("closeEmbed").onclick = function() {
   document.getElementById("EmbedOverlay").style.display = "none";
 };
 
-// Close Embed if orientation changes to portrait
+
+
+
+
+
+
+
+// Close Embed if screen becomes under 300px
 function checkEmbedOrientation() {
-  if (window.innerHeight > window.innerWidth) {
+  if (window.innerWidth < 300) {
     document.getElementById("EmbedOverlay").style.display = "none";
   }
 }
 
 window.addEventListener("resize", checkEmbedOrientation);
 window.addEventListener("orientationchange", checkEmbedOrientation);
-                
+
+
+
+
+
+
+
+
+
                 //Show Sup
                 document.getElementById("SupBtn").onclick = function(e) {
 e.preventDefault();
