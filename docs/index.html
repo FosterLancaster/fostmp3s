@@ -32,7 +32,7 @@ body {
 }
 .fmp3sheader {
   float: right;
-  margin: 0px 10px 0px 10px;
+  margin: 0px 5px 0px 5px;
   min-height: 40px;
   height: 40px;
   width: auto;
@@ -67,7 +67,7 @@ body {
   background-color: #ffffff;
   border: solid 2px #484848;
   color: #000000;
-  border-radius: 5px;
+  border-radius: 3px;
   width: fit-content;
   padding: 2px;
   overflow: hidden;
@@ -909,7 +909,7 @@ li a:hover {
 }
 /*------100vh Controls Sum Landscape = 256px (with frame) + 234px (without frame)-------*/
   /*----Mini Player----*/
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 400px) {
 .songbutton {
   -webkit-text-stroke: .05em #000000;
   font-family: 'futura';
@@ -918,14 +918,10 @@ li a:hover {
 .playcountframe, .shuffleBtn, .songSelection, .EmbedBtn, .volumeContainer {
   display: none;
 }
-}
-
-@media screen and (max-width: 400px) {
-  /*----Alternate Size----*/
-  .Seven {
+.Seven {
   height: calc(100vh - 256px);
-  }
-  .MusicHeader {
+}
+.MusicHeader {
   transition-duration: .2s;
   padding: 40px 0px 50px 0px;
   max-height: 251px;
