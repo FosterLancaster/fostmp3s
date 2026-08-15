@@ -5,7 +5,7 @@
 <title>fostmp3s official</title>
 
 <!-- Fost Mp3's
-<iframe src="https://fosterlancaster.github.io/fostmp3s" style="width: 100%; height: 100%; border-top-left-radius: 20px; border-bottom-right-radius: 20px; min-height: 250px; min-width: 200px; border: none; display: block;" class="fostmp3s"></iframe>
+<iframe src="https://fosterlancaster.github.io/fostmp3s" style="width: 100%; height: 100%; border-top-left-radius: 20px; border-bottom-right-radius: 20px; min-height: 250px; min-width: 200px; max-height: 100%; max-width: 100%; border: none; display: block;" class="fostmp3s"></iframe>
 Fost Mp3's -->
 
 <style>
@@ -656,8 +656,8 @@ input[type="range"]::-webkit-slider-thumb {
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 100%;
-  max-width: 400px;
+  width: 400px;
+  max-width: calc(100% - 20px);
   margin-left: auto;
   margin-right: auto;
   box-sizing: border-box;
@@ -666,9 +666,6 @@ input[type="range"]::-webkit-slider-thumb {
   background-color: rgba(0, 0, 0, .7);
   border-bottom: solid 1px #ffffff;
   border-radius: 20px;
-}
-.EmbedInner {
-  width: 600px;
 }
 .SupHeader {
   height: 48px;
@@ -1115,7 +1112,7 @@ li a:hover {
           <div class="SupHeader"><img src="fmp3simages/Embed.png" style="width: 45px; height: 45px;"></div>
           <div class="EmbedBody">
           <textarea readonly>
-            <iframe src="https://fosterlancaster.github.io/fostmp3s" style="width: 100%; height: 100%; border-top-left-radius: 20px; border-bottom-right-radius: 20px; min-height: 250px; min-width: 200px; border: none; display: block;" class="fostmp3s"></iframe>
+            <iframe src="https://fosterlancaster.github.io/fostmp3s" style="width: 100%; height: 100%; border-top-left-radius: 20px; border-bottom-right-radius: 20px; min-height: 250px; min-width: 200px; max-height: 100%; max-width: 100%; border: none; display: block;" class="fostmp3s"></iframe>
           </textarea>
         </div>
       </div>
