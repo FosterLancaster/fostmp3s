@@ -890,7 +890,7 @@ li a:hover {
   transform: rotate(90deg); 
   position: absolute; 
   right: 0px; 
-  top: calc(50% + 100px);
+  top: calc(50% + 85px);
   line-height: 42px;
   transform-origin: top right;
   z-index: 3;
@@ -898,15 +898,16 @@ li a:hover {
 .LatestButton {
   display: inline-block; 
   text-align: center; 
-  width: auto; 
-  font-size: 12px;
+  width: auto;
+  max-width: 20vh; 
+  font-size: .7em;
   padding: 0px 10px 0px 10px;
   overflow: hidden;
   height: 17.5px;
   line-height: 17.5px;
   border-radius: 20px;
   cursor: pointer; 
-  color: #ffffff;
+  color: #ffecf1;
 }
 /*------100vh Controls Sum Landscape = 256px (with frame) + 234px (without frame)-------*/
   /*----Mini Player----*/
@@ -1149,13 +1150,13 @@ li a:hover {
 <div class="SupBody">
   <div class="Latest">
     <a onclick="this.closest('.SupBody').scrollTo({ top: 0, behavior: 'smooth' })">
-      <div class="LatestButton" style="border: solid 1px #ffffff;"/>&larr; Foremost</div>
+      <div class="LatestButton" style="border: solid 1px #ffecf1;"/>&larr; Freshest</div>
     </a>
     <a onclick="this.closest('.SupBody').scrollTo({
          top: this.closest('.SupBody').scrollHeight,
          behavior: 'smooth'
        })">
-      <div class="LatestButton" style="border: solid 1px #ffffff;"/>Least Recent &rarr;</div>
+      <div class="LatestButton" style="border: solid 1px #ffecf1;"/>&rarr; Least Recent</div>
     </a>
 </div>
 
