@@ -686,10 +686,12 @@ input[type="range"]::-webkit-slider-thumb {
   overflow-x: hidden;
   height: 100%;
   max-height: 100%;
-  max-width: calc(100% - 25px);
+  max-width: calc(100% - 35px);
+  padding-right: 0px;
   margin-left: 0;
   margin-right: auto;
-  border-radius: 5px;
+  border-radius: 0px;
+  border-top: solid 1px #ffffff;
 }
 .EmbedBody {
   flex: 1;
@@ -769,7 +771,7 @@ li {
   border-radius: 8px;
   margin: 0 0 15px 0;     /* left instead of centered */
   padding: 10px 10px 55px 10px;
-  max-width: calc(100% - 33px);
+  max-width: 100%;
   text-align: center;
   position: relative;
   pointer-events: none;
@@ -1161,7 +1163,7 @@ li a:hover {
     style="height: 15vh; display: block; border-radius: 10px; margin: 2vh auto;"
     src="fmp3simages/BlindLove.jpg"
   >
-  <div style="height: auto; border-bottom: solid 1px #ffffff;">
+  <div style="height: auto;">
     <div style="display: flex; align-items: center; justify-content: center; gap: 3px;">
       <span>Foster Lancaster</span>
       <img
