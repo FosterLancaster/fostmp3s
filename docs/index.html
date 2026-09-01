@@ -905,8 +905,8 @@ li a:hover {
   text-align: center; 
   width: auto; 
   margin: 0px;
-  font-size: .7em;
-  padding: 0px 10px 0px 10px;
+  font-size: 13px;
+  padding: 0px 3px 0px 3px;
   overflow: hidden;
   height: 17.5px;
   line-height: 17.5px;
@@ -978,7 +978,7 @@ li a:hover {
 @media screen and (max-height: 280px) {
 .Latest {
   width: 130px;
-  top: calc(50% + 65px);
+  top: calc(50% + 77.5px);
 }
 .LatestButton {
   width: 40px;
@@ -1192,13 +1192,13 @@ li a:hover {
 <div class="SupBody">
   <div class="Latest">
     <a onclick="this.closest('.SupBody').scrollTo({ top: 0, behavior: 'smooth' })">
-      <div class="LatestButton" style="border: solid 1px #ffecf1;"/>&larr; Freshest</div>
+      <div class="LatestButton" style="border: solid 1px #ffecf1;"/>&larr; Latest "Sup"</div>
     </a>
     <a onclick="this.closest('.SupBody').scrollTo({
          top: this.closest('.SupBody').scrollHeight,
          behavior: 'smooth'
        })">
-      <div class="LatestButton" style="border: solid 1px #ffecf1;"/>&rarr; Least Recent</div>
+      <div class="LatestButton" style="border: solid 1px #ffecf1;"/>&rarr; First "Sup"</div>
     </a>
 </div>
 
