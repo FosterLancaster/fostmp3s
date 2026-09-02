@@ -1435,27 +1435,6 @@ async function commitDailyGrowth(songRef, songId) {
   });
 }
 
-    const lastUpdated = data.lastUpdated || now;
-    const elapsed = now - lastUpdated;
-
-    // Only permanently commit growth every 6 hours
-    if (elapsed < COMMIT_INTERVAL) {
-      return data;
-    }
-
-    const growth = Math.floor(elapsed * RATE_PER_MS);
-
-    return {
-      ...data,
-      plays: (data.plays || 0) + growth,
-      lastUpdated: now,
-      dailyBoost: getDailyBoost(songId),
-      boostDate: getToday()
-    };
-  });
-}
-
-
 function setupFirebasePlayCounts(songButtons) {
   songButtons.forEach(button => {
     const songId = getSongId(button.dataset.song);
