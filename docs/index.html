@@ -1395,11 +1395,20 @@ async function commitDailyGrowth(songRef, songId) {
     const now = Date.now();
     const COMMIT_INTERVAL = 6 * 60 * 60 * 1000;
 
- if (!data) { return { plays: 0, lastUpdated: Date.now(), dailyBoost: 0, boostDate: getToday() }; }
+    // Brand-new song
+    if (!data) {
+      return {
+        plays: 0,
+        lastUpdated: now,
+        dailyBoost: 0,
+        boostDate: getToday()
+      };
+    }
 
     const lastUpdated = data.lastUpdated || now;
     const elapsed = now - lastUpdated;
 
+    // Only permanently commit growth every 6 hours
     if (elapsed < COMMIT_INTERVAL) {
       return data;
     }
@@ -1416,58 +1425,76 @@ async function commitDailyGrowth(songRef, songId) {
   });
 }
 
- function setupFirebasePlayCounts(songButtons) {
-  songButtons.forEach(button => {update
+
+function setupFirebasePlayCounts(songButtons) {
+  songButtons.forEach(button => {
     const songId = getSongId(button.dataset.song);
     const songRef = ref(database, `songs/${songId}`);
 
+    onValue(songRef, snapshot => {
 
-onValue(songRef, snapshot => {
+      // Brand-new song
+      if (!snapshot.exists()) {
+        if (!dailyChecked[songId]) {
+          dailyChecked[songId] = true;
+          commitDailyGrowth(songRef, songId);
+        }
 
-  // Brand-new song
-  if (!snapshot.exists()) {
-
-    if (!dailyChecked[songId]) {
-      dailyChecked[songId] = true;
-      commitDailyGrowth(songRef, songId);
-    }
-
-    return;
-  }
-
-  const data = snapshot.val();
-
-  if (!dailyChecked[songId]) {
-    dailyChecked[songId] = true;
-    commitDailyGrowth(songRef, songId);
-  }
-
-  const el = button.querySelector(".playcount");
-  if (!el) return;
-
-  const basePlays = Number(data.plays) || 0;
-  const lastUpdated = Number(data.lastUpdated) || 0;
-
-  // rest of updateDisplay code...
-});
-
+        return;
       }
 
-function updateDisplay() {
-  const elapsed = lastUpdated ? Date.now() - lastUpdated : 0; const estimatedGrowth = Math.floor( Math.max(0, elapsed) * RATE_PER_MS ); const dailyBoost = Number(data.dailyBoost) || 0; let displayPlays = Number(basePlays) + estimatedGrowth + dailyBoost; if (highestDisplayed[songId] !== undefined) { displayPlays = Math.max( displayPlays, highestDisplayed[songId] ); } highestDisplayed[songId] = displayPlays;
+      const data = snapshot.val();
 
-  const shortText = formatPlays(displayPlays);
-  const fullText = displayPlays.toLocaleString();
+      // Check whether growth needs to be permanently committed
+      if (!dailyChecked[songId]) {
+        dailyChecked[songId] = true;
+        commitDailyGrowth(songRef, songId);
+      }
 
-  // Show the full number while hovering over the song button
-  if (button.matches(":hover")) {
-    el.textContent = fullText;
-  } else {
-    el.textContent = shortText;
-  }
+      const el = button.querySelector(".playcount");
+      if (!el) return;
 
-  updateTotalPlays();
-}
+      const basePlays = Number(data.plays) || 0;
+      const lastUpdated = Number(data.lastUpdated) || 0;
+
+      function updateDisplay() {
+        const elapsed = lastUpdated
+          ? Date.now() - lastUpdated
+          : 0;
+
+        const estimatedGrowth = Math.floor(
+          Math.max(0, elapsed) * RATE_PER_MS
+        );
+
+        const dailyBoost = Number(data.dailyBoost) || 0;
+
+        let displayPlays =
+          basePlays +
+          estimatedGrowth +
+          dailyBoost;
+
+        // Never allow displayed number to decrease
+        if (highestDisplayed[songId] !== undefined) {
+          displayPlays = Math.max(
+            displayPlays,
+            highestDisplayed[songId]
+          );
+        }
+
+        highestDisplayed[songId] = displayPlays;
+
+        const shortText = formatPlays(displayPlays);
+        const fullText = displayPlays.toLocaleString();
+
+        // Show complete number while hovering
+        if (button.matches(":hover")) {
+          el.textContent = fullText;
+        } else {
+          el.textContent = shortText;
+        }
+
+        updateTotalPlays();
+      }
 
       // Display immediately
       updateDisplay();
@@ -1477,20 +1504,22 @@ function updateDisplay() {
         clearInterval(el._interval);
       }
 
+      // Recalculate every second
       el._interval = setInterval(updateDisplay, 1000);
     });
   });
 }
 
+
 function updatePlaycountText(button, songId) {
   if (!button || !songId) return;
 
-  const el = button.querySelector('.playcount');
+  const el = button.querySelector(".playcount");
   if (!el) return;
 
   const displayPlays = highestDisplayed[songId] || 0;
 
-  if (button.matches(':hover')) {
+  if (button.matches(":hover")) {
     el.textContent = displayPlays.toLocaleString();
   } else {
     el.textContent = formatPlays(displayPlays);
@@ -1504,6 +1533,7 @@ async function commitSongPlay(songPath, button) {
   const songId = getSongId(songPath);
   lastPlayedSongId = songId;
 
+  // Immediately increase displayed number
   highestDisplayed[songId] =
     (highestDisplayed[songId] || 0) + 1;
 
@@ -1511,15 +1541,20 @@ async function commitSongPlay(songPath, button) {
   updateTotalPlays();
 
   try {
-    await update(ref(database, `songs/${songId}`), {
-      plays: increment(1)
-      // DO NOT update lastUpdated here
-    });
+    await update(
+      ref(database, `songs/${songId}`),
+      {
+        plays: increment(1)
+        // Do not update lastUpdated here
+      }
+    );
   } catch (err) {
-    console.error("Firebase play increment failed:", err);
+    console.error(
+      "Firebase play increment failed:",
+      err
+    );
   }
 }
-
 
 // Foster Lancaster Music Player
 
@@ -2269,7 +2304,6 @@ export default {
     });
   }
 };
-  ----->
+----->
 </body>
 </html>
-
