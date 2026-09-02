@@ -1395,7 +1395,7 @@ async function commitDailyGrowth(songRef, songId) {
     const now = Date.now();
     const COMMIT_INTERVAL = 6 * 60 * 60 * 1000;
 
-    // Brand-new song
+    // Completely new song
     if (!data) {
       return {
         plays: 0,
@@ -1404,6 +1404,36 @@ async function commitDailyGrowth(songRef, songId) {
         boostDate: getToday()
       };
     }
+
+    // Existing song that does not have a timer yet
+    if (!data.lastUpdated) {
+      return {
+        ...data,
+        plays: Number(data.plays) || 0,
+        lastUpdated: now,
+        dailyBoost: Number(data.dailyBoost) || 0,
+        boostDate: data.boostDate || getToday()
+      };
+    }
+
+    const lastUpdated = Number(data.lastUpdated);
+    const elapsed = now - lastUpdated;
+
+    if (elapsed < COMMIT_INTERVAL) {
+      return data;
+    }
+
+    const growth = Math.floor(elapsed * RATE_PER_MS);
+
+    return {
+      ...data,
+      plays: (Number(data.plays) || 0) + growth,
+      lastUpdated: now,
+      dailyBoost: getDailyBoost(songId),
+      boostDate: getToday()
+    };
+  });
+}
 
     const lastUpdated = data.lastUpdated || now;
     const elapsed = now - lastUpdated;
