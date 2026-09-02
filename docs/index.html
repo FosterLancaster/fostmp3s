@@ -1395,14 +1395,7 @@ async function commitDailyGrowth(songRef, songId) {
     const now = Date.now();
     const COMMIT_INTERVAL = 6 * 60 * 60 * 1000;
 
-    if (!data) {
-      return {
-        plays: 0,
-        lastUpdated: now,
-        dailyBoost: getDailyBoost(songId),
-        boostDate: getToday()
-      };
-    }
+ if (!data) { return { plays: 0, lastUpdated: now, dailyBoost: 0, boostDate: getToday() }; }
 
     const lastUpdated = data.lastUpdated || now;
     const elapsed = now - lastUpdated;
@@ -1457,12 +1450,7 @@ function updateDisplay() {
     Math.max(0, elapsed) * RATE_PER_MS
   );
 
-  const dailyBoost = getDailyBoost(songId);
-
-  let displayPlays =
-    Number(basePlays) +
-    estimatedGrowth +
-    dailyBoost;
+  const dailyBoost = Number(data.dailyBoost) || 0; let displayPlays = Number(basePlays) + estimatedGrowth + dailyBoost;
 
   // Never allow the displayed number to decrease
   if (highestDisplayed[songId] !== undefined) {
@@ -2088,10 +2076,6 @@ document.getElementById("closeEmbed").onclick = function() {
 
 
 
-
-
-
-
 // Close Embed if screen becomes under 300px
 function checkEmbedOrientation() {
   if (window.innerWidth < 300) {
@@ -2101,11 +2085,6 @@ function checkEmbedOrientation() {
 
 window.addEventListener("resize", checkEmbedOrientation);
 window.addEventListener("orientationchange", checkEmbedOrientation);
-
-
-
-
-
 
 
 
