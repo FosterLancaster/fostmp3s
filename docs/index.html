@@ -1395,7 +1395,7 @@ async function commitDailyGrowth(songRef, songId) {
     const now = Date.now();
     const COMMIT_INTERVAL = 6 * 60 * 60 * 1000;
 
- if (!data) { return { plays: 0, lastUpdated: now, dailyBoost: 0, boostDate: getToday() }; }
+ if (!data) { return { plays: 0, lastUpdated: Date.now(), dailyBoost: 0, boostDate: getToday() }; }
 
     const lastUpdated = data.lastUpdated || now;
     const elapsed = now - lastUpdated;
@@ -1417,50 +1417,44 @@ async function commitDailyGrowth(songRef, songId) {
 }
 
  function setupFirebasePlayCounts(songButtons) {
-  songButtons.forEach(button => {
+  songButtons.forEach(button => {update
     const songId = getSongId(button.dataset.song);
     const songRef = ref(database, `songs/${songId}`);
 
-    onValue(songRef, snapshot => {
-      const data = snapshot.val() || {};
 
-      if (!dailyChecked[songId]) {
-        dailyChecked[songId] = true;
-        commitDailyGrowth(songRef, songId);
-      }
+onValue(songRef, snapshot => {
 
-      const el = button.querySelector('.playcount');
-      if (!el) return;
+  // Brand-new song
+  if (!snapshot.exists()) {
 
-      const basePlays = data.plays || 0;
-      const lastUpdated = data.lastUpdated || Date.now();
-      const today = getToday();
+    if (!dailyChecked[songId]) {
+      dailyChecked[songId] = true;
+      commitDailyGrowth(songRef, songId);
+    }
 
-      if (!data.boostDate || data.boostDate !== today) {
-        update(songRef, {
-          dailyBoost: getDailyBoost(songId),
-          boostDate: today
-        });
+    return;
+  }
+
+  const data = snapshot.val();
+
+  if (!dailyChecked[songId]) {
+    dailyChecked[songId] = true;
+    commitDailyGrowth(songRef, songId);
+  }
+
+  const el = button.querySelector(".playcount");
+  if (!el) return;
+
+  const basePlays = Number(data.plays) || 0;
+  const lastUpdated = Number(data.lastUpdated) || 0;
+
+  // rest of updateDisplay code...
+});
+
       }
 
 function updateDisplay() {
-  const elapsed = Date.now() - lastUpdated;
-
-  const estimatedGrowth = Math.floor(
-    Math.max(0, elapsed) * RATE_PER_MS
-  );
-
-  const dailyBoost = Number(data.dailyBoost) || 0; let displayPlays = Number(basePlays) + estimatedGrowth + dailyBoost;
-
-  // Never allow the displayed number to decrease
-  if (highestDisplayed[songId] !== undefined) {
-    displayPlays = Math.max(
-      displayPlays,
-      highestDisplayed[songId]
-    );
-  }
-
-  highestDisplayed[songId] = displayPlays;
+  const elapsed = lastUpdated ? Date.now() - lastUpdated : 0; const estimatedGrowth = Math.floor( Math.max(0, elapsed) * RATE_PER_MS ); const dailyBoost = Number(data.dailyBoost) || 0; let displayPlays = Number(basePlays) + estimatedGrowth + dailyBoost; if (highestDisplayed[songId] !== undefined) { displayPlays = Math.max( displayPlays, highestDisplayed[songId] ); } highestDisplayed[songId] = displayPlays;
 
   const shortText = formatPlays(displayPlays);
   const fullText = displayPlays.toLocaleString();
@@ -2278,3 +2272,4 @@ export default {
   ----->
 </body>
 </html>
+
