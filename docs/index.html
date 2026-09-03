@@ -781,6 +781,7 @@ li {
   position: relative;
   pointer-events: none;
   border: solid 1px #ffffff;
+  filter: drop-shadow(0px 1px 1px #000000);
 }
 li a {
   color: #a16100;
@@ -895,8 +896,8 @@ li a:hover {
   transform: rotate(90deg); 
   position: absolute; 
   right: 0px; 
-  top: calc(50% + 100px);
-  width: 200px;
+  bottom: -90px;
+  width: 250px;
   line-height: 42px;
   transform-origin: top right;
   z-index: 3;
@@ -910,7 +911,7 @@ li a:hover {
   padding: 0px 3px 0px 3px;
   overflow: hidden;
   height: 17.5px;
-  line-height: 16.8px;
+  line-height: 17px;
   border-radius: 20px;
   cursor: pointer; 
   color: #ffecf1;
@@ -918,7 +919,12 @@ li a:hover {
 }
 .SupProfile {
   line-height: 25px;
-  justify-content: center;
+  justify-content: right;
+  background-image: url('fmp3simages/ProfileGif.gif');
+  background-size: cover;
+  background-position: center center;
+  -webkit-text-stroke: .03em #000000;
+  color: #ffff00;
 }
 /*------100vh Controls Sum Landscape = 256px (with frame) + 234px (without frame)-------*/
   /*----Mini Player----*/
@@ -1163,12 +1169,11 @@ li a:hover {
 </div>
 </div>
 
-<div class="SupProfile" style="width: 100%;">
+<div class="SupProfile" style="width: 100%; position: relative;">
   <img
-    style="height: 20vh; display: block; border-radius: 10px; margin: 2vh auto;"
-    src="fmp3simages/Profile.gif"
+    style="height: 40vh; min-height: 200px; display: block; border-radius: 10px;" src="fmp3simages/Profile.gif"
   >
-  <div style="height: auto;">
+  <div style="height: 50px; overflow: hidden; position: absolute; bottom: 0px; right: 0px; margin: 10px;">
     <div style="display: flex; align-items: center; justify-content: center; gap: 3px;">
       <span>Foster Lancaster</span>
       <img
@@ -1184,9 +1189,9 @@ li a:hover {
         style="margin: 0px 5px -5px 0px;"
         class="totallistensnumber2 totalPlayCount"
       >?</span>
-      <span style="color: #4f4f4f;">Total Listens</span>
+      <span>Total Listens</span>
     </div>
-    </div>
+  </div>
 </div>
 </div>
 
