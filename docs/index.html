@@ -896,11 +896,14 @@ li a:hover {
   transform: rotate(90deg); 
   position: absolute; 
   right: 0px; 
-  bottom: -90px;
+  bottom: -92px;
   width: 250px;
-  line-height: 42px;
+  line-height: 42.5px;
   transform-origin: top right;
   z-index: 3;
+}
+.LatestButton:hover {
+  filter: invert(1);
 }
 .LatestButton {
   display: inline-block; 
@@ -910,11 +913,11 @@ li a:hover {
   font-size: 13px;
   padding: 0px 3px 0px 3px;
   overflow: hidden;
-  height: 17.5px;
-  line-height: 16.5px;
-  border-radius: 20px;
+  height: 19px;
+  line-height: 18.5px;
+  border-radius: 5px;
   cursor: pointer; 
-  color: #ffecf1;
+  color: #ffffff;
   background-color: #000000;
 }
 .SupProfile {
@@ -984,7 +987,7 @@ li a:hover {
 }
 }
 
-@media screen and (max-height: 280px) {
+@media screen and (max-height: 330px) {
 .Latest {
   width: 130px;
   top: calc(50% + 77.5px);
@@ -1198,13 +1201,13 @@ li a:hover {
 <div class="SupBody">
   <div class="Latest">
     <a onclick="this.closest('.SupBody').scrollTo({ top: 0, behavior: 'smooth' })">
-      <div class="LatestButton" style="border: solid 1px #ffecf1;"/>&larr; Latest "Sup"</div>
+      <div class="LatestButton" style="border: solid 1px #ffffff;"/>&larr; Latest "Sup"</div>
     </a>
     <a onclick="this.closest('.SupBody').scrollTo({
          top: this.closest('.SupBody').scrollHeight,
          behavior: 'smooth'
        })">
-      <div class="LatestButton" style="border: solid 1px #ffecf1;"/>&rarr; First "Sup"</div>
+      <div class="LatestButton" style="border: solid 1px #ffffff;"/>&rarr; First "Sup"</div>
     </a>
 </div>
 
