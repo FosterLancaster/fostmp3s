@@ -92,12 +92,6 @@ audio {
   display: block;
   position: relative;
  }
-td {
-  padding: 0;
-}
-table {
-  border-spacing: 0;
-}
 .volumeContainer:hover, 
 .nextprev-btn:hover, 
 .EmbedBtn:hover, 
@@ -553,8 +547,8 @@ table {
   box-sizing: border-box;
 }
 .volumeContainer {
-  height: 40px;
-  width: 80px;
+  height: 45px;
+  width: 100px;
   display: block;
 }
 .progressBar {
@@ -924,8 +918,7 @@ li a:hover {
   height: 240px; 
   width: 100%; 
   position: relative;
-  max-height: 40vh;
-  line-height: 25px;
+  line-height: 20px;
   justify-content: right;
 }
 /*------100vh Controls Sum Landscape = 256px (with frame) + 234px (without frame)-------*/
@@ -984,7 +977,7 @@ li a:hover {
 }
 }
 
-@media screen and (max-height: 330px) {
+@media screen and (max-height: 400px) {
 .Latest {
   width: 130px;
   top: calc(50% + 77.5px);
@@ -1163,7 +1156,7 @@ li a:hover {
           <div style="position: relative; z-index: 1;">
 </div>
 
-<div align="center" style="margin: 0px 0px 0px 7.5px; height: 48px; border-collapse: collapse;">
+<div align="center" style="margin: 0px 0px 0px 7.5px; height: auto; border-collapse: collapse;">
   <img src="fmp3simages/Sup.png"
            style="display: block; max-height: 48px;"
            alt="Sup"
@@ -1171,35 +1164,60 @@ li a:hover {
 </div>
 </div>
 
+
 <div class="SupProfile">
   <div align="center">
-  <table>
-  <td>
-  <img src="fmp3simages/ProfileGif.gif" style="margin: 20px 20px 20px 0px; height: 200px; width: 200px; border-radius: 50%;">
-  </td>
-  <td>
-    <div style="display: flex; align-items: center; justify-content: center; gap: 3px;">   
-    <span style="-webkit-text-stroke: .03em #000000; color: #ffff00;">Foster Lancaster</span>
-      <img
-        src="fmp3simages/Verification.png"
-        style="cursor: pointer; height: 15px; width: 15px; display: block;"
-        alt="Verified"
-        title="Verified"
-      >
-    </div>
-    <div align="center">
-    <div class="totallistens totalPlays">
-      <span
-        style="margin: 0px 5px -5px 0px;"
-        class="totallistensnumber2 totalPlayCount"
-      >?</span>
-      <span style="-webkit-text-stroke: .03em #000000; color: #d7d7d7;">Total Listens</span>
+    <table>
+      <tr>
+        <!-- Left: Profile Image -->
+        <td>
+          <img
+            src="fmp3simages/ProfileGif.gif"
+            style="margin: 20px 20px 20px 0px; border: solid 1px #ffffff; height: 200px; width: 200px; border-radius: 50%;"
+          >
+        </td>
+        <!-- Right: Profile Information -->
+        <td style="text-align: center; vertical-align: middle;">
+          <!-- Name + Verification -->
+          <table style="margin: 0 auto;">
+            <tr>
+              <td>
+                <div style="-webkit-text-stroke: .03em #000000; color: #ffff00;">
+                  Foster Lancaster
+                </div>
+              </td>
+              <td>
+                <img
+                  src="fmp3simages/Verification.png"
+                  style="cursor: pointer; height: 15px; width: 15px; display: block;"
+                  alt="Verified"
+                  title="Verified"
+                >
+              </td>
+            </tr>
+          </table>
+<!-- Total Listens -->
+<div
+  class="totallistens totalPlays"
+  style="width: 100%; display: flex; justify-content: center; align-items: center;"
+>
+  <div style="display: flex; justify-content: center; align-items: center; gap: 5px;">
+    <div
+      class="totallistensnumber2 totalPlayCount"
+    >?</div>
+    <div style="-webkit-text-stroke: .03em #000000; color: #d7d7d7;">
+      Total Listens
     </div>
   </div>
 </div>
-</td>
-</table>
-</div>
+          <!-- Description -->
+          <div style="color: #ffffff; font-size: 15px; text-align: center;">
+            A pop singer with big ideas.
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
 </div>
 
 
