@@ -213,7 +213,7 @@ audio {
   border-radius: 90px;
   background-image: url('fmp3simages/FostBranding.png');
   background-repeat: no-repeat;
-  background-position: center center;
+  background-position: center center 0px;
   background-size: contain;
   border: double 5px #ffffff;
   background-color: #d17233;
@@ -778,16 +778,16 @@ li {
   border: solid 1px #ffffff;
   background-image: url('fmp3simages/WaterChat.png');
   background-size: 20px 10px;
-  background-position: 0px bottom;
+  background-position: center bottom;
   background-repeat: repeat-x;
   animation: linear drown 3s infinite;
 }
 li a {
-  color: #0eec25;
+  color: #00a700;
   pointer-events: auto;
 }
 li a:hover {
-  color: #000000;
+  color: #ff0000;
   pointer-events: auto;
 }
 .textHighlight {
@@ -925,6 +925,7 @@ li a:hover {
   position: relative;
   line-height: 20px;
   justify-content: right;
+  display: block;
 }
 /*------100vh Controls Sum Landscape = 256px (with frame) + 234px (without frame)-------*/
   /*----Mini Player----*/
@@ -984,8 +985,8 @@ li a:hover {
 
 @media screen and (max-height: 350px) {
 .Seven {
-  height: 0px;
-  overflow: hidden;
+  opacity: 0px;
+  pointer-events: none;
 }
 }
 
@@ -1022,11 +1023,21 @@ li a:hover {
 }
 
 @keyframes drown {
-  0% { background-position: 0px bottom; }
-  25% { background-position: 20px bottom; }
-  50% { background-position: 0px bottom; }
-  75% { background-position: -20px bottom; }
-  100% { background-position: 0px bottom; }
+  0% {
+    background-position: 50% bottom;
+  }
+  25% {
+    background-position: calc(50% + 10px) bottom;
+  }
+  50% {
+    background-position: 50% bottom;
+  }
+  75% {
+    background-position: calc(50% - 10px) bottom;
+  }
+  100% {
+    background-position: 50% bottom;
+  }
 }
 
 @keyframes bounce {
@@ -1196,7 +1207,7 @@ li a:hover {
         <td>
           <img
             src="fmp3simages/ProfileGif.gif"
-            style="margin: 10px 10px 10px 0px; border: solid 1px #ffffff; height: 200px; width: 200px; border-radius: 50%;"
+            style="margin: 10px 10px 10px 0px; border: solid 1px #ffffff; height: 200px; width: 200px; border-radius: 45px;"
           alt="Sup Photo" title="Sup Photo">
         </td>
         <!-- Right: Profile Information -->
@@ -1206,7 +1217,7 @@ li a:hover {
             <tr>
               <td>
                 <a href="https://fostmp3s.com/info" target="_blank">
-                  <div style="-webkit-text-stroke: .03em #000000; color: #ffffff;" alt="Foster Lancaster" title="Foster Lancaster">
+                  <div style="text-decoration: underline; color: #ffffff;" alt="Foster Lancaster" title="Foster Lancaster">
                     Foster Lancaster
                   </div>
                 </a>
@@ -1237,7 +1248,7 @@ li a:hover {
 </div>
           <!-- Description -->
           <div style="color: #ffffff; font-size: 15px; text-align: center;" alt="Description" title="Description">
-            "In" despite all logic
+            Never outshining or interrupting.
           </div>
         </td>
       </tr>
