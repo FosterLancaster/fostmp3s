@@ -347,7 +347,7 @@ audio {
   background-color: transparent;
   background-image: linear-gradient(to top, rgba(0, 0, 0, .6), transparent, rgba(255, 255, 255, .6));
   background-size: cover;
-  text-align: left;
+  text-align: center;
   box-sizing: border-box;
   border-top-left-radius: 20px;
   border-bottom-right-radius: 20px;
@@ -369,21 +369,24 @@ audio {
   padding-left: 118px;
 }
 .SongTitle {
-  text-indent: 5px;
-  top: 0px;
+  top: 0;
+  left: 50%;
+  width: 40vw;
+  height: 100%;
+  max-width: 40vw;
+  line-height: 20px;
+  transform: translateX(-50%);
   position: absolute;
   display: flex;
   align-items: center;
-  width: fit-content;
-  max-width: 100%;
-  height: 100%;                 /* ← this is fine */
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  background-image: linear-gradient(to right, #000000, transparent);
+  justify-content: center;
+  text-align: center;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  background-image: linear-gradient(to right, transparent 20%, #000000, transparent 80%);
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  padding-right: 50px;
 }
 .playcountframe {
   color: #ffffff;
@@ -1248,7 +1251,7 @@ li a:hover {
 </div>
           <!-- Description -->
           <div style="color: #ffffff; font-size: 15px; text-align: center;" alt="Description" title="Description">
-            Never outshining or interrupting.
+            Under + Away
           </div>
         </td>
       </tr>
