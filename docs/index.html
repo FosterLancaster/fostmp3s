@@ -931,6 +931,16 @@ li a:hover {
   justify-content: right;
   display: block;
 }
+.ProfileImage {
+  display: block; 
+  margin: 10px; 
+  border: solid 1px #ffffff; 
+  height: auto; 
+  width: 30vh; 
+  max-width: 180px; 
+  border-radius: 20px;
+}
+
 /*------100vh Controls Sum Landscape = 256px (with frame) + 234px (without frame)-------*/
   /*----Mini Player----*/
 @media screen and (max-width: 400px) {
@@ -1209,10 +1219,7 @@ li a:hover {
       <tr>
         <!-- Left: Profile Image -->
         <td>
-          <img
-            src="fmp3simages/ProfileGif.gif"
-            style="display: block; margin: 10px 10px 10px 0px; border: solid 1px #ffffff; height: 200px; width: 200px; border-radius: 45px;"
-          alt="Sup Photo" title="Sup Photo">
+        <img class="ProfileImage" src="fmp3simages/ProfileGif.gif" alt="Sup Photo" title="Sup Photo">
         </td>
         <!-- Right: Profile Information -->
         <td style="text-align: center; vertical-align: middle;">
