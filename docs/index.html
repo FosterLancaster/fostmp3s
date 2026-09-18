@@ -141,7 +141,7 @@ audio {
   position: relative;
   text-align: left;
   max-height: 250px;
-  overflow: hidden;
+  overflow: visible;
   max-width: 100%;
 }
  .LancasterMusicPlayer {
@@ -199,6 +199,8 @@ audio {
   background-color: rgba(0, 0, 0, .5);
 }
 .PasswordBar {
+  position: relative;
+  z-index: 1;
   max-height: 40px;
   line-height: 40px;
   height: 0px;
@@ -230,7 +232,7 @@ audio {
 .EngageBar {
   height: 93px;
   display: block;
-  overflow: hidden;
+  overflow: visible;
 }
 .EngageBar table {
   height: 93px;
@@ -484,6 +486,20 @@ audio {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+}
+.Emphasis {
+  opacity: .8;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(0deg);
+  width: 600px;
+  height: 600px;
+  z-index: 0;
+  animation: Emphasis 3s linear infinite;
 }
 #playLogo {
   height: auto;
@@ -500,6 +516,8 @@ audio {
   width: 100px;
   max-width: 100%;
   display: block;
+  position: relative;
+  z-index: 1;
 }
 .MusicButton {
   height: 93px;
@@ -1023,6 +1041,15 @@ li {
   100% { transform: translateY(0px); }
 }
 
+@keyframes Emphasis {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
 @keyframes color {
   0% { filter: hue-rotate(0deg);}
   100% { filter: hue-rotate(360deg);}
@@ -1273,6 +1300,7 @@ li {
 </td>
       <td>
         <div class="MusicButton" id="playBtn" alt="Play/Pause Music" title="Play/Pause Music">
+    <img class="Emphasis" src="fmp3simages/Emphasis.png">
     <div class="upeffect">
       <span class="up up1"></span>
       <span class="up up2"></span>
