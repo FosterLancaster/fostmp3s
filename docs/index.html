@@ -499,6 +499,7 @@ audio {
   height: 600px;
   z-index: 0;
   animation: Emphasis 3s linear infinite;
+  pointer-events: none;
 }
 #playLogo {
   height: auto;
@@ -1045,14 +1046,14 @@ li {
 @keyframes Emphasis {
   0% {
     transform: translate(-50%, -50%) rotate(0deg);
-    opacity: 0;
+    opacity: .2;
   }
   50% {
     opacity: 1;
   }
   100% {
     transform: translate(-50%, -50%) rotate(360deg);
-    opacity: 0;;
+    opacity: .2;
   }
 }
 
