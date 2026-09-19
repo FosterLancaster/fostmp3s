@@ -1560,50 +1560,26 @@ function setupFirebasePlayCounts(songButtons) {
   });
 }
 
-function updateDisplay() {
+function updateTotalPlays() {
+  let total = 0;
 
-  let displayPlays = calculateCurrentPlays(
-    basePlays,
-    lastUpdated
+  document.querySelectorAll(".songbutton").forEach(button => {
+    const songId = button.dataset.songId;
+
+    if (highestDisplayed[songId] !== undefined) {
+      total += highestDisplayed[songId];
+    }
+  });
+
+  highestTotalDisplayed = Math.max(
+    highestTotalDisplayed,
+    total
   );
 
-  const dailyBoost = Number(data.dailyBoost) || 0;
+  document.querySelectorAll(".totalPlayCount").forEach(el => {
+    el.textContent = formatPlays(highestTotalDisplayed);
 
-  displayPlays += dailyBoost;
-
-  // Never allow displayed number to decrease
-  if (highestDisplayed[songId] !== undefined) {
-    displayPlays = Math.max(
-      displayPlays,
-      highestDisplayed[songId]
-    );
-  }
-
-  highestDisplayed[songId] = displayPlays;
-
-  const shortText = formatPlays(displayPlays);
-  const fullText = displayPlays.toLocaleString();
-
-  if (button.matches(":hover")) {
-    el.textContent = fullText;
-  } else {
-    el.textContent = shortText;
-  }
-
-  updateTotalPlays();
-}
-
-      // Display immediately
-      updateDisplay();
-
-      // Prevent duplicate intervals
-      if (el._interval) {
-        clearInterval(el._interval);
-      }
-
-      // Recalculate every second
-      el._interval = setInterval(updateDisplay, 1000);
-    });
+    el.title = highestTotalDisplayed.toLocaleString();
   });
 }
 
