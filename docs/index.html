@@ -791,7 +791,7 @@ li:hover {
 li {
   list-style: none;
   background-color: rgba(0, 0, 0, .1);
-  color: #000000;
+  color: #ffffff;
   border-radius: 5px;
   margin: 0 0 15px 0;     /* left instead of centered */
   padding: 10px 10px 55px 10px;
@@ -805,16 +805,6 @@ li {
   background-position: center calc(100% - 10px);
   background-repeat: repeat-x;
   transition-duration: .5s;
-}
-.textHighlight {
-  display: inline;
-  background: #ffffff;
-  padding: 0 .15em;
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
-}
-.textHighlight:empty {
-  display: none;
 }
 .love {
   height: 45px;
@@ -954,33 +944,35 @@ li {
   border-radius: 20px;
 }
 .feedDescription {
-  display: block;
-  background: transparent;
-  padding: 0;
-  margin: 0;
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 0 !important;
+  font-size: 0 !important;
 }
 .youtubeEmbed {
   display: block !important;
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  margin: 10px 0;
+  position: relative !important;
+  width: 100% !important;
+  aspect-ratio: 16 / 9 !important;
+  height: auto !important;
+  margin: 0 !important;
   padding: 0 !important;
-  background: transparent !important;
+  line-height: 0 !important;
+  font-size: 0 !important;
   overflow: hidden;
-  line-height: 0;
-  font-size: 0;
+  background: transparent
 }
 .youtubeEmbed iframe {
   display: block !important;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
   margin: 0 !important;
   padding: 0 !important;
-  border: 0;
+  border: 0 !important;
 }
 
 /*------100vh Controls Sum Landscape = 256px (with frame) + 234px (without frame)-------*/
@@ -2306,17 +2298,7 @@ fetch("https://fostsup.fostmp3s.workers.dev/")
         youtubePattern,
         function(match, videoID) {
 
-          return `
-            <div class="youtubeEmbed">
-              <iframe
-                src="https://www.youtube.com/embed/${videoID}"
-                title="YouTube video"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen>
-              </iframe>
-            </div>
-          `;
+return `<div class="youtubeEmbed"><iframe src="https://www.youtube.com/embed/${videoID}?rel=0" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>`;
 
         }
       );
@@ -2333,17 +2315,7 @@ fetch("https://fostsup.fostmp3s.workers.dev/")
     youtubePattern,
     function(match, videoID) {
 
-      return `
-        <div class="youtubeEmbed">
-          <iframe
-            src="https://www.youtube.com/embed/${videoID}?rel=0"
-            title="YouTube video"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen>
-          </iframe>
-        </div>
-      `;
+return `<div class="youtubeEmbed"><iframe src="https://www.youtube.com/embed/${videoID}?rel=0" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>`;
 
     }
   );
@@ -2436,17 +2408,13 @@ const linkedDescription =
       ${
         cleanDescription.length > 0
           ? `
-<div class="feedDescription">
-  ${linkedDescription}
-</div>
+<div class="feedDescription">${linkedDescription}</div>
           `
           : ""
       }
 
       <div class="feedTitle">
-        <span class="textHighlight">
-          ${linkedTitle}
-        </span>
+        ${linkedTitle}
       </div>
 
       <div class="love">
