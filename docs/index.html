@@ -644,7 +644,6 @@ input[type="range"]::-webkit-slider-thumb {
   position: relative;
   margin-top: -6px;
 }
-#EmbedOverlay,
 #SupOverlay {
   position: fixed;
   top: 0px;
@@ -658,7 +657,6 @@ input[type="range"]::-webkit-slider-thumb {
   z-index: 10;
   color: #000000;
 }
-.EmbedContent,
 .SupContent {
   height: 100%;
   width: 100%;
@@ -668,7 +666,7 @@ input[type="range"]::-webkit-slider-thumb {
   position: relative;
   backdrop-filter: blur(10px);
 }
-.SupInner, .EmbedInner {
+.SupInner{
   position: relative;
   display: flex;
   flex-direction: column;
@@ -686,9 +684,6 @@ input[type="range"]::-webkit-slider-thumb {
   background-size: 200px auto;
   background-position: center center;
   background-repeat: repeat;
-}
-.EmbedInner {
-  background-image: url('fmp3simages/FostBrandingMini.png'), radial-gradient(transparent 50%, rgba(0, 0, 0, .7));
 }
 .SupHeader {
   height: 48px;
@@ -714,34 +709,6 @@ input[type="range"]::-webkit-slider-thumb {
   border-radius: 0px;
   border-top: solid 1px #ffffff;
 }
-.EmbedBody {
-  flex: 1;
-  overflow-y: auto;
-  overflow-x: hidden;
-  height: 100%;
-  max-height: 100%;
-  width: 450px;
-  max-width: calc(100% - 5px);
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 5px;
-}
-.EmbedInner textarea {
-  font-size: .8em;
-  line-height: 1.6em;
-  flex: 1;
-  padding: 10px;
-  margin: 10px;
-  width: calc(100% - 40px);
-  max-width: calc(100% - 40px);
-  height: calc(100% - 40px);
-  resize: none;
-  min-width: 0;
-  display: block;
-  border: none;
-  overflow-x: hidden;
-}
-#closeEmbed,
 #closeSup {
   font-size: 18px;
   color: #ffffff;
@@ -901,7 +868,7 @@ li {
   transform: rotate(90deg); 
   position: absolute; 
   right: 0px; 
-  bottom: -27px;
+  bottom: -29px;
   width: 161.5px;
   line-height: 42.5px;
   transform-origin: top right;
@@ -954,7 +921,7 @@ li {
   display: block !important;
   position: relative !important;
   width: 100% !important;
-  aspect-ratio: 16 / 9 !important;
+  aspect-ratio: 3 / 4 !important;
   height: auto !important;
   margin: 0 !important;
   padding: 0 !important;
@@ -978,7 +945,7 @@ li {
 /*------100vh Controls Sum Landscape = 256px (with frame) + 234px (without frame)-------*/
   /*----Mini Player----*/
 @media screen and (max-width: 400px) {
-.playcountframe, .shuffleBtn, .songSelection, .EmbedBtn, .volumeContainer {
+.playcountframe, .shuffleBtn, .songSelection, .volumeContainer {
   display: none;
 }
 .Seven {
@@ -1035,7 +1002,7 @@ li {
 .SupProfile {
   display: none;
 }
-.SupHeader, .SupInner, .EmbedInner {
+.SupHeader, .SupInner{
   border-bottom: none;
 }
 }
@@ -1044,7 +1011,7 @@ li {
 .SupProfile {
   display: none;
 }
-.SupHeader, .SupInner, .EmbedInner {
+.SupHeader, .SupInner {
   border-bottom: none;
 }
 }
@@ -1168,38 +1135,20 @@ li {
 <div class="ControlBar">
   <table style="border-spacing: 0px;">
   
-    <td style="padding: 0px;">
-      <a href="#" id="EmbedBtn">
-        <img src="fmp3simages/Embed.png" class="EmbedBtn" alt="Embed" title="Embed">
-      </a>
-      
-      <div id="EmbedOverlay">
-        <div class="EmbedContent">
-        <button id="closeEmbed">X</button>
-        <div class="EmbedInner">
-          <div class="SupHeader"><img src="fmp3simages/Embed.png" style="width: 45px; height: 45px;"></div>
-          <div class="EmbedBody">
-          <textarea readonly>
-            <iframe src="https://fosterlancaster.github.io/fostmp3s" style="width: 100%; height: 100%; border-top-left-radius: 20px; border-bottom-right-radius: 20px; min-width: 210px; min-height: 280px; max-width: 100%; max-height: 100%; border: none; display: block;" class="fostmp3s"></iframe>
-          </textarea>
-        </div>
-      </div>
-      </div>
-      </div>
-    </td>
-  
-  
   <td style="padding: 0px;">
   <img src="fmp3simages/Prev.png" id="prevBtn" class="nextprev-btn" alt="Previous" title="Previous">
   </td>
+
   <td>
   <div class="progressBar" id="progressBar" alt="Progress Bar" title="Progress Bar">
   <span id="progress"></span>
   </div>
   </td>
+
   <td style="padding: 0px;">
   <img src="fmp3simages/Next.png" id="nextBtn" class="nextprev-btn" alt="Next" title="Next">
   </td>
+
   <td style="padding: 0px;">
     <div class="volumeContainer" alt="Volume" title="Volume">
     <table>
@@ -1295,7 +1244,7 @@ li {
          top: this.closest('.SupBody').scrollHeight,
          behavior: 'smooth'
        })">
-      <div class="LatestButton" style="border: solid 1px #ffffff;"/>&rarr; Further</div>
+      <div class="LatestButton" style="border: solid 1px #ffffff;"/>&rarr; Former</div>
     </a>
 </div>
 
@@ -1707,14 +1656,6 @@ audio.addEventListener("ended", () => {
   }
   defaultImage?.classList.remove("playing");
 });            
-                
-document.getElementById("EmbedBtn");
-document.getElementById("EmbedOverlay");
-document.getElementById("closeEmbed");
-document.getElementById("xBtn");
-document.getElementById("xOverlay");
-document.getElementById("closeX");
-                
                 
 // Call Classes
 const passwordBar         = document.querySelector('.PasswordBar');
@@ -2181,37 +2122,6 @@ if (songButtons.length > 0) {
 
 
 
-
-// Open and close Embed overlay
-document.getElementById("EmbedBtn").onclick = function(e) {
-  e.preventDefault();
-
-  // Only open if 300px or wider
-  if (window.innerWidth >= 300) {
-    document.getElementById("EmbedOverlay").style.display = "flex";
-  }
-};
-
-document.getElementById("closeEmbed").onclick = function() {
-  document.getElementById("EmbedOverlay").style.display = "none";
-};
-
-
-
-
-// Close Embed if screen becomes under 300px
-function checkEmbedOrientation() {
-  if (window.innerWidth < 300) {
-    document.getElementById("EmbedOverlay").style.display = "none";
-  }
-}
-
-window.addEventListener("resize", checkEmbedOrientation);
-window.addEventListener("orientationchange", checkEmbedOrientation);
-
-
-
-
                 //Show Sup
                 document.getElementById("SupBtn").onclick = function(e) {
 e.preventDefault();
@@ -2507,3 +2417,4 @@ export default {
 ----->
 </body>
 </html>
+
