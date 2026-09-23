@@ -869,9 +869,10 @@ li {
   position: absolute; 
   right: 0px; 
   bottom: -29px;
-  width: 161.5px;
+  width: 164.5px;
   line-height: 42.5px;
   transform-origin: top right;
+  background-color: transparent;
   z-index: 3;
 }
 .LatestButton:hover {
@@ -1195,7 +1196,7 @@ li {
             <tr>
               <td>
                 <a href="https://fostmp3s.com/info" target="_blank">
-                  <div style="text-decoration: underline; color: #ffffff;" alt="Foster Lancaster" title="Foster Lancaster">
+                  <div style="text-decoration: underline; color: #c2b022;" alt="Foster Lancaster" title="Foster Lancaster">
                     Foster Lancaster
                   </div>
                 </a>
@@ -1237,14 +1238,14 @@ li {
 
 <div class="SupBody">
   <div class="Latest">
-    <a onclick="this.closest('.SupBody').scrollTo({ top: 0, behavior: 'smooth' })">
-      <div class="LatestButton" style="border: solid 1px #ffffff;"/>&larr; Later/after</div>
-    </a>
     <a onclick="this.closest('.SupBody').scrollTo({
          top: this.closest('.SupBody').scrollHeight,
          behavior: 'smooth'
        })">
-      <div class="LatestButton" style="border: solid 1px #ffffff;"/>&rarr; Former</div>
+      <div class="LatestButton" style="border: solid 1px #ffffff;"/>First or... &rarr;</div>
+    </a>
+    <a onclick="this.closest('.SupBody').scrollTo({ top: 0, behavior: 'smooth' })">
+      <div class="LatestButton" style="border: solid 1px #ffffff;"/>&larr; Last/after</div>
     </a>
 </div>
 
@@ -2323,9 +2324,7 @@ const linkedDescription =
           : ""
       }
 
-      <div class="feedTitle">
-        ${linkedTitle}
-      </div>
+      <div class="feedTitle">${linkedTitle}</div>
 
       <div class="love">
 
