@@ -1376,7 +1376,7 @@ function Starter() {
   let highestTotalDisplayed = 0;
 
   //Play Rate
-const PLAYS_PER_6H = 12300;
+const PLAYS_PER_6H = 250;
 const RATE_PER_MS = PLAYS_PER_6H / (6 * 60 * 60 * 1000);
 
 function calculateCurrentPlays(basePlays, lastUpdated) {
@@ -1424,7 +1424,7 @@ function calculateCurrentPlays(basePlays, lastUpdated) {
     }
 
     //Play Rate Extra
-    return hash % 2 === 0 ? 5555 : 0;
+    return hash % 2 === 0 ? 55 : 0;
 
   }
 
