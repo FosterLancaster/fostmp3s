@@ -1222,7 +1222,7 @@ li {
 </div>
           <!-- Description -->
           <div style="color: #ffffff; font-size: 15px; text-align: center;" alt="Description" title="Description">
-          If you know me, great. If you don't know me, do you really have to pretend like you do?... &#129321;
+          I'm not so great... &#129321;
           </div>
         </td>
       </tr>
@@ -1375,7 +1375,10 @@ function Starter() {
   const dailyChecked = {};
   let highestTotalDisplayed = 0;
 
-  //Play Rate
+
+
+
+//---------------------------------------------------------------------------------------Play Rate
 const PLAYS_PER_6H = 400;
 const RATE_PER_MS = PLAYS_PER_6H / (6 * 60 * 60 * 1000);
 
@@ -1386,7 +1389,6 @@ function calculateCurrentPlays(basePlays, lastUpdated) {
     elapsed * RATE_PER_MS
   );
 }
-
 
   function getToday() {
     return new Date().toISOString().split("T")[0];
@@ -1473,34 +1475,81 @@ async function commitDailyGrowth(songRef, songId) {
   });
 }
 
-function setupFirebasePlayCounts(songButtons) {
-  songButtons.forEach(button => {
-    const songId = button.dataset.songId;
-    const songRef = ref(database, `songs/${songId}`);
+function getActiveSongButtons() {
+  return [
+    ...document.querySelectorAll(
+      ".songSelection .songbutton[data-song-id]"
+    )
+  ];
+}
 
-    // Check for accumulated growth immediately
+function isActiveSong(songId) {
+  return getActiveSongButtons().some(
+    button => button.dataset.songId === songId
+  );
+}
+
+function setupFirebasePlayCounts() {
+
+  const songButtons = getActiveSongButtons();
+
+  songButtons.forEach(button => {
+
+    const songId = button.dataset.songId;
+
+    if (!songId) return;
+
+    const songRef =
+      ref(database, `songs/${songId}`);
+
+
+    // Only active songs get accumulated growth
     commitDailyGrowth(songRef, songId);
 
-    // Check every minute for a 6-hour commit
+
+    // Only active songs continue getting checked
     setInterval(() => {
+
+      if (!isActiveSong(songId)) {
+        return;
+      }
+
       commitDailyGrowth(songRef, songId);
+
     }, 60 * 1000);
 
+
     onValue(songRef, snapshot => {
+
       if (!snapshot.exists()) return;
 
       const data = snapshot.val();
-      const el = button.querySelector(".playcount");
+
+      const el =
+        button.querySelector(".playcount");
 
       if (!el) return;
 
+
       function updateDisplay() {
-        const basePlays = Number(data.plays) || 0;
+
+        // Don't calculate removed songs
+        if (!isActiveSong(songId)) {
+          return;
+        }
+
+
+        const basePlays =
+          Number(data.plays) || 0;
+
+
         const lastUpdated =
           Number(data.lastUpdated) || Date.now();
 
+
         const dailyBoost =
           Number(data.dailyBoost) || 0;
+
 
         let displayPlays =
           calculateCurrentPlays(
@@ -1508,56 +1557,88 @@ function setupFirebasePlayCounts(songButtons) {
             lastUpdated
           ) + dailyBoost;
 
-        // Never visually decrease
-        if (highestDisplayed[songId] !== undefined) {
+
+        if (
+          highestDisplayed[songId] !== undefined
+        ) {
+
           displayPlays = Math.max(
             displayPlays,
             highestDisplayed[songId]
           );
+
         }
 
-        highestDisplayed[songId] = displayPlays;
 
-        el.textContent = button.matches(":hover")
-          ? displayPlays.toLocaleString()
-          : formatPlays(displayPlays);
+        highestDisplayed[songId] =
+          displayPlays;
+
+
+        el.textContent =
+          button.matches(":hover")
+            ? displayPlays.toLocaleString()
+            : formatPlays(displayPlays);
+
 
         updateTotalPlays();
+
       }
 
+
       updateDisplay();
+
 
       if (el._interval) {
         clearInterval(el._interval);
       }
 
+
       el._interval =
-        setInterval(updateDisplay, 1000);
+        setInterval(
+          updateDisplay,
+          1000
+        );
+
     });
+
   });
+
 }
 
 function updateTotalPlays() {
+
   let total = 0;
 
-  document.querySelectorAll(".songbutton").forEach(button => {
-    const songId = button.dataset.songId;
 
-    if (highestDisplayed[songId] !== undefined) {
-      total += highestDisplayed[songId];
+  getActiveSongButtons().forEach(button => {
+
+    const songId =
+      button.dataset.songId;
+
+    if (
+      highestDisplayed[songId] !== undefined
+    ) {
+
+      total +=
+        highestDisplayed[songId];
+
     }
+
   });
 
-  highestTotalDisplayed = Math.max(
-    highestTotalDisplayed,
-    total
-  );
 
-  document.querySelectorAll(".totalPlayCount").forEach(el => {
-    el.textContent = formatPlays(highestTotalDisplayed);
+  document
+    .querySelectorAll(".totalPlayCount")
+    .forEach(el => {
 
-    el.title = highestTotalDisplayed.toLocaleString();
-  });
+      el.textContent =
+        formatPlays(total);
+
+      el.title =
+        total.toLocaleString();
+
+    });
+
 }
 
 
@@ -1578,9 +1659,18 @@ function updatePlaycountText(button, songId) {
 
 
 async function commitSongPlay(songPath, button) {
-  if (!songPath) return;
 
-  const songId = button.dataset.songId;
+  if (!songPath || !button) return;
+
+  const songId =
+    button.dataset.songId;
+
+  if (!songId) return;
+
+  // Never increment a removed/inactive song
+  if (!isActiveSong(songId)) {
+    return;
+  }
   lastPlayedSongId = songId;
 
   // Immediately increase displayed number
