@@ -1222,7 +1222,7 @@ li {
 </div>
           <!-- Description -->
           <div style="color: #ffffff; font-size: 15px; text-align: center;" alt="Description" title="Description">
-          I'm not so great... &#129321;
+          Everyone's favorite pop singer &#129321;
           </div>
         </td>
       </tr>
@@ -1379,7 +1379,7 @@ function Starter() {
 
 
 //---------------------------------------------------------------------------------------Play Rate
-const PLAYS_PER_6H = 400;
+const PLAYS_PER_6H = 13000;
 const RATE_PER_MS = PLAYS_PER_6H / (6 * 60 * 60 * 1000);
 
 function calculateCurrentPlays(basePlays, lastUpdated) {
@@ -1426,7 +1426,7 @@ function calculateCurrentPlays(basePlays, lastUpdated) {
     }
 
     //Play Rate Extra
-    return hash % 2 === 0 ? 120 : 0;
+    return hash % 2 === 0 ? 6500 : 0;
 
   }
 
