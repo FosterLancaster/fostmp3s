@@ -482,6 +482,7 @@ audio {
   overflow: visible;
 }
 .Emphasis {
+  z-index: 0;
   opacity: .8;
   position: absolute;
   overflow: hidden;
@@ -490,16 +491,17 @@ audio {
   transform: translate(-50%, -50%) rotate(0deg);
   width: 600px;
   height: 600px;
-  z-index: 0;
   animation: Emphasis 3s linear infinite;
   pointer-events: none;
 }
 .fostmp3sdesign {
+  z-index: 0;
   position: absolute;
   overflow: visible;
   top: 50%;
   left: 50%;
   width: 220px;
+  max-width: 50vw;
   height: 220px;
   transform: translate(-50%, -50%) rotate(0deg);
   background-image: url('fmp3simages/FostBranding.png');
