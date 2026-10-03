@@ -144,17 +144,13 @@ audio {
   overflow: visible;
   max-width: 100%;
 }
- .LancasterMusicPlayer {
+.LancasterMusicPlayer {
   width: 100%;
-  height: 100%; /* Important */
+  height: 100%;
   text-align: center;
   color: #d3d3d3;
   position: relative;
   overflow: hidden;
-  background-image: url('fmp3simages/FostBranding.png');
-  background-repeat: no-repeat;
-  background-position: bottom center;
-  background-size: auto 33%;
 }
 /*----Bars----*/
 .Password {
@@ -479,6 +475,7 @@ audio {
   align-items: center;
   justify-content: center;
   position: relative;
+  overflow: visible;
 }
 .Emphasis {
   opacity: .8;
@@ -492,6 +489,19 @@ audio {
   z-index: 0;
   animation: Emphasis 3s linear infinite;
   pointer-events: none;
+}
+.fostmp3sdesign {
+  position: absolute;
+  overflow: visible;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  height: 300px;
+  transform: translate(-50%, -50%) rotate(0deg);
+  background-image: url('fmp3simages/FostBranding.png');
+  background-repeat: no-repeat;
+  background-size: 300px auto;
+  background-position: center center;
 }
 #playLogo {
   height: auto;
@@ -1277,6 +1287,7 @@ li {
       <td>
         <div class="MusicButton" id="playBtn" alt="Play/Pause Music" title="Play/Pause Music">
     <img class="Emphasis" src="fmp3simages/Emphasis.png">
+    <div class="fostmp3sdesign"></div>
     <div class="upeffect">
       <span class="up up1"></span>
       <span class="up up2"></span>
