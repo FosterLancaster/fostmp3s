@@ -257,6 +257,8 @@ audio {
   box-shadow: none;
 }
 .ControlBar {
+  min-width: 50%;
+  padding-right: 20px;
   max-height: 40px;
   line-height: 40px;
   height: 0px;
@@ -265,7 +267,7 @@ audio {
   display: flex;
   align-items: center;      
   border: none;
-  justify-content: center;
+  justify-content: right;
   border-top: none;
   position: relative;
   z-index: 3;
@@ -464,6 +466,8 @@ audio {
   display: flex;
   align-items: center;      /* vertical center in MusicButton */
   justify-content: center;  /* horizontal center in MusicButton */
+  z-index: 1;
+  cursor: pointer;
 }
 #playBtn,
 #buyBtn {
@@ -495,13 +499,14 @@ audio {
   overflow: visible;
   top: 50%;
   left: 50%;
-  width: 300px;
-  height: 300px;
+  width: 220px;
+  height: 220px;
   transform: translate(-50%, -50%) rotate(0deg);
   background-image: url('fmp3simages/FostBranding.png');
   background-repeat: no-repeat;
-  background-size: 300px auto;
+  background-size: 100% auto;
   background-position: center center;
+  filter: invert(.5);
 }
 #playLogo {
   height: auto;
