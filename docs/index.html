@@ -257,7 +257,8 @@ audio {
   box-shadow: none;
 }
 .ControlBar {
-  min-width: 50%;
+  justify-content: right;
+  padding: 0px 10px;
   max-height: 40px;
   line-height: 40px;
   height: 0px;
@@ -266,7 +267,6 @@ audio {
   display: flex;
   align-items: center;      
   border: none;
-  justify-content: right;
   border-top: none;
   position: relative;
   z-index: 3;
@@ -955,6 +955,10 @@ li {
 .Seven {
   height: calc(100svh - 256px);
 }
+.ControlBar {
+  justify-content: center;
+  padding: 0px;
+}
 .MusicHeader {
   transition-duration: .2s;
   padding: 40px 0px 50px 0px;
@@ -1388,7 +1392,7 @@ function Starter() {
 
 
 //---------------------------------------------------------------------------------------Play Rate
-const PLAYS_PER_6H = 13000;
+const PLAYS_PER_6H = 900;
 const RATE_PER_MS = PLAYS_PER_6H / (6 * 60 * 60 * 1000);
 
 function calculateCurrentPlays(basePlays, lastUpdated) {
@@ -1435,7 +1439,7 @@ function calculateCurrentPlays(basePlays, lastUpdated) {
     }
 
     //Play Rate Extra
-    return hash % 2 === 0 ? 6500 : 0;
+    return hash % 2 === 0 ? 350 : 0;
 
   }
 
