@@ -258,7 +258,6 @@ audio {
 }
 .ControlBar {
   min-width: 50%;
-  padding-right: 20px;
   max-height: 40px;
   line-height: 40px;
   height: 0px;
@@ -466,8 +465,13 @@ audio {
   display: flex;
   align-items: center;      /* vertical center in MusicButton */
   justify-content: center;  /* horizontal center in MusicButton */
-  z-index: 1;
   cursor: pointer;
+}
+#playBtn {
+  z-index: 1;
+}
+#buyBtn {
+  z-index: 2;
 }
 #playBtn,
 #buyBtn {
@@ -481,51 +485,47 @@ audio {
   position: relative;
   overflow: visible;
 }
-.Emphasis {
+#playLogo,
+#buyLogo {
+  height: auto;
+  width: 100px;
+  max-width: 100%;
+  z-index: 3;
+}
+#playLogo {
+  cursor: pointer;
+  transition-duration: .3s;
+  animation: bounce .5s ease infinite;
+}
+#buyLogo {
+  display: block;
+}
+.Emphasis,
+.fostmp3sdesign {
   z-index: -1;
-  opacity: .8;
-  position: absolute;
-  overflow: hidden;
+  pointer-events: none;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) rotate(0deg);
+  position: absolute;
+}
+.Emphasis {
+  opacity: .8;
+  overflow: hidden;
   width: 600px;
   height: 600px;
   animation: Emphasis 3s linear infinite;
   pointer-events: none;
 }
 .fostmp3sdesign {
-  z-index: 0;
-  position: absolute;
   overflow: visible;
-  top: 50%;
-  left: 50%;
   width: 220px;
   max-width: 50vw;
   height: 220px;
-  transform: translate(-50%, -50%) rotate(0deg);
   background-image: url('fmp3simages/FostBranding.png');
   background-repeat: no-repeat;
   background-size: 100% auto;
   background-position: center center;
-}
-#playLogo {
-  height: auto;
-  width: 100px;
-  max-width: 100%;
-  position: relative;
-  z-index: 1;
-  cursor: pointer;
-  transition-duration: .3s;
-  animation: bounce .5s ease infinite;
-}
-#buyLogo {
-  height: auto;
-  width: 100px;
-  max-width: 100%;
-  display: block;
-  position: relative;
-  z-index: 1;
 }
 .MusicButton {
   height: 93px;
@@ -1291,7 +1291,7 @@ li {
   </a>
 </td>
       <td>
-        <div class="MusicButton" id="playBtn" alt="Play/Pause Music" title="Play/Pause Music">
+    <div class="MusicButton" id="playBtn" alt="Play/Pause Music" title="Play/Pause Music">
     <img class="Emphasis" src="fmp3simages/Emphasis.png">
     <div class="fostmp3sdesign"></div>
     <div class="upeffect">
