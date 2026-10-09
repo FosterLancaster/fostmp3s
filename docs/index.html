@@ -1235,7 +1235,7 @@ li {
 </div>
           <!-- Description -->
           <div style="color: #ffffff; font-size: 15px; text-align: center;" alt="Description" title="Description">
-          Play some tunes, read some sups, and please consider buying the support password. &#129321;
+          Associated with nothing and no one. &#x1FAF6;
           </div>
         </td>
       </tr>
@@ -1341,9 +1341,8 @@ li {
 
 
 
-<!--- Song Selection Reveal -->
-
 <script>
+//------------------------------------- Song Selection Reveal ------------------------------->
 function Starter() {
   const songSelection = document.querySelector(".songSelection");
   const seven = document.querySelector(".Seven");
@@ -1356,8 +1355,8 @@ function Starter() {
 }
 </script>
 
-<!--- FostMp3s Counter -->
   <script type="module">
+//------------------------------------- fostmp3s Listens ------------------------------->
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-analytics.js";
   import {
@@ -1393,63 +1392,131 @@ function Starter() {
 
 
 //---------------------------------------------------------------------------------------Play Rate
-const PLAYS_PER_6H = 12700;
+const PLAYS_PER_6H = 10000;
 const RATE_PER_MS = PLAYS_PER_6H / (6 * 60 * 60 * 1000);
 
-function calculateCurrentPlays(basePlays, lastUpdated) {
-  const elapsed = Math.max(0, Date.now() - lastUpdated);
+//----Get Time Zone
+const TIME_ZONE = "America/Detroit";
 
-  return basePlays + Math.floor(
-    elapsed * RATE_PER_MS
+//----Weekdays
+const WEEKDAY_MULTIPLIERS = [
+  1.00, // Sunday
+  1.15, // Monday
+  1.30, // Tuesday
+  1.40, // Wednesday
+  1.50, // Thursday
+  2.00, // Friday (always maximum)
+  1.20  // Saturday
+];
+
+//----Get Time Zone Specifics
+function getLocalParts(date = new Date()) {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: TIME_ZONE,
+    weekday: "short",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    hourCycle: "h23"
+  }).formatToParts(date);
+
+  const values = Object.fromEntries(
+    parts.map(part => [part.type, part.value])
   );
+
+  return {
+    weekday: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+      .indexOf(values.weekday),
+    hour: Number(values.hour),
+    date: `${values.year}-${values.month}-${values.day}`
+  };
 }
 
-  function getToday() {
-    return new Date().toISOString().split("T")[0];
+//----Multiply by weekday/night day
+function getTrafficMultiplier(date = new Date()) {
+  const { weekday, hour } = getLocalParts(date);
+
+  const dayMultiplier = WEEKDAY_MULTIPLIERS[weekday];
+
+  // Night: 10 PM through 5:59 AM
+  const isNight = hour >= 22 || hour < 6;
+
+  return dayMultiplier * (isNight ? 0.5 : 1);
+}
+
+//-----Calculate current plays
+function calculateCurrentPlays(basePlays, lastUpdated) {
+  const now = Date.now();
+  let cursor = Math.min(now, Number(lastUpdated) || now);
+  let growth = 0;
+
+//---- Hourly growth calculate
+
+  while (cursor < now) {
+    const nextHour =
+      Math.floor(cursor / 3600000) * 3600000 + 3600000;
+
+    const end = Math.min(now, nextHour);
+
+    const multiplier = getTrafficMultiplier(
+      new Date(cursor)
+    );
+
+    growth += (end - cursor) * RATE_PER_MS * multiplier;
+
+    cursor = end;
   }
 
-  function formatPlays(num) {
-    if (num >= 1_000_000_000) {
-      return (num / 1_000_000_000).toFixed(1) + "B";
-    }
-    if (num >= 1_000_000) {
-      return (num / 1_000_000).toFixed(1) + "M";
-    }
-    if (num >= 1_000) {
-      return (num / 1_000).toFixed(1) + "K";
-    }
-    return num.toLocaleString();
+  return Number(basePlays) + Math.floor(growth);
+}
+
+function getToday() {
+  return getLocalParts().date;
+}
+
+function formatPlays(num) {
+  if (num >= 1_000_000_000) {
+    return (num / 1_000_000_000).toFixed(1) + "B";
+  }
+  if (num >= 1_000_000) {
+    return (num / 1_000_000).toFixed(1) + "M";
+  }
+  if (num >= 1_000) {
+    return (num / 1_000).toFixed(1) + "K";
+  }
+  return num.toLocaleString();
+}
+
+function getDailyBoost(songId) {
+  const now = new Date();
+  const { date, hour } = getLocalParts(now);
+
+  // Changes every 6 hours in Eastern Time
+  const block = Math.floor(hour / 6);
+
+  let hash = 0;
+  const key = songId + date + block;
+
+  for (let i = 0; i < key.length; i++) {
+    hash += key.charCodeAt(i);
   }
 
-  function getDailyBoost(songId) {
+//---- Apply Traffic Multiplier
+  const multiplier = getTrafficMultiplier(now);
 
-    const now = new Date();
+  return hash % 2 === 0
+    ? Math.floor(1200 * multiplier)
+    : 0;
+}
 
-    // changes every 6 hours
-    const block = Math.floor(now.getHours() / 6);
-
-    let hash = 0;
-
-    const key =
-      songId +
-      now.toISOString().split("T")[0] +
-      block;
-
-    for (let i = 0; i < key.length; i++) {
-      hash += key.charCodeAt(i);
-    }
-
-    //Play Rate Extra
-    return hash % 2 === 0 ? 3700 : 0;
-
-  }
 
 async function commitDailyGrowth(songRef, songId) {
   await runTransaction(songRef, (data) => {
     const now = Date.now();
     const COMMIT_INTERVAL = 6 * 60 * 60 * 1000;
 
-    // Completely new song
+//---- New Songs Only
     if (!data) {
       return {
         plays: 0,
@@ -1459,7 +1526,7 @@ async function commitDailyGrowth(songRef, songId) {
       };
     }
 
-    // Existing song that does not have a timer yet
+//---- Get New Songs Updated
     if (!data.lastUpdated) {
       return {
         ...data,
@@ -1477,8 +1544,10 @@ async function commitDailyGrowth(songRef, songId) {
       return data;
     }
 
-    const growth = Math.floor(elapsed * RATE_PER_MS);
-
+const growth = Math.max(
+  0,
+  calculateCurrentPlays(0, lastUpdated)
+);
     return {
       ...data,
       plays: (Number(data.plays) || 0) + growth,
@@ -1710,13 +1779,11 @@ async function commitSongPlay(songPath, button) {
   }
 }
 
-// Foster Lancaster Music Player
 
-
+//------------------------------------- fostmp3s Music Player Main ------------------------------->
 
                 document.addEventListener("DOMContentLoaded", () => {
-                
-// Call ID's
+//---- Main fostmp3s ID's
 const volumeControl = document.getElementById('volumeControl');
 const playBtn       = document.getElementById('playBtn');
 const buyBtn        = document.getElementById('buyBtn');
@@ -1732,7 +1799,7 @@ const nextBtn       = document.getElementById('nextBtn');
 const prevBtn       = document.getElementById('prevBtn');
 const Password      = document.getElementById('passwordInput');
 
-// Pick ONE play image when the page loads
+//---- Random 4 Pick Play
                 const playImages = [
 'fmp3simages/PLAY1.png',
 'fmp3simages/PLAY2.png',
@@ -1768,24 +1835,24 @@ audio.addEventListener("ended", () => {
   defaultImage?.classList.remove("playing");
 });            
                 
-// Call Classes
+//----- Call Classes
 const passwordBar         = document.querySelector('.PasswordBar');
 const defaultImage        = document.querySelector('.default-image');
 const LancasterMusicPlayer= document.querySelector('.LancasterMusicPlayer');
                 
-// Set Order of Songs
+//---- Set Order of Songs
 let songButtons = Array.from(document.querySelectorAll('.songbutton'));
 const audioPreload = {};
 
-// Set Firebase play counts for every song button
+//----- Set Firebase play counts for every song button
 setupFirebasePlayCounts(songButtons);
                 
-// ---- Safety guards (a missing element can stop the whole script and make the play button "not work") ----
+//---- Safety guards (a missing element can stop the whole script and make the play button "not work") ----
 if (!audio) console.warn('[FOSTMp3s] Missing #audio element');
 if (!playBtn) console.warn('[FOSTMp3s] Missing #playBtn element');
 if (!playLogo) console.warn('[FOSTMp3s] Missing #playLogo element');
                 
-// Load Songs
+//---- Load Songs
 songButtons.forEach((btn) => {
   const song = btn.dataset.song;
   if (!song) return;
@@ -1794,46 +1861,46 @@ songButtons.forEach((btn) => {
   audioPreload[song] = audioObj;
 });
                 
-// Set Password
+//---- Set Password
 const PASSWORD = "ThanksForSingingFost!";
 window.currentsongindex = -1;
                 
-// Hide Volume
+//---- Hide Volume
 if (/iPhone|iPad|iPod/.test(navigator.userAgent) && volumeControl) {
   volumeControl.style.display = 'none';
 }
                 
-// Set Listen Count
+//---- Set Listen Count
 const MAX_LISTENS = 18;
 const LISTENS_KEY = 'listensLeft';
                 
-// Check If Paid For Infinite
+//---- Check If Paid For Infinite
 const isInfiniteListen = () => {
-  // Check for infinite and infinite image
+//---- Check for infinite and infinite image
   if (localStorage.getItem('infiniteListen') === 'true') return true;
   if (!counterDiv) return false;
                 
-  // Create Image Variable
+//---- Create Image Variable
   const img = counterDiv.querySelector('img');
   if (!img) return false;
                 
-  // Swap Variable With Image
+//---- Swap Variable With Image
   return img.src.includes('Infinity.png');
 };
                 
-// Load Listen Count
+//---- Load Listen Count
 let listensLeft = loadLocalListens();
 function loadLocalListens() {
   const v = parseInt(localStorage.getItem(LISTENS_KEY), 10);
   return Number.isFinite(v) ? v : MAX_LISTENS;
 }
                 
-// Save Local Listen Count Variable
+//---- Save Local Listen Count Variable
 function saveLocalListens() {
   localStorage.setItem(LISTENS_KEY, String(listensLeft));
 }
                 
-// If Not An Image, Gather The Listen Count
+//---- If Not An Image, Gather The Listen Count
 const updateListenUI = () => {
   if (!counterDiv) return;
                 
@@ -1844,7 +1911,7 @@ const updateListenUI = () => {
   }
 };
                 
-// Load Listens from API
+//---- Load Listens from API
 async function fetchListenCountFromServer() {
   try {
     const res = await fetch('/api/listens', { method: 'GET', credentials: 'include' });
@@ -1881,25 +1948,25 @@ async function saveListenCountToServer() {
                 
 updateListenUI();
                 
-// ---- Run-out-of-plays event (intro moved here) ----
+//---- Run-out-of-plays event (intro moved here)
 function onRunOutOfPlays() {
   // Change to Payment Screen
   if (payOff) payOff.style.display = 'block';
   if (payOn)  payOn.style.display  = 'none';
                 
-  // Play Intro (AUDIO) when you run out
-  if (introAudio) {
-    try { introAudio.pause(); } catch {}
-    try { introAudio.currentTime = 0; } catch {}
-    const p = introAudio.play();
-    if (p && typeof p.catch === "function") p.catch(() => {});
-  }
-                
-  // Play Intro Video (if you have it) when you run out
-  document.getElementById("TheIntroPlayer")?.play().catch(()=>{});
+//---- Play Intro (AUDIO) when you run out
+if (introAudio) {
+  try { introAudio.pause(); } catch {}
+  try { introAudio.currentTime = 0; } catch {}
+
+  const p = introAudio.play();
+
+  if (p && typeof p.catch === "function") p.catch(() => {});
 }
-                
-// Decrement Listen Count
+
+} //---- Closes onRunOutOfPlays()
+
+//---- Decrement Listen Count
 const decrementListenCount = () => {
   if (isInfiniteListen()) return true;
                 
@@ -1910,28 +1977,28 @@ const decrementListenCount = () => {
     return true;
   }
                 
-  // If you hit 0, trigger the run-out event (intro moved here)
+//----- If you hit 0, trigger the run-out event (intro moved here)
   onRunOutOfPlays();
   return false;
 };
                 
                 
-                //-------------While Loading Fix-----------
+//-------------While Loading Fix-----------
                 
 const playSong = (index) => {
 if (!audio) return;
                 
-// Update if Haven't Updated
+//----- Update if Haven't Updated
 if (!decrementListenCount()) return;
                 
-// 🔹 CHANGE UI IMMEDIATELY (while loading)
+//---- CHANGE UI IMMEDIATELY (while loading)
 if (playLogo && listensLeft > 0) {
   playLogo.src = "fmp3simages/PAUSE.png";
 }
 
 defaultImage?.classList.add('playing');
                 
-// Stop intro audio if it was playing
+//---- Stop intro audio if it was playing
 if (introAudio) {
   try { introAudio.pause(); } catch {}
   try { introAudio.currentTime = 0; } catch {}
@@ -2014,17 +2081,17 @@ const handleSongButtonClick = (index) => {
     playSong(index);
     return;
   }
-  // Same song clicked: toggle play/pause
+//---- Same song clicked: toggle play/pause
   togglePlayPause();
 };
                 
-// Event Listeners - compute index at click time so it matches shuffled order
+//---- Event Listeners - compute index at click time so it matches shuffled order
 songButtons.forEach((btn) => {
-  // When Any Button Clicked
+//---- When Any Button Clicked
   btn.addEventListener('click', () => {
     const index = songButtons.indexOf(btn);
     if (index !== -1) {
-      // Order Assigned
+//---- Order Assigned
       handleSongButtonClick(index);
     }
   });
@@ -2066,7 +2133,7 @@ songButtons.forEach((btn) => {
 
 
 
-// Progress Bar
+//---- Progress Bar
 if (progressBar) {
   progressBar.addEventListener('click', (e) => {
     if (!audio) return;
@@ -2076,7 +2143,7 @@ if (progressBar) {
   });
 }
                 
-// Time Update
+//---- Time Update
 function updateProgressFor(active) {
   if (!progress) return;
   if (!isNaN(active.duration) && active.duration > 0) {
@@ -2127,10 +2194,10 @@ if (volumeControl) {
   });
 }
                 
-// Input Password
+//---- Input Password
 const passwordInput = document.getElementById('passwordInput');
 if (passwordInput) {
-  // Enter Submit
+//---- Enter Submit
   passwordInput.addEventListener('keydown', function (event) {
     if (event.key === 'Enter') {
       event.preventDefault();
@@ -2145,20 +2212,20 @@ window.submitPassword = () => {
     listensLeft = MAX_LISTENS; // or 0, doesn't matter since infinite overrides UI
     updateListenUI();
                 
-    // Update to Infinite
+//---- Update to Infinite
     saveListenCountToServer();  // let server know this IP is infinite
                 
-    // Set to Normal UI
+//---- Set to Normal UI
     if (payOff) payOff.style.display = 'none';
     if (payOn)  payOn.style.display  = 'block';
                 
-    // Reset
+//---- Reset
     if (Password) {
       Password.value = '';  // clear the text
       Password.placeholder = 'Correct';    // new placeholder
     }
                 
-    // Red (your note said Red but this is green; leaving your note)
+//----- Red (your note said Red but this is green; leaving your note)
     if (passwordBar) passwordBar.style.backgroundColor = 'rgba(18, 177, 0, .7)';
                 
     // Play First Song (optional)
@@ -2168,11 +2235,11 @@ window.submitPassword = () => {
   } else {
                 
     if (Password) {
-      Password.value = '';  // clear the text
-      Password.placeholder = 'Incorrect';   // new placeholder
+      Password.value = '';  //---- clear the text
+      Password.placeholder = 'Incorrect';   //---- new placeholder
     }
                 
-    // Green (your note said Green but this is red; leaving your note)
+//----- Green (your note said Green but this is red; leaving your note)
     if (passwordBar) passwordBar.style.backgroundColor = 'rgba(255, 0, 1, .7)';
   }
 };
@@ -2181,68 +2248,64 @@ window.shuffle = () => {
   const container = document.getElementById("songSelection");
   if (!container || songButtons.length === 0) return;
                 
-  // Order of Songs
+//---- Order of Songs
   let newOrder = [...songButtons];
                 
-  // Set Current Song Apart
+//---- Set Current Song Apart
   if (window.currentsongindex !== -1 && songButtons[window.currentsongindex]) {
                 
-    // There is a "current" song – keep it at the top
+//---- There is a "current" song – keep it at the top
     const currentBtn = songButtons[window.currentsongindex];
                 
-    // Remove Current Song
+//---- Remove Current Song
     newOrder = newOrder.filter(btn => btn !== currentBtn);
                 
-    // Shuffle Songs
+//---- Shuffle Songs
     for (let i = newOrder.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [newOrder[i], newOrder[j]] = [newOrder[j], newOrder[i]];
     }
                 
-    // Put Current Up
+//---- Put Current Up
     newOrder.unshift(currentBtn);
                 
-    // Set New Order
+//---- Set New Order
     newOrder.forEach(btn => container.appendChild(btn));
     songButtons = newOrder;
-    window.currentsongindex = 0; // current song is now at top, but playback state is unchanged
+    window.currentsongindex = 0; //---- current song is now at top, but playback state is unchanged
                 
   } else {
                 
-    // No current song selected: just shuffle and start the first one
+//---- No current song selected: just shuffle and start the first one
     for (let i = newOrder.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [newOrder[i], newOrder[j]] = [newOrder[j], newOrder[i]];
     }
-                
+               
     newOrder.forEach(btn => container.appendChild(btn));
     songButtons = newOrder;
                 
   }
 }
+
 fetchListenCountFromServer();
                 
-  // Launch Shuffle On Load
+//---- Launch Shuffle On Load
 if (songButtons.length > 0) {
   window.shuffle();
 }
+
+});
                 
-                });
-                
-                //Open and close overlays
 
+                    
 
-
-            
-
-//Show Sup
+//------------------------------------- fostmp3s Sup ------------------------------->
 
 let supLoaded = false;
 let supLoading = false;
 
-// ------------------------------------
-// OPEN SUP
-// ------------------------------------
+//---- OPEN SUP
 
 document.getElementById("SupBtn").onclick = function(e) {
 
@@ -2250,7 +2313,7 @@ document.getElementById("SupBtn").onclick = function(e) {
 
   document.getElementById("SupOverlay").style.display = "flex";
 
-  // Only load if it hasn't already loaded
+//---- Only load if it hasn't already loaded
   if (!supLoaded && !supLoading) {
     loadSup();
   }
@@ -2258,9 +2321,7 @@ document.getElementById("SupBtn").onclick = function(e) {
 };
 
 
-// ------------------------------------
-// CLOSE SUP
-// ------------------------------------
+//---- CLOSE SUP
 
 document.getElementById("closeSup").onclick = function() {
 
@@ -2269,9 +2330,8 @@ document.getElementById("closeSup").onclick = function() {
 };
 
 
-// ------------------------------------
-// ESCAPE HTML
-// ------------------------------------
+
+//---- ESCAPE HTML
 
 function escapeHTML(text) {
 
@@ -2285,20 +2345,19 @@ function escapeHTML(text) {
 }
 
 
-// ------------------------------------
-// MAKE LINKS + YOUTUBE CLICKABLE
-// ------------------------------------
+
+//---- MAKE LINKS + YOUTUBE CLICKABLE
 
 function makeLinksClickable(text) {
 
   if (!text) return "";
 
-  // YouTube URLs
+//---- YouTube URLs
   const youtubePattern =
     /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/gi;
 
 
-  // Convert YouTube URLs into embeds FIRST
+//----- Convert YouTube URLs into embeds FIRST
   text = text.replace(
     youtubePattern,
     function(match, videoID) {
@@ -2329,7 +2388,7 @@ function makeLinksClickable(text) {
   );
 
 
-  // Separate YouTube embeds from normal text
+//---- Separate YouTube embeds from normal text
   const parts = text.split(
     /(<div class="youtubeEmbed">[\s\S]*?<\/div>)/gi
   );
@@ -2337,7 +2396,7 @@ function makeLinksClickable(text) {
 
   return parts.map(function(part) {
 
-    // Don't escape the YouTube embed HTML
+//---- Don't escape the YouTube embed HTML
     if (
       part.toLowerCase().includes(
         '<div class="youtubeembed">'
@@ -2349,11 +2408,11 @@ function makeLinksClickable(text) {
     }
 
 
-    // Escape normal text
+//---- Escape normal text
     const escapedText = escapeHTML(part);
 
 
-    // Detect normal URLs
+//---- Detect normal URLs
     const urlPattern =
       /(?:https?:\/\/|www\.)[^\s<]+/gi;
 
@@ -2404,13 +2463,11 @@ function makeLinksClickable(text) {
 }
 
 
-// ------------------------------------
-// LOAD SUP
-// ------------------------------------
+//---- LOAD SUP
 
 async function loadSup() {
 
-  // Prevent two requests at the same time
+//---- Prevent two requests at the same time
   if (supLoading) return;
 
 
@@ -2436,9 +2493,7 @@ async function loadSup() {
 
   try {
 
-    // --------------------------------
-    // FETCH RSS
-    // --------------------------------
+//---- FETCH RSS
 
     const response = await fetch(
       "https://fostsup.fostmp3s.workers.dev/",
@@ -2456,18 +2511,13 @@ async function loadSup() {
 
     }
 
-
-    // --------------------------------
-    // GET RSS TEXT
-    // --------------------------------
+//---- GET RSS TEXT
 
     const str =
       await response.text();
 
 
-    // --------------------------------
-    // PARSE RSS XML
-    // --------------------------------
+//---- PARSE RSS XML
 
     const parser =
       new DOMParser();
@@ -2480,7 +2530,7 @@ async function loadSup() {
       );
 
 
-    // Make sure XML parsed correctly
+//---- Make sure XML parsed correctly
     const parserError =
       xml.querySelector("parsererror");
 
@@ -2494,9 +2544,7 @@ async function loadSup() {
     }
 
 
-    // --------------------------------
-    // GET POSTS
-    // --------------------------------
+//---- GET POSTS
 
     const items =
       xml.querySelectorAll("item");
@@ -2511,13 +2559,11 @@ async function loadSup() {
     }
 
 
-    // Remove old posts before rebuilding
+//---- Remove old posts before rebuilding
     feedList.innerHTML = "";
 
 
-    // --------------------------------
-    // BUILD EACH POST
-    // --------------------------------
+//---- BUILD EACH POST
 
     items.forEach(item => {
 
@@ -2531,9 +2577,8 @@ async function loadSup() {
     item.querySelector("description")?.textContent || "";
 
 
-  // ------------------------------------
-  // USE CONTENT:ENCODED WHEN AVAILABLE
-  // ------------------------------------
+//---- USE CONTENT:ENCODED WHEN AVAILABLE
+
 
   const rawContent =
     contentEncoded || rawDescription;
@@ -2545,9 +2590,7 @@ async function loadSup() {
   tempDiv.innerHTML = rawContent;
 
 
-  // ------------------------------------
-  // FIND IMAGE
-  // ------------------------------------
+//---- FIND IMAGE
 
   const enclosure =
     item.querySelector("enclosure");
@@ -2568,18 +2611,12 @@ const image =
   "";
 
 
-  // ------------------------------------
-  // FIND YOUTUBE VIDEO
-  // ------------------------------------
-
-// ------------------------------------
-// FIND YOUTUBE VIDEO
-// ------------------------------------
+//---- FIND YOUTUBE VIDEO
 
 let youtubeID = "";
 
 
-// Check iframe first
+//---- Check iframe first
 const youtubeIframe =
   tempDiv.querySelector(
     'iframe[src*="youtube.com"], iframe[src*="youtu.be"]'
@@ -2602,7 +2639,7 @@ if (youtubeIframe) {
 }
 
 
-// Check normal YouTube URL
+//---- Check normal YouTube URL
 if (!youtubeID) {
 
   const youtubeMatch =
@@ -2617,14 +2654,13 @@ if (!youtubeID) {
 }
 
 
-// ------------------------------------
-// FIND TIKTOK VIDEO
-// ------------------------------------
+
+//---- FIND TIKTOK VIDEO
 
 let tiktokID = "";
 
 
-// Look for a normal TikTok video URL
+//---- Look for a normal TikTok video URL
 const tiktokMatch =
   rawContent.match(
     /(?:https?:\/\/)?(?:www\.)?tiktok\.com\/@[^\/\s"'<>]+\/video\/(\d+)/i
@@ -2635,7 +2671,7 @@ if (tiktokMatch) {
 }
 
 
-// Also check TikTok blockquote embeds
+//---- Also check TikTok blockquote embeds
 if (!tiktokID) {
 
   const tiktokBlockquote =
@@ -2658,9 +2694,7 @@ if (!tiktokID) {
 
 }
 
-  // ------------------------------------
-  // ALSO LOOK FOR YOUTUBE URL
-  // ------------------------------------
+//---- ALSO LOOK FOR YOUTUBE URL
 
   if (!youtubeID) {
 
@@ -2677,11 +2711,9 @@ if (!tiktokID) {
   }
 
 
-  // ------------------------------------
-  // CLEAN DESCRIPTION
-  // ------------------------------------
+//---- CLEAN DESCRIPTION
 
-  // Remove media because we're displaying it separately
+//---- Remove media because we're displaying it separately
   tempDiv
     .querySelectorAll(
       "img, iframe, video, script, style"
@@ -2711,9 +2743,7 @@ if (!tiktokID) {
   }
 
 
-  // ------------------------------------
-  // REMOVE YOUTUBE URL FROM TEXT
-  // ------------------------------------
+//---- REMOVE YOUTUBE URL FROM TEXT
 
   cleanDescription =
     cleanDescription.replace(
@@ -2722,9 +2752,8 @@ if (!tiktokID) {
     ).trim();
 
 
-  // ------------------------------------
-  // CLICKABLE LINKS
-  // ------------------------------------
+//---- CLICKABLE LINKS
+
 
   const linkedDescription =
     makeLinksClickable(cleanDescription);
@@ -2734,9 +2763,7 @@ if (!tiktokID) {
     makeLinksClickable(title);
 
 
-  // ------------------------------------
-  // CREATE POST
-  // ------------------------------------
+//---- CREATE POST
 
   const li =
     document.createElement("li");
@@ -2856,19 +2883,14 @@ if (!tiktokID) {
 });
 
 
-    // --------------------------------
-    // SUCCESS
-    // --------------------------------
+//---- SUCCESS
 
     supLoaded = true;
 
 
   } catch (err) {
 
-
-    // --------------------------------
-    // ERROR
-    // --------------------------------
+//---- ERROR
 
     console.error(
       "Error loading Sup:",
@@ -2881,13 +2903,9 @@ if (!tiktokID) {
 
   } finally {
 
-
-    // --------------------------------
-    // ALLOW ANOTHER ATTEMPT
-    // --------------------------------
+//---- ALLOW ANOTHER ATTEMPT
 
     supLoading = false;
-
 
   }
 
