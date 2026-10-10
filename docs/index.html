@@ -342,9 +342,7 @@ audio {
   padding-left: 88px;
   line-height: 18px;
   border: solid .5px #ffffff;
-  background-color: transparent;
-  background-image: linear-gradient(to top, rgba(0, 0, 0, .6), transparent, rgba(255, 255, 255, .6));
-  background-size: cover;
+  background-color: rgba(0, 0, 0, .1);
   text-align: center;
   box-sizing: border-box;
   border-top-left-radius: 20px;
@@ -383,9 +381,6 @@ audio {
   white-space: normal;
   overflow-wrap: break-word;
   word-wrap: break-word;
-  background-image: linear-gradient(to right, transparent 20%, rgb(0, 0, 0, .2), transparent 80%);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
 }
 .playcountframe {
   color: #ddddb9;
@@ -404,14 +399,14 @@ audio {
   width: auto;
   background-color: transparent;
   flex-shrink: 0;
-  background-image: linear-gradient(to left, #000000, transparent);
-  background-size: 100% 100%;
-  background-position: center center;
   padding: 0px 5px 0px 60px;
 }
 .plays {
   position: static;
   white-space: nowrap;
+  background-color: #000000;
+  border-radius: 5px;
+  padding: 5px;
 }
 .playcount {
   position: static; /* remove the absolute positioning */
