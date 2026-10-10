@@ -312,7 +312,7 @@ audio {
   background-color: rgba(255, 255, 255, .8);
 }
 .OffMusicHeader {
-  -webkit-text-stroke: .1em #ffffff;
+  -webkit-text-stroke: .75em #ffffff;
   height: calc(100vh - 224px);
   min-height: calc(100vh - 224px);
   width: 100%;
@@ -354,6 +354,9 @@ audio {
   text-overflow: ellipsis;
   display: flex;
   align-items: stretch; /* Centers text vertically */
+  background-image: radial-gradient(transparent 50%, rgba(0, 0, 0, .4));
+  background-size: cover;
+  background-position: center center;
 }
 .songbutton:focus {
   background-color: rgb(0, 0, 0, .8);
@@ -404,9 +407,13 @@ audio {
 .plays {
   position: static;
   white-space: nowrap;
-  background-color: #000000;
+  background-color: transparent;
   border-radius: 5px;
-  padding: 5px;
+  padding: 20px;
+  background-image: url('fmp3simages/Count.png');
+  background-size: 100% 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 .playcount {
   position: static; /* remove the absolute positioning */
