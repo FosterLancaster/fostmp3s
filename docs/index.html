@@ -771,17 +771,13 @@ li {
   background-color: rgba(0, 0, 0, .1);
   color: #ffffff;
   border-radius: 5px;
-  margin: 0 0 15px 0;     /* left instead of centered */
-  padding: 10px 10px 55px 10px;
+  margin-bottom: 15px;     /* left instead of centered */
+  padding: 10px 10px 60px 10px;
   max-width: 100%;
   text-align: center;
   position: relative;
   pointer-events: auto;
   border: solid 1px #ffffff;
-  background-image: url('fmp3simages/WaterChat.png');
-  background-size: 20px 10px;
-  background-position: center calc(100% - 10px);
-  background-repeat: repeat-x;
   transition-duration: .5s;
 }
 .love {
@@ -839,12 +835,12 @@ li {
 .postbutton:hover {
   background-color: rgb(255, 255, 255, .5);
 }
-.postreact {
+.postsms {
   width: 2em;
   height: 2em;
   max-width: 45px;
   max-height: 45px;
-  background-image: url('fmp3simages/Email.png');
+  background-image: url('fmp3simages/SMS.png');
   background-size: 2em 2em;
   background-position: center;
   background-repeat: no-repeat;
@@ -2842,36 +2838,25 @@ if (!tiktokID) {
         <tr>
 
           <td>
-
-            <a
-              href="mailto:foster@fostmp3s.com"
-              target="_blank"
-            >
-
+            <a href="sms:+12486320350" target="_blank">
               <div
-                class="postbutton postreact"
+                class="postbutton postsms"
                 title="Send Message">
               </div>
-
             </a>
-
           </td>
 
 
           <td>
-
             <a
               href="https://fostmp3s.com/pw"
               target="_blank"
             >
-
               <div
                 class="postbutton postbuy"
                 title="Buy Password">
               </div>
-
             </a>
-
           </td>
 
         </tr>
