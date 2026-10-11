@@ -281,6 +281,9 @@ audio {
   overflow-y: hidden;
   pointer-events: none;
   transition: opacity 1s;
+  border: solid .5px #ffffff;
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 /*------100vh Controls Sum Landscape = 246px (with frame) + 224px (without frame)-------*/
 /*----Bars----*/
@@ -354,7 +357,7 @@ audio {
   text-overflow: ellipsis;
   display: flex;
   align-items: stretch; /* Centers text vertically */
-  background-image: radial-gradient(transparent 50%, rgba(0, 0, 0, .55));
+  background-image: radial-gradient(transparent 50%, rgba(0, 0, 0, .8));
   background-size: 100% 100%;
   background-position: center center;
 }
@@ -522,9 +525,9 @@ audio {
 }
 .fostmp3sdesign {
   overflow: visible;
-  width: 200px;
+  width: 180px;
   max-width: 50vw;
-  height: 200px;
+  height: 180px;
   background-image: url('fmp3simages/FostBranding.png');
   background-repeat: no-repeat;
   background-size: 100% auto;
@@ -808,7 +811,7 @@ li {
   padding: 0px;
 }
 .upeffect {
-  opacity: .8;
+  opacity: .5;
   position: absolute;
   inset: 0;
   overflow: hidden;
@@ -817,7 +820,7 @@ li {
   transform: translate(-50%, -50%);
   width: 80px;
   height: 80px;
-  z-index: 3;
+  z-index: 4;
   animation: color 3s linear infinite;
 }
 .postbutton {
