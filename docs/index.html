@@ -819,14 +819,11 @@ li {
   animation: color 3s linear infinite;
 }
 .postbutton {
-  margin: 2px;
-  display: inline-flex;
+  display: block;
   align-items: center;      /* vertical center */
   justify-content: center;  /* centers contents if there's extra space */
   position: relative;
   width: auto;
-  height: 2em;
-  max-height: 45px;
   border-radius: 5px;
   transition-duration: .5s;
   pointer-events: auto;
@@ -836,15 +833,16 @@ li {
   background-color: rgb(255, 255, 255, .5);
 }
 .postsms {
-  width: 2em;
+  font-size: 12px;
+  width: auto;
+  padding: 0px 10px;
   height: 2em;
-  max-width: 45px;
+  line-height: 2em;
+  max-width: auto;
   max-height: 45px;
-  background-image: url('fmp3simages/SMS.png');
-  background-size: 2em 2em;
-  background-position: center;
-  background-repeat: no-repeat;
   flex-shrink: 0;
+  color: #ffe5e5;
+  border: solid 1px #ffe5e5;
 }
 .postbuy {
   width: 2em;
@@ -1206,7 +1204,7 @@ li {
             <tr>
               <td>
                 <a href="https://fostmp3s.com/info" target="_blank">
-                  <div style="text-decoration: underline; color: #686800;" alt="Foster Lancaster" title="Foster Lancaster">
+                  <div style="text-decoration: underline; color: #ffe5e5;" alt="Foster Lancaster" title="Foster Lancaster">
                     Foster Lancaster
                   </div>
                 </a>
@@ -2845,6 +2843,7 @@ if (!tiktokID) {
               <div
                 class="postbutton postsms"
                 title="Send Message">
+                Text Message
               </div>
             </a>
           </td>
