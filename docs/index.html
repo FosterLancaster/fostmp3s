@@ -768,17 +768,17 @@ li:hover {
 }
 li {
   list-style: none;
-  background-color: rgba(0, 0, 0, .1);
+  background-color: #5d5d5d;
   color: #ffffff;
   border-radius: 5px;
-  margin-bottom: 15px;     /* left instead of centered */
-  padding: 10px 10px 60px 10px;
+  padding: 10px 5px 60px 5px;
+  margin: 0px 5px 15px 5px;
   max-width: 100%;
   text-align: center;
   position: relative;
   pointer-events: auto;
-  border: solid 1px #cbcbcb;
   transition-duration: .5s;
+  filter: drop-shadow(0px 0px 3px #000000);
 }
 .love {
   height: 45px;
@@ -891,7 +891,7 @@ li {
   line-height: 18.5px;
   border-radius: 5px;
   cursor: pointer; 
-  color: #cbcbcb;
+  color: #ffffff;
   background-color: #000000;
 }
 .SupProfile {
@@ -1392,7 +1392,7 @@ function Starter() {
 
 
 //---------------------------------------------------------------------------------------Play Rate
-const PLAYS_PER_6H = 3000;
+const PLAYS_PER_6H = 1800;
 const RATE_PER_MS = PLAYS_PER_6H / (6 * 60 * 60 * 1000);
 
 //----Get Time Zone
