@@ -64,8 +64,8 @@ a:hover {
   line-height: 13px;
   font-size: 12px;
   background-color: #ffffff;
-  border: solid 2px #484848;
-  color: #474747;
+  border: solid 2px #474747;
+  color: #000000;
   border-radius: 3px;
   width: fit-content;
   padding: 2px;
@@ -189,10 +189,10 @@ audio {
   cursor: pointer;
   user-select: none; /* prevent highlighting text */
   pointer-events: auto;
-  background-color: #cbcbcb;
+  background-color: #474747;
 }
 .PasswordSubmit:hover {
-  background-color: rgba(0, 0, 0, .5);
+  filter: invert(1);
 }
 .PasswordBar {
   position: relative;
@@ -750,7 +750,7 @@ input[type="range"]::-webkit-slider-thumb {
 .SupPosts {
   width: 100%;
   max-width: 100%;
-  margin: 15px 0px 0px 0px;
+  margin: 10px 0px 0px 0px;
   padding: 0;              /* important */
   flex: 1;
   font-size: 1em;
@@ -772,7 +772,7 @@ li {
   color: #ffffff;
   border-radius: 5px;
   padding: 10px 5px 60px 5px;
-  margin: 0px 5px 15px 5px;
+  margin: 5px 5px 15px 5px;
   max-width: 100%;
   text-align: center;
   position: relative;
@@ -1321,7 +1321,7 @@ li {
   <div class="PasswordUnlockBar">
     <div id="passwordUnlock" class="PasswordBar">
       <input id="passwordInput" class="Password" type="password" placeholder="p a s s w o r d" alt="Password" title="Password"/>
-      <div class="PasswordSubmit" id="passwordSubmit" onclick="submitPassword()" alt="Submit" title="Submit"><img style="height: 100%; width: auto;" src="fmp3simages/Unlock.png"></div>
+      <div class="PasswordSubmit" id="passwordSubmit" onclick="submitPassword()" alt="Submit" title="Submit">Enter</div>
     </div>
     </div>
             <audio class="audio-player" id="audio" preload="auto">
