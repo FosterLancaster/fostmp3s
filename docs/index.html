@@ -673,7 +673,8 @@ input[type="range"]::-webkit-slider-thumb {
 .SupContent {
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, .5);
+  background-color: rgba(0, 0, 0, .6);
+  backdrop-filter: blur(25px);
   display: flex;
   flex-direction: column;
   position: relative;
@@ -694,7 +695,7 @@ input[type="range"]::-webkit-slider-thumb {
   background-image: url('fmp3simages/SupBrandingMini.png');
   border-bottom: solid 1px #cbcbcb;
   background-size: 100% auto;
-  background-position: center center;
+  background-position: center 48px;
   background-repeat: repeat;
 }
 .SupHeader {
@@ -706,7 +707,8 @@ input[type="range"]::-webkit-slider-thumb {
   white-space: nowrap;
   overflow: hidden;
   color: #cbcbcb;
-  border-bottom: solid .5px #cbcbcb;
+  background-color: #5d5d5d;
+  filter: drop-shadow(0px 0px 3px #000000);
 }
 .SupBody {
   flex: 1;
@@ -769,6 +771,7 @@ li:hover {
 li {
   list-style: none;
   background-color: #5d5d5d;
+  filter: drop-shadow(0px 0px 3px #000000);
   color: #ffffff;
   border-radius: 5px;
   padding: 10px 5px 60px 5px;
@@ -778,7 +781,6 @@ li {
   position: relative;
   pointer-events: auto;
   transition-duration: .5s;
-  filter: drop-shadow(0px 0px 3px #000000);
 }
 .love {
   height: 45px;
