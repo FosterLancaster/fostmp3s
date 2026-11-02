@@ -1800,12 +1800,16 @@ async function commitSongPlay(songPath, button) {
 
                 document.addEventListener("DOMContentLoaded", () => {
 
-//---- Check for Sup
-  const supOverlay = document.getElementById("SupOverlay");
+//---- Check parent page for Sup
+const supOverlay = document.getElementById("SupOverlay");
 
-  if (window.location.pathname.includes("/sup") && supOverlay) {
+try {
+  if (window.parent.location.pathname.includes("/sup") && supOverlay) {
     supOverlay.style.display = "block";
   }
+} catch (error) {
+  console.log("Cannot access parent URL");
+}
 
 //---- Main fostmp3s ID's
 const volumeControl = document.getElementById('volumeControl');
