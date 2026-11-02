@@ -1799,6 +1799,14 @@ async function commitSongPlay(songPath, button) {
 //------------------------------------- fostmp3s Music Player Main ------------------------------->
 
                 document.addEventListener("DOMContentLoaded", () => {
+
+//---- Check for Sup
+  const supOverlay = document.getElementById("SupOverlay");
+
+  if (window.location.pathname.includes("/sup") && supOverlay) {
+    supOverlay.style.display = "block";
+  }
+
 //---- Main fostmp3s ID's
 const volumeControl = document.getElementById('volumeControl');
 const playBtn       = document.getElementById('playBtn');
@@ -1814,6 +1822,7 @@ const payOn         = document.getElementById('PayOn');
 const nextBtn       = document.getElementById('nextBtn');
 const prevBtn       = document.getElementById('prevBtn');
 const Password      = document.getElementById('passwordInput');
+
 
 //---- Random 4 Pick Play
                 const playImages = [
@@ -2919,13 +2928,6 @@ if (!tiktokID) {
 }
 
 
-//---- Check for Sup
-
-document.addEventListener("DOMContentLoaded", function() {
-  if (window.location.href.includes("/sup")) {
-    document.getElementById("SupOverlay").style.display = "block";
-  }
-});
 </script>
 </body>
 </html>
