@@ -1809,6 +1809,7 @@ const supOverlay = document.getElementById("SupOverlay");
 if (new URLSearchParams(window.location.search).get("sup") === "true") {
   if (supOverlay) {
     supOverlay.style.display = "flex";
+    loadSup();
   }
 }
 
