@@ -2917,6 +2917,15 @@ if (!tiktokID) {
 
 
 }
+
+
+//---- Check for Sup
+
+document.addEventListener("DOMContentLoaded", function() {
+  if (window.location.href.includes("/sup")) {
+    document.getElementById("SupOverlay").style.display = "block";
+  }
+});
 </script>
 </body>
 </html>
