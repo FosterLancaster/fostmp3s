@@ -119,14 +119,13 @@ audio {
   overflow: hidden;
   position: relative;
   opacity: 1;
-  background-image: radial-gradient(transparent 50%, rgba(0, 0, 0, .7));
+  background-image: radial-gradient(transparent 40%, rgba(0, 0, 0, .9));
   background-size: cover;
   background-position: center center;
 }
 .LancasterFrame:has(.MusicHeader:hover) .ControlBar {
   height: 40px;
 }
-
 .LancasterFrame:has(.MusicHeader:hover) .PasswordBar {
   height: 40px;
   opacity: 1;
@@ -997,8 +996,9 @@ li {
   text-overflow: ellipsis;
   display: block;
 }
-.LancasterFrame:hover .PasswordBar {
+.LancasterFrame:has(.MusicHeader:hover) .PasswordBar {
   height: 50px;
+  opacity: 1;
 }
 }
 
