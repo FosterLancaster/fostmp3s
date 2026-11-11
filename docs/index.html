@@ -123,14 +123,16 @@ audio {
   background-size: cover;
   background-position: center center;
 }
-.LancasterFrame:hover .ControlBar {
+.LancasterFrame:has(.MusicHeader:hover) .ControlBar {
   height: 40px;
 }
-.LancasterFrame:hover .PasswordBar {
+
+.LancasterFrame:has(.MusicHeader:hover) .PasswordBar {
   height: 40px;
   opacity: 1;
 }
-.LancasterFrame:hover .MusicHeader {
+
+.MusicHeader:hover {
   padding: 0px;
 }
 #playBtn:hover .moreInfo {
