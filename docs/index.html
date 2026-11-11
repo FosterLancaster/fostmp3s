@@ -34,16 +34,21 @@ a:hover {
   display: block;
 }
 .fmp3sheader {
-  float: right;
-  margin: 0px 5px 0px 5px;
+  margin: 2.5px 5px;
   min-height: 40px;
   height: 40px;
-  width: auto;
   max-height: 40px;
   overflow: visible;
   position: relative;
   cursor: pointer;
   z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fmp3sheader table {
+  margin: 0 auto;
+  border-spacing: 0;
 }
 .MainLogo {
   height: 30px;
@@ -592,7 +597,7 @@ audio {
   width: 70px;
   height: 10px;
   max-width: 100%;
-  background-color: rgba(0, 0, 0, .8);
+  background-color: rgba(0, 0, 0, .5);
   border: solid 1px #cbcbcb;
   cursor: pointer;
   overflow: hidden;
@@ -1101,23 +1106,7 @@ li {
 <!------Music Player------>
 <div class="LancasterFrame" id="LancasterFrame">
 <div class="LancasterMusicPlayer">
-  <a href="https://fostmp3s.com/fostmp3s" target="_blank">
-  <div class="fmp3sheader">
-  <table>
-  <td>
-  <img class="MainLogo" src="fmp3simages/FostMp3sLogo.png">
-  </td>
-  <td>
-  <div align='center'>
-<div class="totallistens totalPlays">
-  <div class="totallistensnumber totalPlayCount">?</div>
-  Total Listens
-</div>
-  </div>
-  </td>
-  </table>
-  </div>
-  </a>
+
   <!----PayOn---->
         <div id="PayOn">
           <div class="Seven">
@@ -1363,18 +1352,36 @@ li {
               <source src="" type="audio/mp3">
               Your browser does not support the audio element.
             </audio>  
-                </div>        
-
+</div>        
+</div>
 
 <!------Music Header end------> 
-            </div>
-            </div>
-            </div>
-            </div>
+            
+
+<!---Bottom Number-->
+  <a href="https://fostmp3s.com/fostmp3s" target="_blank">
+  <div class="fmp3sheader">
+  <table>
+  <td>
+  <img class="MainLogo" src="fmp3simages/FostMp3sLogo.png">
+  </td>
+  <td>
+  <div align='center'>
+<div class="totallistens totalPlays">
+  <div class="totallistensnumber totalPlayCount">?</div>
+  Total Listens
+</div>
+  </div>
+  </td>
+  </table>
+  </div>
+  </a>
+
+</div>
+</div>
+</div>
 <!------Music Player------>
-              </div>
-
-
+</div>
 
 <script>
 //------------------------------------- Song Selection Reveal ------------------------------->
@@ -1427,7 +1434,7 @@ function Starter() {
 
 
 //---------------------------------------------------------------------------------------Play Rate
-const PLAYS_PER_6H = 4000;
+const PLAYS_PER_6H = 10000;
 const RATE_PER_MS = PLAYS_PER_6H / (6 * 60 * 60 * 1000);
 
 //----Get Time Zone
