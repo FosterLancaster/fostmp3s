@@ -1436,7 +1436,7 @@ function Starter() {
 
 
 //---------------------------------------------------------------------------------------Play Rate
-const PLAYS_PER_6H = 12000;
+const PLAYS_PER_6H = 1500;
 const RATE_PER_MS = PLAYS_PER_6H / (6 * 60 * 60 * 1000);
 
 //----Get Time Zone
@@ -1550,7 +1550,7 @@ function getDailyBoost(songId) {
   const multiplier = getTrafficMultiplier(now);
 
   return hash % 2 === 0
-    ? Math.floor(6722 * multiplier)
+    ? Math.floor(500 * multiplier)
     : 0;
 }
 
