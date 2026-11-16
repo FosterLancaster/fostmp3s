@@ -953,6 +953,22 @@ li {
   padding: 0 !important;
   border: 0 !important;
 }
+.BackToMusic {
+  width: 72px;
+  height: 20px;
+  background-color: transparent;
+  transition-duration: .5s;
+}
+.BackToMusic:hover {
+  background-color: #ffffff;
+}
+.SupAlbum {
+cursor: pointer; 
+margin: 0px;
+height: 20px; 
+width: 20px; 
+display: inline-block;
+}
 
 /*------100vh Controls Sum Landscape = 256px (with frame) + 234px (without frame)-------*/
   /*----Mini Player----*/
@@ -1235,12 +1251,11 @@ li {
                 </a>
               </td>
               <td>
-                <img
-                  src="fmp3simages/Verification.png"
-                  style="cursor: pointer; margin-bottom: -2px; height: 20px; width: 20px; display: block;"
-                  alt="Verified"
-                  title="Verified"
-                >
+                <div id="openMp3s" class="BackToMusic">
+                <img class="SupAlbum" src="fmp3simages/Verification.png" alt="Verified" title="Verified">
+                <img class="SupAlbum" src="fmp3simages/TheGoodLink.png" alt="Verified" title="Verified">
+                <img class="SupAlbum" src="fmp3simages/ZeroSugar.jpg" alt="Verified" title="Verified">
+                </div>
               </td>
             </tr>
           </table>
@@ -2379,12 +2394,12 @@ document.getElementById("SupBtn").onclick = function(e) {
 //---- CLOSE SUP
 
 document.getElementById("closeSup").onclick = function() {
-
   document.getElementById("SupOverlay").style.display = "none";
-
 };
 
-
+document.getElementById("openMp3s").onclick = function() {
+  document.getElementById("SupOverlay").style.display = "none";
+};
 
 //---- ESCAPE HTML
 
