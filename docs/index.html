@@ -67,7 +67,7 @@ a:hover {
   color: #ffffff;
   font-size: 14px;
   width: fit-content;
-  -webkit-text-stroke: .4px #000000;
+  -webkit-text-stroke: .5px #000000;
 }
 .totallistensnumber {
   height: 13px;
@@ -157,6 +157,10 @@ audio {
   color: #d3d3d3;
   position: relative;
   overflow: hidden;
+  background-image: linear-gradient(to top, rgba(0, 0, 0, .9), transparent);
+  background-size: 100% 40px;
+  background-repeat: no-repeat;
+  background-position: bottom center;
 }
 /*----Bars----*/
 .Password {
@@ -523,8 +527,8 @@ audio {
 .Emphasis {
   opacity: .8;
   overflow: hidden;
-  width: 350px;
-  height: 350px;
+  width: 300px;
+  height: 300px;
   animation: EmphasisIntro 1s ease-in forwards, Emphasis 10s linear 1s infinite;
   pointer-events: none;
 }
@@ -1081,25 +1085,25 @@ border: solid 1px #ffffff;
 @keyframes EmphasisIntro {
   0% {
     transform: translate(-50%, -100vh) rotate(0deg);
-    opacity: 1;
+    opacity: .8;
   }
   100% {
     transform: translate(-50%, -50%) rotate(0deg);
-    opacity: 1;
+    opacity: .8;
   }
 }
 
 @keyframes Emphasis {
   0% {
     transform: translate(-50%, -50%) rotate(0deg);
-    opacity: 1;
+    opacity: .8;
   }
   50% {
     opacity: .2;
   }
   100% {
     transform: translate(-50%, -50%) rotate(360deg);
-    opacity: 1;
+    opacity: .8;
   }
 }
 
