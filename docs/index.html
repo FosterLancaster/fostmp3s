@@ -20,10 +20,6 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'futura';
-  background-image: linear-gradient(to top, rgba(0, 0, 0, .9), transparent);
-  background-size: 100% 40px;
-  background-repeat: no-repeat;
-  background-position: bottom center;
 }
 a {
   color: #ddddb9;
@@ -524,10 +520,10 @@ audio {
   position: absolute;
 }
 .Emphasis {
-  opacity: .8;
+  opacity: 1;
   overflow: hidden;
-  width: 300px;
-  height: 300px;
+  width: 250px;
+  height: 250px;
   animation: EmphasisIntro 1s ease-in forwards, Emphasis 10s linear 1s infinite;
   pointer-events: none;
 }
@@ -1084,25 +1080,25 @@ border: solid 1px #ffffff;
 @keyframes EmphasisIntro {
   0% {
     transform: translate(-50%, -100vh) rotate(0deg);
-    opacity: .8;
+    opacity: 1;
   }
   100% {
     transform: translate(-50%, -50%) rotate(0deg);
-    opacity: .8;
+    opacity: 1;
   }
 }
 
 @keyframes Emphasis {
   0% {
     transform: translate(-50%, -50%) rotate(0deg);
-    opacity: .8;
+    opacity: 1;
   }
   50% {
     opacity: .2;
   }
   100% {
     transform: translate(-50%, -50%) rotate(360deg);
-    opacity: .8;
+    opacity: 1;
   }
 }
 
