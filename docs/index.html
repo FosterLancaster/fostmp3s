@@ -64,11 +64,12 @@ a:hover {
   max-height: 40px;
   overflow: hidden;
   position: relative;
-  color: #cbcbcb;
-  font-size: 12px;
+  color: #ffff00;
+  font-size: 14px;
   width: fit-content;
+  -webkit-text-stroke: .4px #000000;
 }
-.totallistensnumber, .totallistensnumber2 {
+.totallistensnumber {
   height: 13px;
   max-height: 13px;
   line-height: 13px;
@@ -80,9 +81,6 @@ a:hover {
   width: fit-content;
   padding: 2px;
   overflow: hidden;
-}
-.totallistensnumber2 {
-  display: inline-block;
 }
 audio {
   display: none;
@@ -1276,9 +1274,9 @@ border: solid 1px #ffffff;
 >
   <div style="display: flex; justify-content: center; align-items: center; gap: 5px;">
     <div
-      class="totallistensnumber2 totalPlayCount"
+      class="totallistensnumber totalPlayCount"
     >?</div>
-    <div style="margin-bottom: -2px; -webkit-text-stroke: .03em #474747; color: #d7d7d7;" alt="Total Listens" title="Total Listens">
+    <div style="margin-bottom: -2px;" alt="Total Listens" title="Total Listens">
       Listeners
     </div>
   </div>
