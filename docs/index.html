@@ -59,20 +59,29 @@ a:hover {
   right: 0px;
 }
 .totallistens {
-  margin: 2px;
-  min-height: 40px;
   height: 40px;
-  max-height: 40px;
-  overflow: hidden;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  line-height: 16px;
   color: #ffffff;
   font-size: 14px;
-  width: fit-content;
+  width: 100%;
+  text-align: center;
   -webkit-text-stroke: .7px #000000;
 }
+.totallistensnumber {
+  height: 13px;
+  line-height: 13px;
+  font-size: 12px;
+  background-color: #ffffff;
+  border: solid 2px #474747;
+  color: #000000;
+  border-radius: 3px;
+  padding: 2px;
+  width: fit-content;
+  margin: 2px;
+  text-align: center;
+}
 .totallistenssup {
+  line-height: 40px;
   margin: 2px;
   min-height: 40px;
   height: 40px;
@@ -83,19 +92,6 @@ a:hover {
   font-size: 14px;
   width: fit-content;
   -webkit-text-stroke: .7px #000000;
-}
-.totallistensnumber {
-  height: 13px;
-  max-height: 13px;
-  line-height: 13px;
-  font-size: 12px;
-  background-color: #ffffff;
-  border: solid 2px #474747;
-  color: #000000;
-  border-radius: 3px;
-  width: fit-content;
-  padding: 2px;
-  overflow: hidden;
 }
 audio {
   display: none;
@@ -1064,7 +1060,7 @@ border: solid 1px #ffffff;
   display: none;
 }
 .MainLogo {
-  transform: scale(.5);
+  transform: scale(.4);
   transform-origin: right bottom;
 }
 .SupHeader, .SupInner {
@@ -1283,19 +1279,19 @@ border: solid 1px #ffffff;
             </tr>
           </table>
 <!-- Total Listens -->
-<div
-  class="totallistenssup totalPlays"
-  style="width: 100%; display: flex; justify-content: center; align-items: center;"
->
-  <div style="display: flex; justify-content: center; align-items: center; gap: 5px;">
-    <div
-      class="totallistensnumber totalPlayCount"
-    >?</div>
-    <div style="margin-bottom: -2px;" alt="Total Listens" title="Total Listens">
-      Listeners
+
+<div align="center">
+    <table>
+    <td>
+    <div class="totallistensnumber totalPlayCount">?</div>
+    </td>
+    <td>
+    <div class="totallistenssup" alt="Total Listens" title="Total Listens">
+    Listeners
     </div>
+    </td>
+    </table>
   </div>
-</div>
           <!-- Description -->
           <div style="margin: 10px; color: #ffffff; font-size: 15px; text-align: center;" alt="Description" title="Description">
           I do not think I'm better than you. &#x2728;
@@ -1303,8 +1299,9 @@ border: solid 1px #ffffff;
         </td>
       </tr>
     </table>
+    
 
-<div style="font-size: 13px; line-height: 17px; color: #d6d6d6; margin: 5px;">
+<div style="font-size: 13px; line-height: 17px; color: #d6d6d6; margin: 5px; max-width: 325px;">
 The views expressed by Foster Lancaster do not necessarily reflect Fost Records, and any information needs to be treated like fiction until confirmed by reliable sources.
 </div>
 
@@ -1402,16 +1399,19 @@ The views expressed by Foster Lancaster do not necessarily reflect Fost Records,
             
 
 <!---Bottom Number-->
-  <a href="https://fostmp3s.com/fostmp3s" target="_blank">
-  <img class="MainLogo" src="fmp3simages/FostMp3sLogo.png">
-  <div align='center'>
-<div class="totallistens totalPlays">
-  <div class="totallistensnumber totalPlayCount">?</div>
-  Listeners
-</div>
-  </div>
+<a href="https://fostmp3s.com/fostmp3s" target="_blank">
+<img class="MainLogo" src="fmp3simages/FostMp3sLogo.png">
 
-  </a>
+
+<div style="left: 50%; transform: translateX(-50%); position: absolute;">
+
+<div class="totallistensnumber totalPlayCount">?</div>
+<div class="totallistens">Listeners</div>
+
+</div> 
+
+</a>
+</div>
 
 </div>
 </div>
