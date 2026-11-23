@@ -843,28 +843,21 @@ li {
 .postbutton:hover {
   background-color: rgb(255, 255, 255, .5);
 }
-.postsms {
-  font-size: 12px;
-  width: auto;
-  padding: 0px 10px;
-  height: 2em;
-  line-height: 2em;
-  max-width: auto;
-  max-height: 45px;
-  flex-shrink: 0;
-  color: #000000;
-  border: solid 1px #000000;
-}
-.postbuy {
+.postsms, .postbuy {
   width: 2em;
   height: 2em;
   max-width: 45px;
-  max-height: 45px;
-  background-image: url('fmp3simages/PWBuy.png');
+  max-height: 45px;  
   background-size: 2em 2em;
   background-position: center;
   background-repeat: no-repeat;
   flex-shrink: 0;
+}
+.postsms {
+background-image: url('fmp3simages/Text.png');
+}
+.postbuy {
+  background-image: url('fmp3simages/PWBuy.png');
 }
 .up {
   position: absolute;
@@ -1297,7 +1290,7 @@ border: solid 1px #ffffff;
     </table>
     
 
-<div style="font-size: 13px; line-height: 17px; color: #d6d6d6; margin: 5px; max-width: 325px;">
+<div style="font-size: 12px; line-height: 15px; color: #d6d6d6; margin: 5px; max-width: 325px;">
 The views expressed by Foster Lancaster do not necessarily reflect Fost Records, and any information needs to be treated like fiction until confirmed by reliable sources.
 </div>
 
@@ -1464,7 +1457,7 @@ function Starter() {
 
 
 //---------------------------------------------------------------------------------------Play Rate
-const PLAYS_PER_6H = 1500;
+const PLAYS_PER_6H = 3000;
 const RATE_PER_MS = PLAYS_PER_6H / (6 * 60 * 60 * 1000);
 
 //----Get Time Zone
@@ -1578,7 +1571,7 @@ function getDailyBoost(songId) {
   const multiplier = getTrafficMultiplier(now);
 
   return hash % 2 === 0
-    ? Math.floor(500 * multiplier)
+    ? Math.floor(750 * multiplier)
     : 0;
 }
 
@@ -2927,7 +2920,6 @@ if (!tiktokID) {
               <div
                 class="postbutton postsms"
                 title="Text Message Link">
-                Text Message Link
               </div>
             </a>
           </td>
