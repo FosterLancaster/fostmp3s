@@ -59,16 +59,14 @@ a:hover {
   right: 0px;
 }
 .totallistens {
-  height: 40px;
+  height: 16px;
   line-height: 16px;
-  color: #ffffff;
+  color: #919191;
   font-size: 14px;
-  width: 100%;
   text-align: center;
-  -webkit-text-stroke: .7px #000000;
 }
 .totallistensnumber {
-  margin: 2px auto;
+  margin: 5px auto;
   height: 13px;
   line-height: 13px;
   font-size: 12px;
@@ -1270,16 +1268,10 @@ border: solid 1px #ffffff;
 <!-- Total Listens -->
 
 <div align="center">
-    <table>
-    <td>
-    <div class="totallistensnumber totalPlayCount">?</div>
-    </td>
-    <td>
-    <div class="totallistenssup" alt="Total Listens" title="Total Listens">
-    Listeners
-    </div>
-    </td>
-    </table>
+<table class="totallistensnumber">
+<td><div class="totalPlayCount">?</div></td>
+<td><div class="totallistens">Listeners</div></td>
+</td></table>
   </div>
           <!-- Description -->
           <div style="margin: 10px; color: #ffffff; font-size: 15px; text-align: center;" alt="Description" title="Description">
@@ -1393,8 +1385,10 @@ The views expressed by Foster Lancaster do not necessarily reflect Fost Records,
 
 
 <div style="left: 50%; transform: translateX(-50%); position: absolute;">
-<div class="totallistensnumber totalPlayCount">?</div>
-<div class="totallistens">Listeners</div>
+<table class="totallistensnumber">
+<td><div class="totalPlayCount">?</div></td>
+<td><div class="totallistens">Listeners</div></td>
+</td></table>
 </div>
 
 </a>
