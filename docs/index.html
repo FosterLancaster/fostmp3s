@@ -1579,9 +1579,9 @@ function getDailyBoost(songId) {
 //---- Apply Traffic Multiplier
   const multiplier = getTrafficMultiplier(now);
 
-  return hash % 2 === 0
-    ? Math.floor(200 * multiplier)
-    : 0;
+return hash % 2 === 0
+  ? Math.floor((PLAYS_PER_6H / 3) * multiplier)
+  : 0;
 }
 
 
