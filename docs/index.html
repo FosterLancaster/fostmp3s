@@ -1447,9 +1447,22 @@ function Starter() {
 
 
 
-//---------------------------------------------------------------------------------------Play Rate
-const PLAYS_PER_6H = 800;
-const RATE_PER_MS = PLAYS_PER_6H / (6 * 60 * 60 * 1000);
+//---------------------------------------------------------------------------------------Play Rate fostmp3srate.json
+const rateResponse = await fetch("fostmp3srate.json", {
+  cache: "no-store"
+});
+
+if (!rateResponse.ok) {
+  throw new Error("Unable to load rate");
+}
+
+const rateConfig = await rateResponse.json();
+const PLAYS_PER_6H = Number(rateConfig.PLAYS_PER_6H);
+
+if (!Number.isFinite(PLAYS_PER_6H) || PLAYS_PER_6H < 0) {
+  throw new Error("Invalid growth rate");
+}
+
 
 //----Get Time Zone
 const TIME_ZONE = "America/Detroit";
@@ -1502,7 +1515,11 @@ function getTrafficMultiplier(date = new Date()) {
 }
 
 //-----Calculate current plays
-function calculateCurrentPlays(basePlays, lastUpdated) {
+function calculateCurrentPlays(
+  basePlays,
+  lastUpdated,
+  rate = PLAYS_PER_6H
+) {
   const now = Date.now();
   let cursor = Math.min(now, Number(lastUpdated) || now);
   let growth = 0;
@@ -1519,7 +1536,8 @@ function calculateCurrentPlays(basePlays, lastUpdated) {
       new Date(cursor)
     );
 
-    growth += (end - cursor) * RATE_PER_MS * multiplier;
+    growth += (end - cursor) *
+  (rate / (6 * 60 * 60 * 1000)) * multiplier;
 
     cursor = end;
   }
@@ -1569,48 +1587,69 @@ function getDailyBoost(songId) {
 
 async function commitDailyGrowth(songRef, songId) {
   await runTransaction(songRef, (data) => {
+
     const now = Date.now();
     const COMMIT_INTERVAL = 6 * 60 * 60 * 1000;
 
-//---- New Songs Only
+    // New songs
     if (!data) {
       return {
         plays: 0,
         lastUpdated: now,
         dailyBoost: 0,
-        boostDate: getToday()
+        boostDate: getToday(),
+        savedRate: PLAYS_PER_6H
       };
     }
 
-//---- Get New Songs Updated
-    if (!data.lastUpdated) {
-      return {
-        ...data,
-        plays: Number(data.plays) || 0,
-        lastUpdated: now,
-        dailyBoost: Number(data.dailyBoost) || 0,
-        boostDate: data.boostDate || getToday()
-      };
-    }
+    const basePlays = Number(data.plays) || 0;
+    const lastUpdated = Number(data.lastUpdated) || now;
 
-    const lastUpdated = Number(data.lastUpdated);
+    // Remember the previous rate
+    const savedRate = Number(
+      data.savedRate ?? PLAYS_PER_6H
+    );
+
+    const rateChanged = savedRate !== PLAYS_PER_6H;
     const elapsed = now - lastUpdated;
 
-    if (elapsed < COMMIT_INTERVAL) {
+    // Commit immediately if the rate changes
+    if (elapsed < COMMIT_INTERVAL && !rateChanged) {
+      if (data.savedRate == null || !data.lastUpdated) {
+        return {
+          ...data,
+          lastUpdated,
+          savedRate
+        };
+      }
+
       return data;
     }
 
-const growth = Math.max(
-  0,
-  calculateCurrentPlays(0, lastUpdated)
-);
+    // Calculate accumulated growth using the OLD rate
+    const growth = Math.max(
+      0,
+      calculateCurrentPlays(0, lastUpdated, savedRate)
+    );
+
+    const oldBoost = Number(data.dailyBoost) || 0;
+    const newBoost = getDailyBoost(songId);
+
+    // Prevent decreases caused by changing boosts
+    const boostProtection = Math.max(
+      0,
+      oldBoost - newBoost
+    );
+
     return {
       ...data,
-      plays: (Number(data.plays) || 0) + growth,
+      plays: basePlays + growth + boostProtection,
       lastUpdated: now,
-      dailyBoost: getDailyBoost(songId),
-      boostDate: getToday()
+      dailyBoost: newBoost,
+      boostDate: getToday(),
+      savedRate: PLAYS_PER_6H
     };
+
   });
 }
 
@@ -1690,11 +1729,12 @@ function setupFirebasePlayCounts() {
           Number(data.dailyBoost) || 0;
 
 
-        let displayPlays =
-          calculateCurrentPlays(
-            basePlays,
-            lastUpdated
-          ) + dailyBoost;
+let displayPlays =
+  calculateCurrentPlays(
+    basePlays,
+    lastUpdated,
+    Number(data.savedRate ?? PLAYS_PER_6H)
+  ) + dailyBoost;
 
 
         if (
