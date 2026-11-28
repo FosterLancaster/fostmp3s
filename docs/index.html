@@ -2011,6 +2011,16 @@ function saveLocalListens() {
 //---- If Not An Image, Gather The Listen Count
 const updateListenUI = () => {
   if (!counterDiv) return;
+
+  //---- Move Emphasis
+  const emphasis = document.querySelector('.Emphasis');
+  const target = (!isInfiniteListen() && listensLeft <= 0)
+    ? buyBtn
+    : playBtn;
+
+  if (emphasis && target && emphasis.parentElement !== target) {
+    target.prepend(emphasis);
+  }
                 
   if (isInfiniteListen()) {
     counterDiv.innerHTML = '<img src="fmp3simages/Infinity.png" style="width: 1.2em;" alt="∞">';
