@@ -273,7 +273,7 @@ audio {
   box-shadow: none;
 }
 .ControlBar {
-  justify-content: right;
+  justify-content: center;
   padding: 0px 10px;
   max-height: 40px;
   line-height: 40px;
@@ -487,7 +487,7 @@ audio {
   z-index: 1;
 }
 #buyBtn {
-  z-index: 2;
+  z-index: 1;
 }
 #playBtn,
 #buyBtn {
@@ -1978,8 +1978,8 @@ if (/iPhone|iPad|iPod/.test(navigator.userAgent) && volumeControl) {
   volumeControl.style.display = 'none';
 }
                 
-//---- Set Listen Count
-const MAX_LISTENS = 18;
+//-------------------------------------------------------------- Set Listen Count
+const MAX_LISTENS = 10;
 const LISTENS_KEY = 'listensLeft';
                 
 //---- Check If Paid For Infinite
